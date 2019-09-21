@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dungeon_Generator
+namespace DungeonGeneratorNS
 {
     public class Path : Area
     {

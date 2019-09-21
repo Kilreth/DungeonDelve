@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dungeon_Generator
+namespace DungeonGeneratorNS
 {
     /// <summary>
     /// A Room represents the vacant tiles in a room.
@@ -50,8 +50,8 @@ namespace Dungeon_Generator
                 {
                     // Existing room wall tiles are allowed to overlap
                     // This allows walls to be shared by rooms
-                    if (dungeon.GetTile(row, col).Space != Space.Rock
-                        && dungeon.GetTile(row, col).Space != Space.Wall)
+                    if (dungeon.GetTile(row, col).Block != Block.Rock
+                        && dungeon.GetTile(row, col).Block != Block.Wall)
                     {
                         return false;
                     }
@@ -93,9 +93,9 @@ namespace Dungeon_Generator
                 // So check the actual tile as well as this room's list of doors
 
                 Tile door = walls[DungeonGenerator.Rng.Next(0, walls.Count)];
-                if (!Doors.Contains(door) && door.Space != Space.Door
-                    && !dungeon.IsTileSurroundedBy(door, Space.Door)
-                    && dungeon.GetTileByDirection(door).Space != Space.Granite)
+                if (!Doors.Contains(door) && door.Block != Block.Door
+                    && !dungeon.IsTileSurroundedBy(door, Block.Door)
+                    && dungeon.GetTileByDirection(door).Block != Block.Granite)
                 {
                     SetTileAsDoor(door);
                     return door;
@@ -113,7 +113,7 @@ namespace Dungeon_Generator
         public void SetTileAsDoor(Tile tile)
         {
             Doors.Add(tile);
-            tile.Space = Space.Door;
+            tile.Block = Block.Door;
         }
 
         /// <summary>

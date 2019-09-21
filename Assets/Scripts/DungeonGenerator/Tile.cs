@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dungeon_Generator
+namespace DungeonGeneratorNS
 {
     /// <summary>
     /// An environmental tile. A 2D array of Tiles forms a dungeon.
@@ -17,20 +17,20 @@ namespace Dungeon_Generator
 
         public int Row { get; }
         public int Col { get; }
-        public Space Space { get; set; }
+        public Block Block { get; set; }
         public Direction Direction { get; set; }
         public Area Area { get; set; }
 
         public static bool IsWalkable(Tile tile)
         {
-            return IsWalkable(tile.Space);
+            return IsWalkable(tile.Block);
         }
 
-        public static bool IsWalkable(Space space)
+        public static bool IsWalkable(Block block)
         {
-            return space == Space.Path
-                || space == Space.Room
-                || space == Space.Door;
+            return block == Block.Path
+                || block == Block.Room
+                || block == Block.Door;
         }
 
         public static Direction Invert(Direction direction)
@@ -75,11 +75,11 @@ namespace Dungeon_Generator
             return (Row << 2) ^ Col;
         }
 
-        public Tile(int row, int col, Space space)
+        public Tile(int row, int col, Block block)
         {
             Row = row;
             Col = col;
-            Space = space;
+            Block = block;
         }
     }
 
@@ -99,5 +99,5 @@ namespace Dungeon_Generator
     /// Path:    Vacant tiles that make corridors connecting doors
     /// Door:    Vacant tiles connecting rooms and paths
     /// </summary>
-    public enum Space { Granite, Rock, Room, Wall, Path, Door, StairsUp, StairsDown, Key, WALKABLE }
+    public enum Block { Granite, Rock, Room, Wall, Path, Door, StairsUp, StairsDown, Key, WALKABLE }
 }

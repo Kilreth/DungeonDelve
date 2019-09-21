@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dungeon_Generator
+namespace DungeonGeneratorNS
 {
     /// <summary>
     /// A CorridorTile wraps around a Tile and is used in iterative path finding.
@@ -15,7 +15,7 @@ namespace Dungeon_Generator
         public CorridorTile From { get; }
         public Direction PreviousDirection { get; }
         public List<Direction> DirectionsToTry { get; }
-        public Space Space { get { return Tile.Space; } }
+        public Block Block { get { return Tile.Block; } }
 
         public CorridorTile ChooseNextTile(Dungeon dungeon, double chanceToTurn)
         {

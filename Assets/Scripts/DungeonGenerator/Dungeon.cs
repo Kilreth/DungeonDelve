@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dungeon_Generator
+namespace DungeonGeneratorNS
 {
     public class Dungeon
     {
@@ -83,22 +83,22 @@ namespace Dungeon_Generator
             }
         }
 
-        public bool IsTileAdjacentTo(Tile tile, Space otherType, Tile from = null)
+        public bool IsTileAdjacentTo(Tile tile, Block otherType, Tile from = null)
         {
             return GetAdjacentTilesOfType(tile, otherType, from).Count > 0;
         }
 
-        public bool IsTileSurroundedBy(Tile tile, Space otherType, Tile from = null)
+        public bool IsTileSurroundedBy(Tile tile, Block otherType, Tile from = null)
         {
             return GetSurroundingTilesOfType(tile, otherType, from).Count > 0;
         }
 
-        public List<Tile> GetAdjacentTilesOfType(Tile tile, Space otherType, Tile from = null)
+        public List<Tile> GetAdjacentTilesOfType(Tile tile, Block otherType, Tile from = null)
         {
             return TilesOfType(GetSurroundingTilesImpl(tile, from, false), otherType);
         }
 
-        public List<Tile> GetSurroundingTilesOfType(Tile tile, Space otherType, Tile from = null)
+        public List<Tile> GetSurroundingTilesOfType(Tile tile, Block otherType, Tile from = null)
         {
             return TilesOfType(GetSurroundingTilesImpl(tile, from, true), otherType);
         }
@@ -113,18 +113,18 @@ namespace Dungeon_Generator
             return GetSurroundingTilesImpl(tile, from, true);
         }
 
-        public List<Tile> TilesOfType(List<Tile> surrounding, Space space)
+        public List<Tile> TilesOfType(List<Tile> surrounding, Block block)
         {
             for (int i = surrounding.Count - 1; i >= 0; --i)
             {
-                if (space == Space.WALKABLE)
+                if (block == Block.WALKABLE)
                 {
                     if (!Tile.IsWalkable(surrounding[i]))
                     {
                         surrounding.RemoveAt(i);
                     }
                 }
-                else if (surrounding[i].Space != space)
+                else if (surrounding[i].Block != block)
                 {
                     surrounding.RemoveAt(i);
                 }
@@ -222,9 +222,9 @@ namespace Dungeon_Generator
         /// Useful for carving a room's walls and the inner walkable space.
         /// </summary>
         /// <param name="room"></param>
-        /// <param name="space"></param>
+        /// <param name="block"></param>
         /// <param name="area"></param>
-        private void CarveRoomHelper(Room room, Space space, Area area)
+        private void CarveRoomHelper(Room room, Block block, Area area)
         {
             int rowToStop = room.FirstRow + room.Height;
             int colToStop = room.FirstCol + room.Width;
@@ -233,7 +233,7 @@ namespace Dungeon_Generator
                 for (int col = room.FirstCol; col < colToStop; col++)
                 {
                     Tile tile = GetTile(row, col);
-                    tile.Space = space;
+                    tile.Block = block;
                     tile.Area = area;
                 }
             }
@@ -245,8 +245,8 @@ namespace Dungeon_Generator
         /// <param name="room"></param>
         public void CarveRoom(Room room)
         {
-            CarveRoomHelper(room.Outer, Space.Wall, room);
-            CarveRoomHelper(room, Space.Room, room);
+            CarveRoomHelper(room.Outer, Block.Wall, room);
+            CarveRoomHelper(room, Block.Room, room);
             Rooms.Add(room);
         }
 
@@ -260,13 +260,13 @@ namespace Dungeon_Generator
             // Impervious granite edge of the dungeon
             for (int row = 0; row < Height; row++)
             {
-                Tiles[row, 0] = new Tile(row, 0, Space.Granite);
-                Tiles[row, Width-1] = new Tile(row, Width-1, Space.Granite);
+                Tiles[row, 0] = new Tile(row, 0, Block.Granite);
+                Tiles[row, Width-1] = new Tile(row, Width-1, Block.Granite);
             }
             for (int col = 0; col < Width; col++)
             {
-                Tiles[0, col] = new Tile(0, col, Space.Granite);
-                Tiles[Height-1, col] = new Tile(Height-1, col, Space.Granite);
+                Tiles[0, col] = new Tile(0, col, Block.Granite);
+                Tiles[Height-1, col] = new Tile(Height-1, col, Block.Granite);
             }
 
             // Rock interior
@@ -274,7 +274,7 @@ namespace Dungeon_Generator
             {
                 for (int col = 1; col < Width-1; col++)
                 {
-                    Tiles[row, col] = new Tile(row, col, Space.Rock);
+                    Tiles[row, col] = new Tile(row, col, Block.Rock);
                 }
             }
         }
