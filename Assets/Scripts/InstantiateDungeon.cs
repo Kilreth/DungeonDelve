@@ -11,14 +11,14 @@ public class InstantiateDungeon : MonoBehaviour
     {
         public GameObject path;
         public GameObject wall;
+        public GameObject stairs;
     }
     public PrefabsSelect prefabsInEditor;
     public Dictionary<Block, GameObject> prefabs;
 
-    public GameObject instantiateParent;
-
-    private DungeonGenerator dungeonGenerator;
-    private Dungeon dungeon;
+    public GameObject BlocksParent { get; private set; }
+    public DungeonGenerator DungeonGenerator { get; private set; }
+    public Dungeon Dungeon { get; private set; }
 
     void Awake()
     {
@@ -30,30 +30,39 @@ public class InstantiateDungeon : MonoBehaviour
 
             { Block.Room, prefabsInEditor.path },
             { Block.Door, prefabsInEditor.path },
-            { Block.Path, prefabsInEditor.path }
+            { Block.Path, prefabsInEditor.path },
+
+            { Block.StairsUp, prefabsInEditor.stairs },
+            { Block.StairsDown, prefabsInEditor.stairs },
+            { Block.Key, prefabsInEditor.path },
         };
 
-        dungeonGenerator = new DungeonGenerator(60, 80);
-        dungeon = dungeonGenerator.Dungeon;
+        DungeonGenerator = new DungeonGenerator(60, 80);
+        Dungeon = DungeonGenerator.Dungeon;
+        CreateDungeonObjects();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void CreateDungeonObjects()
     {
-        for (int row = 0; row < dungeon.Height; ++row)
+        // Apply block size at runtime
+        foreach (GameObject prefab in prefabs.Values)
         {
-            for (int col = 0; col < dungeon.Width; ++col)
+            prefab.transform.localScale = new Vector3(GM.Instance.BlockScale,
+                                                      prefab.transform.localScale.y,
+                                                      GM.Instance.BlockScale);
+        }
+
+        BlocksParent = new GameObject("Blocks");
+
+        for (int row = 0; row < Dungeon.Height; ++row)
+        {
+            for (int col = 0; col < Dungeon.Width; ++col)
             {
-                Tile tile = dungeon.GetTile(row, col);
+                Tile tile = Dungeon.GetTile(row, col);
                 GameObject block = prefabs[tile.Block];
-                Instantiate(block, new Vector3(col, 0, row), Quaternion.identity, instantiateParent.transform);
+                Instantiate(block, new Vector3(col * GM.Instance.BlockScale, 0, row * GM.Instance.BlockScale),
+                            Quaternion.identity, BlocksParent.transform);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

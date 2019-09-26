@@ -482,7 +482,7 @@ namespace DungeonGeneratorNS
             GenerateDoors(Dungeon, 0.1);
             GenerateCorridors(Dungeon, 0.2);
             MakeDungeonACompleteGraph(Dungeon, 0.2);
-            //GenerateStairsAndKey(Dungeon);
+            GenerateStairsAndKey(Dungeon);
         }
 
         static DungeonGenerator()
