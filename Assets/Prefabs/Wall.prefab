@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1395220801044740201, guid: b4bf0fc2e93cd2447876a483131f093f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 08cdbf92f36591d449115fd72684e25f, type: 2}
     - target: {fileID: 1395220801044740207, guid: b4bf0fc2e93cd2447876a483131f093f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 1395220801044740207, guid: b4bf0fc2e93cd2447876a483131f093f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1395220801044740207, guid: b4bf0fc2e93cd2447876a483131f093f,
         type: 3}
@@ -70,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 1395220801044740207, guid: b4bf0fc2e93cd2447876a483131f093f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1395220801044740207, guid: b4bf0fc2e93cd2447876a483131f093f,
         type: 3}
@@ -82,10 +87,5 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1395220801044740201, guid: b4bf0fc2e93cd2447876a483131f093f,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 08cdbf92f36591d449115fd72684e25f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4bf0fc2e93cd2447876a483131f093f, type: 3}

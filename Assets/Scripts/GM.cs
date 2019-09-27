@@ -6,7 +6,9 @@ public class GM : MonoBehaviour
 {
     public static GM Instance;
 
-    public float BlockScale = 1.5f;
+    public float BlockScale = 2;
+
+    private InstantiateDungeon instantiateDungeon;
 
     private void Awake()
     {
@@ -17,6 +19,13 @@ public class GM : MonoBehaviour
         else
         {
             Instance = this;
+            InitializeGame();
         }
+    }
+
+    private void InitializeGame()
+    {
+        instantiateDungeon = GetComponent<InstantiateDungeon>();
+        instantiateDungeon.CreateDungeon();
     }
 }

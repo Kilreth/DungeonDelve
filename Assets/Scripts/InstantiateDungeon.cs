@@ -20,7 +20,7 @@ public class InstantiateDungeon : MonoBehaviour
     public DungeonGenerator DungeonGenerator { get; private set; }
     public Dungeon Dungeon { get; private set; }
 
-    void Awake()
+    public void CreateDungeon()
     {
         prefabs = new Dictionary<Block, GameObject>
         {
@@ -42,7 +42,7 @@ public class InstantiateDungeon : MonoBehaviour
         CreateDungeonObjects();
     }
 
-    void CreateDungeonObjects()
+    private void CreateDungeonObjects()
     {
         // Apply block size at runtime
         foreach (GameObject prefab in prefabs.Values)
@@ -60,7 +60,7 @@ public class InstantiateDungeon : MonoBehaviour
             {
                 Tile tile = Dungeon.GetTile(row, col);
                 GameObject block = prefabs[tile.Block];
-                Instantiate(block, new Vector3(col * GM.Instance.BlockScale, 0, row * GM.Instance.BlockScale),
+                Instantiate(block, new Vector3(col * GM.Instance.BlockScale, block.transform.position.y, row * GM.Instance.BlockScale),
                             Quaternion.identity, BlocksParent.transform);
             }
         }
