@@ -44,14 +44,6 @@ public class InstantiateDungeon : MonoBehaviour
 
     private void CreateDungeonObjects()
     {
-        // Apply block size at runtime
-        foreach (GameObject prefab in prefabs.Values)
-        {
-            prefab.transform.localScale = new Vector3(GM.Instance.BlockScale,
-                                                      prefab.transform.localScale.y,
-                                                      GM.Instance.BlockScale);
-        }
-
         BlocksParent = new GameObject("Blocks");
 
         for (int row = 0; row < Dungeon.Height; ++row)
@@ -59,9 +51,14 @@ public class InstantiateDungeon : MonoBehaviour
             for (int col = 0; col < Dungeon.Width; ++col)
             {
                 Tile tile = Dungeon.GetTile(row, col);
-                GameObject block = prefabs[tile.Block];
-                Instantiate(block, new Vector3(col * GM.Instance.BlockScale, block.transform.position.y, row * GM.Instance.BlockScale),
-                            Quaternion.identity, BlocksParent.transform);
+                GameObject prefab = prefabs[tile.Block];
+                GameObject block = Instantiate(prefab, new Vector3(col * GM.Instance.BlockScale,
+                                                                   prefab.transform.position.y,
+                                                                   row * GM.Instance.BlockScale),
+                                               Quaternion.identity, BlocksParent.transform);
+                block.transform.localScale = new Vector3(GM.Instance.BlockScale,
+                                                         GM.Instance.BlockScale * prefab.transform.localScale.y,
+                                                         GM.Instance.BlockScale);
             }
         }
     }
