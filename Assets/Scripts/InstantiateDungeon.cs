@@ -20,8 +20,12 @@ public class InstantiateDungeon : MonoBehaviour
     public DungeonGenerator DungeonGenerator { get; private set; }
     public Dungeon Dungeon { get; private set; }
 
+    private Textures texturesScript;
+
     public void CreateDungeon()
     {
+        Initialize();
+
         prefabs = new Dictionary<Block, GameObject>
         {
             { Block.Granite, prefabsInEditor.wall },
@@ -45,6 +49,7 @@ public class InstantiateDungeon : MonoBehaviour
     private void CreateDungeonObjects()
     {
         BlocksParent = new GameObject("Blocks");
+        Material wallMaterial = texturesScript.RandomWallMaterial();
 
         for (int row = 0; row < Dungeon.Height; ++row)
         {
@@ -59,7 +64,16 @@ public class InstantiateDungeon : MonoBehaviour
                 block.transform.localScale = new Vector3(GM.Instance.BlockScale,
                                                          GM.Instance.BlockScale * prefab.transform.localScale.y,
                                                          GM.Instance.BlockScale);
+                if (prefabs[tile.Block] == prefabsInEditor.wall)
+                {
+                    block.GetComponent<Renderer>().material = wallMaterial;
+                }
             }
         }
+    }
+
+    private void Initialize()
+    {
+        texturesScript = GetComponent<Textures>();
     }
 }
