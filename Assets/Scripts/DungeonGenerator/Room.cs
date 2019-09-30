@@ -50,8 +50,8 @@ namespace DungeonGeneratorNS
                 {
                     // Existing room wall tiles are allowed to overlap
                     // This allows walls to be shared by rooms
-                    if (dungeon.GetTile(row, col).Block != Block.Rock
-                        && dungeon.GetTile(row, col).Block != Block.Wall)
+                    if (dungeon.GetTile(row, col).Block != Block.Rock)
+                        //&& dungeon.GetTile(row, col).Block != Block.Wall)
                     {
                         return false;
                     }

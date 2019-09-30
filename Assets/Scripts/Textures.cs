@@ -1,15 +1,54 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DungeonGeneratorNS;
 
 public class Textures : MonoBehaviour
 {
-    public Material wallMaterial;
-    public Texture wallTexture;
+    [Serializable]
+    public struct WallTextures
+    {
+        public Texture wall1;
+        public Texture wall2;
+        public Texture wall3;
+        public Texture wall4;
+        public Texture wall5;
+        public Texture wall6;
+        public Texture wall7;
+        public Texture wall8;
+    }
+    public WallTextures WallTexturesInEditor;
+    private readonly int totalWallTextures = 8;
 
-    public static readonly byte minColor = 18;
-    public static readonly byte maxColor = 58;
+    public Material WallMaterial;
+
+    public static readonly byte MinColor = 18;
+    public static readonly byte MaxColor = 58;
+
+    public List<Material> PopulateWallMaterials(int repetitionsPerTexture)
+    {
+        List<Texture> wallTextures = new List<Texture>
+        {
+            WallTexturesInEditor.wall1,
+            WallTexturesInEditor.wall2,
+            WallTexturesInEditor.wall3,
+            WallTexturesInEditor.wall4,
+            WallTexturesInEditor.wall5,
+            WallTexturesInEditor.wall6,
+            WallTexturesInEditor.wall7,
+            WallTexturesInEditor.wall8
+        };
+
+        int total = repetitionsPerTexture * totalWallTextures;
+        List<Material> materials = new List<Material>();
+        for (int i = 0; i < total; ++i)
+        {
+            materials.Add(RandomWallMaterial());
+            materials[i].mainTexture = wallTextures[i % totalWallTextures];
+        }
+        return materials;
+    }
 
     public Material RandomWallMaterial()
     {
@@ -21,17 +60,16 @@ public class Textures : MonoBehaviour
         }
 
         List<byte> rgb = new List<byte>();
-        rgb.Add(minColor);
-        rgb.Add(maxColor);
-        rgb.Add((byte)GM.Rng.Next(minColor, maxColor));
+        rgb.Add(MinColor);
+        rgb.Add(MaxColor);
+        rgb.Add((byte)GM.Rng.Next(MinColor, MaxColor));
 
-        byte red = GetAndRemove(rgb, Random.Range(0, 3));
-        byte green = GetAndRemove(rgb, Random.Range(0, 2));
+        byte red = GetAndRemove(rgb, UnityEngine.Random.Range(0, 3));
+        byte green = GetAndRemove(rgb, UnityEngine.Random.Range(0, 2));
         byte blue = rgb[0];
 
-        Material material = new Material(wallMaterial);
+        Material material = new Material(WallMaterial);
         material.color = new Color32(red, green, blue, 255);
-        material.mainTexture = wallTexture;
         return material;
     }
 }
