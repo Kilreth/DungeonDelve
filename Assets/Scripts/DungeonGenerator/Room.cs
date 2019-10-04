@@ -12,32 +12,41 @@ namespace DungeonGeneratorNS
     /// </summary>
     public class Room : Area
     {
+        public Dungeon Dungeon { get; }
+        public int FirstRow { get; }
+        public int FirstCol { get; }
+        public int Height { get; }
+        public int Width { get; }
 
-        public int FirstRow { get; private set; }
-        public int FirstCol { get; private set; }
-        public int Height { get; private set; }
-        public int Width { get; private set; }
+        public Room Outer
+        {
+            get
+            {
+                if (outer == null)
+                {
+                    outer = new Room(Dungeon, FirstRow - 1, FirstCol - 1, Height + 2, Width + 2);
+                }
+                return outer;
+            }
+        }
+        private Room outer;
 
-        public Room Outer { get; private set; }
-        public List<Tile> Doors { get; private set; }
-        private List<Tile> walls { get; set; }
+        public List<Tile> Doors { get; }
+        private List<Tile> walls;
 
         /// <summary>
         /// Determines if a room can be placed where it is, or if it must be discarded.
         /// Notably, all open tiles in the room must be rock.
         /// The walls of this room can overlap with walls of other rooms.
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <returns></returns>
-        public bool CanRoomFit(Dungeon dungeon)
+        public bool CanRoomFit()
         {
-            InitialiseOuter();
-
             // Is origin corner within the dungeon?
-            if (!dungeon.IsTileWithinDungeon(Outer.FirstRow, Outer.FirstCol))
+            if (!Dungeon.IsTileWithinDungeon(Outer.FirstRow, Outer.FirstCol))
                 return false;
             // Is far corner within the dungeon?
-            if (!dungeon.IsTileWithinDungeon(Outer.FirstRow + Outer.Height - 1,
+            if (!Dungeon.IsTileWithinDungeon(Outer.FirstRow + Outer.Height - 1,
                                              Outer.FirstCol + Outer.Width - 1))
                 return false;
 
@@ -50,8 +59,8 @@ namespace DungeonGeneratorNS
                 {
                     // Existing room wall tiles are allowed to overlap
                     // This allows walls to be shared by rooms
-                    if (dungeon.GetTile(row, col).Block != Block.Rock)
-                        //&& dungeon.GetTile(row, col).Block != Block.Wall)
+                    if (Dungeon.GetTile(row, col).Block != Block.Rock)
+                        //&& Dungeon.GetTile(row, col).Block != Block.Wall)
                     {
                         return false;
                     }
@@ -60,9 +69,9 @@ namespace DungeonGeneratorNS
             return true;
         }
 
-        public void GenerateDoors(Dungeon dungeon, double doorToWallRatio)
+        public void GenerateDoors(double doorToWallRatio)
         {
-            FindWallLocations(dungeon);
+            FindWallLocations();
 
             // How many doors will we make?
             int numDoors = (int) (walls.Count * doorToWallRatio);
@@ -74,7 +83,7 @@ namespace DungeonGeneratorNS
 
             while (Doors.Count < numDoors)
             {
-                GenerateDoor(dungeon);
+                GenerateDoor();
             }
         }
 
@@ -82,20 +91,22 @@ namespace DungeonGeneratorNS
         /// Randomly chooses a wall tile as a door.
         /// Does not choose tiles touching an existing door, not even by a corner.
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <returns></returns>
-        public Tile GenerateDoor(Dungeon dungeon)
+        public Tile GenerateDoor()
         {
             int tries = 0;
             while (tries < 100)
             {
-                // Because rooms can share walls, some wall tiles may already be doors from another room!
-                // So check the actual tile as well as this room's list of doors
+                // I've changed the logic in CanRoomFit() so wall tiles aren't shared between rooms.
+                // The below point is a good precaution, regardless.
+
+                // // Because rooms can share walls, some wall tiles may already be doors from another room!
+                // // So check the actual tile as well as this room's list of doors
 
                 Tile door = walls[DungeonGenerator.Rng.Next(0, walls.Count)];
                 if (!Doors.Contains(door) && door.Block != Block.Door
-                    && !dungeon.IsTileSurroundedBy(door, Block.Door)
-                    && dungeon.GetTileByDirection(door).Block != Block.Granite)
+                    && !Dungeon.IsTileSurroundedBy(door, Block.Door)
+                    && Dungeon.GetTileByDirection(door).Block != Block.Granite)
                 {
                     SetTileAsDoor(door);
                     return door;
@@ -121,26 +132,25 @@ namespace DungeonGeneratorNS
         /// Also initializes the tiles' direction -- walls face outward.
         /// Corners are excluded.
         /// </summary>
-        public void FindWallLocations(Dungeon dungeon)
+        public void FindWallLocations()
         {
-            InitialiseOuter();
             walls = new List<Tile>();
             Tile tile;
             for (int row = FirstRow; row < FirstRow + Height; row++)
             {
-                tile = dungeon.GetTile(row, Outer.FirstCol);
+                tile = Dungeon.GetTile(row, Outer.FirstCol);
                 tile.Direction = Direction.Left;
                 walls.Add(tile);
-                tile = dungeon.GetTile(row, Outer.FirstCol + Outer.Width - 1);
+                tile = Dungeon.GetTile(row, Outer.FirstCol + Outer.Width - 1);
                 tile.Direction = Direction.Right;
                 walls.Add(tile);
             }
             for (int col = FirstCol; col < FirstCol + Width; col++)
             {
-                tile = dungeon.GetTile(Outer.FirstRow, col);
+                tile = Dungeon.GetTile(Outer.FirstRow, col);
                 tile.Direction = Direction.Up;
                 walls.Add(tile);
-                tile = dungeon.GetTile(Outer.FirstRow + Outer.Height - 1, col);
+                tile = Dungeon.GetTile(Outer.FirstRow + Outer.Height - 1, col);
                 tile.Direction = Direction.Down;
                 walls.Add(tile);
             }
@@ -154,29 +164,21 @@ namespace DungeonGeneratorNS
             }
         }
 
-        public Tile GetRandomTile(Dungeon dungeon)
+        public Tile GetRandomTile()
         {
             int row = DungeonGenerator.Rng.Next(FirstRow, FirstRow + Height);
             int col = DungeonGenerator.Rng.Next(FirstCol, FirstCol + Width);
-            return dungeon.GetTile(row, col);
+            return Dungeon.GetTile(row, col);
         }
 
-        private void InitialiseOuter()
+        public Room(Dungeon dungeon, int firstRow, int firstCol, int height, int width)
         {
-            if (Outer == null)
-            {
-                Outer = new Room(FirstRow - 1, FirstCol - 1, Height + 2, Width + 2);
-            }
-        }
-
-        public Room(int firstRow, int firstCol, int height, int width)
-        {
+            Dungeon = dungeon;
             FirstRow = firstRow;
             FirstCol = firstCol;
             Height = height;
             Width = width;
 
-            Outer = null;
             walls = null;
             Doors = new List<Tile>();
         }

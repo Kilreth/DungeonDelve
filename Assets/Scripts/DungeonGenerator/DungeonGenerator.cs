@@ -19,8 +19,7 @@ namespace DungeonGeneratorNS
         /// 
         /// Rooms are ordered by BFS so the heuristic is number of rooms+paths crossed.
         /// </summary>
-        /// <param name="dungeon"></param>
-        public void GenerateStairsAndKey(Dungeon dungeon)
+        public void GenerateStairsAndKey()
         {
             // Although very unlikely, it is possible not all rooms at this point are connected
             // Choose a random room that belongs to the connected dungeon
@@ -28,16 +27,16 @@ namespace DungeonGeneratorNS
             List<Room> roomsFromStart;
             do
             {
-                startRoom = dungeon.GetRandomRoom();
-                roomsFromStart = dungeon.FindConnectedRooms(startRoom);
+                startRoom = Dungeon.GetRandomRoom();
+                roomsFromStart = Dungeon.FindConnectedRooms(startRoom);
             }
-            while (roomsFromStart.Count * 2 < dungeon.Rooms.Count);
+            while (roomsFromStart.Count * 2 < Dungeon.Rooms.Count);
             int totalRooms = roomsFromStart.Count;
 
             // DEBUG: Draw BFS order on screen
             for (int i = 0; i < totalRooms; ++i)
             {
-                roomsFromStart[i].GetRandomTile(dungeon).Text = i.ToString();
+                roomsFromStart[i].GetRandomTile().Text = i.ToString();
             }
 
             // The goal room is the farthest room encountered in the breadth-first search
@@ -45,9 +44,9 @@ namespace DungeonGeneratorNS
             Room goalRoom = roomsFromStart[totalRooms - 1];
             Room keyRoom  = roomsFromStart[Rng.Next((int)(totalRooms * 0.4), (int)(totalRooms * 0.6))];
 
-            startRoom.GetRandomTile(dungeon).Block = Block.StairsUp;
-            goalRoom.GetRandomTile(dungeon).Block = Block.StairsDown;
-            keyRoom.GetRandomTile(dungeon).Block = Block.Key;
+            startRoom.GetRandomTile().Block = Block.StairsUp;
+            goalRoom.GetRandomTile().Block = Block.StairsDown;
+            keyRoom.GetRandomTile().Block = Block.Key;
         }
 
         /// <summary>
@@ -63,34 +62,33 @@ namespace DungeonGeneratorNS
         /// Moreover, because stair and key generation use the connected graph,
         /// any isolated rooms are harmless.
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <param name="chanceToTurn"></param>
-        public void MakeDungeonACompleteGraph(Dungeon dungeon, double chanceToTurn)
+        public void MakeDungeonACompleteGraph(double chanceToTurn)
         {
-            List<Room> unconnectedRooms = dungeon.FindUnconnectedRooms(dungeon.GetRandomRoom());
+            List<Room> unconnectedRooms = Dungeon.FindUnconnectedRooms(Dungeon.GetRandomRoom());
             int tries = 0;
-            while (unconnectedRooms.Count > 0 && tries < dungeon.Rooms.Count)
+            while (unconnectedRooms.Count > 0 && tries < Dungeon.Rooms.Count)
             {
                 foreach (Room r in unconnectedRooms)
                 {
                     r.FlagDebug();
                 }
                 Room room = unconnectedRooms[Rng.Next(0, unconnectedRooms.Count)];
-                Tile door = room.GenerateDoor(dungeon);
+                Tile door = room.GenerateDoor();
                 if (door != null)
                 {
                     door.Debug = true;
 
                     // Avoid wasting doors on paths that don't connect anywhere new
                     bool allowConnectionToConnectedArea = false;
-                    GenerateCorridor(dungeon, door, chanceToTurn, allowConnectionToConnectedArea);
+                    GenerateCorridor(door, chanceToTurn, allowConnectionToConnectedArea);
                 }
                 else
                 {
                     return;
                 }
 
-                unconnectedRooms = dungeon.FindUnconnectedRooms(dungeon.GetRandomRoom());
+                unconnectedRooms = Dungeon.FindUnconnectedRooms(Dungeon.GetRandomRoom());
                 ++tries;
             }
         }
@@ -99,11 +97,10 @@ namespace DungeonGeneratorNS
         /// Link all adjacent walkable areas to the area a given tile belongs to.
         /// For example, link the end of a path to the room belonging to a door.
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <param name="tile"></param>
-        public void ConnectAreas(Dungeon dungeon, Tile tile)
+        public void ConnectAreas(Tile tile)
         {
-            foreach (Tile adj in dungeon.GetAdjacentTiles(tile))
+            foreach (Tile adj in Dungeon.GetAdjacentTiles(tile))
             {
                 if (Tile.IsWalkable(adj.Block))
                 {
@@ -115,9 +112,8 @@ namespace DungeonGeneratorNS
         /// <summary>
         /// Commits a stack of wrapped corridor tiles to the dungeon.
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <param name="path"></param>
-        public void CarveCorridor(Dungeon dungeon, Stack<CorridorTile> path)
+        public void CarveCorridor(Stack<CorridorTile> path)
         {
             // Unwrap the tiles in the stack to populate a set
 
@@ -130,7 +126,7 @@ namespace DungeonGeneratorNS
             // Get an existing Path object if there is one; otherwise make a new object
 
             Area area;
-            List<Tile> adjacentPaths = dungeon.GetAdjacentTilesOfType(path.Peek().Tile, Block.Path);
+            List<Tile> adjacentPaths = Dungeon.GetAdjacentTilesOfType(path.Peek().Tile, Block.Path);
             if (adjacentPaths.Count > 0)
             {
                 area = adjacentPaths[0].Area;
@@ -145,7 +141,7 @@ namespace DungeonGeneratorNS
 
             Tile end = path.Peek().Tile;
             end.Area = area;
-            ConnectAreas(dungeon, end);
+            ConnectAreas(end);
 
             // Finally begin carving the corridor
 
@@ -154,7 +150,7 @@ namespace DungeonGeneratorNS
             {
                 head = path.Pop();
                 tiles.Remove(head.Tile);
-                List<Tile> adjacents = dungeon.GetAdjacentTiles(head.Tile, head.From.Tile);
+                List<Tile> adjacents = Dungeon.GetAdjacentTiles(head.Tile, head.From.Tile);
                 foreach (Tile adjacent in adjacents)
                 {
                     if (tiles.Contains(adjacent))
@@ -174,16 +170,15 @@ namespace DungeonGeneratorNS
 
             // Connect the *start* of the path to the room it came from
 
-            ConnectAreas(dungeon, head.Tile);
+            ConnectAreas(head.Tile);
         }
 
         /// <summary>
         /// Perform a flood-fill search from a door to another room's door or a path.
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <param name="door"></param>
         /// <param name="chanceToTurn"></param>
-        public void CorridorWalk(Dungeon dungeon, Tile door, double chanceToTurn, bool allowConnectionToConnectedArea)
+        public void CorridorWalk(Tile door, double chanceToTurn, bool allowConnectionToConnectedArea)
         {
             bool DoorLeadsToOtherRoom(List<Tile> doors)
             {
@@ -200,7 +195,7 @@ namespace DungeonGeneratorNS
             HashSet<CorridorTile> visited = new HashSet<CorridorTile>();
             Stack<CorridorTile> path = new Stack<CorridorTile>();
 
-            Tile firstTile = dungeon.GetTileByDirection(door);
+            Tile firstTile = Dungeon.GetTileByDirection(door);
             CorridorTile start = new CorridorTile(door, null, door.Direction);
             CorridorTile head = new CorridorTile(firstTile, start, door.Direction);
             path.Push(head);
@@ -224,22 +219,22 @@ namespace DungeonGeneratorNS
                 // Have we found any doors?
                 // If all adjacent doors lead to the room we came from, carry on
 
-                if (dungeon.IsTileAdjacentTo(head.Tile, Block.Door, head.From.Tile)
-                        && DoorLeadsToOtherRoom(dungeon.GetAdjacentTilesOfType(head.Tile, Block.Door, head.From.Tile)))
+                if (Dungeon.IsTileAdjacentTo(head.Tile, Block.Door, head.From.Tile)
+                        && DoorLeadsToOtherRoom(Dungeon.GetAdjacentTilesOfType(head.Tile, Block.Door, head.From.Tile)))
                 {
-                    CarveCorridor(dungeon, path);
+                    CarveCorridor(path);
                     return;
                 }
 
                 // Have we found an existing path? Connect to it and end
                 // If we are not allowed to connect to it, then we must skirt around it
 
-                if (dungeon.IsTileAdjacentTo(head.Tile, Block.Path, head.From.Tile))
+                if (Dungeon.IsTileAdjacentTo(head.Tile, Block.Path, head.From.Tile))
                 {
                     if (allowConnectionToConnectedArea || RoomUnconnectedToAdjacentArea(door.Area,
-                        dungeon.GetAdjacentTilesOfType(head.Tile, Block.Path, head.From.Tile)))
+                        Dungeon.GetAdjacentTilesOfType(head.Tile, Block.Path, head.From.Tile)))
                     {
-                        CarveCorridor(dungeon, path);
+                        CarveCorridor(path);
                         return;
                     }
                     else
@@ -258,7 +253,7 @@ namespace DungeonGeneratorNS
                     CorridorTile next;
                     do
                     {
-                        next = head.ChooseNextTile(dungeon, chanceToTurn);
+                        next = head.ChooseNextTile(Dungeon, chanceToTurn);
                     } while (visited.Contains(next) && head.DirectionsToTry.Count > 0);
                     if (visited.Contains(next))
                     {
@@ -286,10 +281,9 @@ namespace DungeonGeneratorNS
         /// It's possible that if the door opens into the corner of another room, our corridor
         /// opens into another corridor first. This is fine, just don't make the last tile a door.
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <param name="door"></param>
         /// <param name="startOfPath"></param>
-        public void CorridorThroughRoomWall(Dungeon dungeon, Tile door, Tile startOfPath, bool allowConnectionToConnectedArea)
+        public void CorridorThroughRoomWall(Tile door, Tile startOfPath, bool allowConnectionToConnectedArea)
         {
             // Prepare a stack of path tiles so we can call our general method to carve the corridor
 
@@ -297,15 +291,15 @@ namespace DungeonGeneratorNS
             CorridorTile wrappedDoor = new CorridorTile(door, null, door.Direction);
             CorridorTile head = new CorridorTile(startOfPath, wrappedDoor, door.Direction);
             path.Push(head);
-            while (!dungeon.IsTileAdjacentTo(head.Tile, Block.WALKABLE, head.From.Tile))
+            while (!Dungeon.IsTileAdjacentTo(head.Tile, Block.WALKABLE, head.From.Tile))
             {
-                Tile nextTile = dungeon.GetTileByDirection(head.Tile, door.Direction);
+                Tile nextTile = Dungeon.GetTileByDirection(head.Tile, door.Direction);
                 head = new CorridorTile(nextTile, head, door.Direction);
                 path.Push(head);
             }
 
             if (!allowConnectionToConnectedArea && !RoomUnconnectedToAdjacentArea(door.Area,
-                dungeon.GetAdjacentTilesOfType(head.Tile, Block.WALKABLE, head.From.Tile)))
+                Dungeon.GetAdjacentTilesOfType(head.Tile, Block.WALKABLE, head.From.Tile)))
             {
                 EraseDoor(door);
                 return;
@@ -315,7 +309,7 @@ namespace DungeonGeneratorNS
             // As a wall tile originally, the door tile is already facing out from its room
 
             Tile otherDoor = path.Peek().Tile;
-            if (dungeon.IsTileAdjacentTo(otherDoor, Block.Room))
+            if (Dungeon.IsTileAdjacentTo(otherDoor, Block.Room))
             {
                 path.Pop();
                 Room otherRoom = (Room)otherDoor.Area;
@@ -326,11 +320,11 @@ namespace DungeonGeneratorNS
 
             if (path.Count > 0)
             {
-                CarveCorridor(dungeon, path);
+                CarveCorridor(path);
             }
             else
             {
-                ConnectAreas(dungeon, door);
+                ConnectAreas(door);
             }
         }
 
@@ -340,23 +334,22 @@ namespace DungeonGeneratorNS
         ///   - A wall of another room. Carve a corridor straight ahead until a walkable space is found
         ///   - Solid rock. Call the flood-fill search to find a door or path for a corridor to connect to
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <param name="door"></param>
         /// <param name="chanceToTurn"></param>
         /// <param name="allowConnectionToConnectedArea"></param>
-        public void GenerateCorridor(Dungeon dungeon, Tile door, double chanceToTurn, bool allowConnectionToConnectedArea)
+        public void GenerateCorridor(Tile door, double chanceToTurn, bool allowConnectionToConnectedArea)
         {
-            Tile startOfPath = dungeon.GetTileByDirection(door, door.Direction);
+            Tile startOfPath = Dungeon.GetTileByDirection(door, door.Direction);
 
             // If door is already connected to a path or another door, there is nothing to do
             // (The initial set of doors touch no other doors, so if a door is adjacent,
             // it was spawned while carving a path straight ahead.)
 
-            if (dungeon.IsTileAdjacentTo(door, Block.WALKABLE, dungeon.GetTileByDirection(door, Tile.Invert(door.Direction))))
+            if (Dungeon.IsTileAdjacentTo(door, Block.WALKABLE, Dungeon.GetTileByDirection(door, Tile.Invert(door.Direction))))
             {
                 if (allowConnectionToConnectedArea || !door.Area.To.Contains(startOfPath.Area))
                 {
-                    ConnectAreas(dungeon, door);
+                    ConnectAreas(door);
                 }
                 else
                 {
@@ -370,13 +363,13 @@ namespace DungeonGeneratorNS
 
             if (startOfPath.Block == Block.Wall)
             {
-                CorridorThroughRoomWall(dungeon, door, startOfPath, allowConnectionToConnectedArea);
+                CorridorThroughRoomWall(door, startOfPath, allowConnectionToConnectedArea);
                 return;
             }
 
             // If there is solid stone ahead, start a path
 
-            CorridorWalk(dungeon, door, chanceToTurn, allowConnectionToConnectedArea);
+            CorridorWalk(door, chanceToTurn, allowConnectionToConnectedArea);
         }
 
         private bool RoomUnconnectedToAdjacentArea(Area area, List<Tile> adjacents)
@@ -398,9 +391,9 @@ namespace DungeonGeneratorNS
             door.Block = Block.Wall;
         }
 
-        public void GenerateCorridors(Dungeon dungeon, double chanceToTurn)
+        public void GenerateCorridors(double chanceToTurn)
         {
-            foreach (Room room in dungeon.Rooms)
+            foreach (Room room in Dungeon.Rooms)
             {
                 // If no corridor can be formed from a door, the door is removed
                 // So a room's list of doors may shrink as we iterate over it
@@ -408,16 +401,16 @@ namespace DungeonGeneratorNS
                 bool allowConnectionToConnectedArea = true;
                 for (int i = room.Doors.Count - 1; i >= 0; --i)
                 {
-                    GenerateCorridor(dungeon, room.Doors[i], chanceToTurn, allowConnectionToConnectedArea);
+                    GenerateCorridor(room.Doors[i], chanceToTurn, allowConnectionToConnectedArea);
                 }
             }
         }
 
-        public void GenerateDoors(Dungeon dungeon, double doorToWallRatio)
+        public void GenerateDoors(double doorToWallRatio)
         {
-            foreach (Room room in dungeon.Rooms)
+            foreach (Room room in Dungeon.Rooms)
             {
-                room.GenerateDoors(dungeon, doorToWallRatio);
+                room.GenerateDoors(doorToWallRatio);
             }
         }
 
@@ -425,18 +418,17 @@ namespace DungeonGeneratorNS
         /// Randomly fill an empty dungeon with rooms until a space ratio is reached,
         /// or until adding another room is unsuccessful after a number of tries.
         /// </summary>
-        /// <param name="dungeon"></param>
         /// <param name="roomToDungeonRatio"></param>
         /// <param name="minRoomHeight"></param>
         /// <param name="minRoomWidth"></param>
         /// <param name="maxRoomHeight"></param>
         /// <param name="maxRoomWidth"></param>
-        public void GenerateRooms(Dungeon dungeon, double roomToDungeonRatio,
+        public void GenerateRooms(double roomToDungeonRatio,
                                      int minRoomHeight, int minRoomWidth, int maxRoomHeight, int maxRoomWidth)
         {
             // Calculate how many room tiles we have
 
-            int totalTiles = dungeon.Height * dungeon.Width;
+            int totalTiles = Dungeon.Height * Dungeon.Width;
             int remainingRoomTiles = (int) (totalTiles * roomToDungeonRatio);
             int minRoomSize = minRoomHeight * minRoomWidth;
 
@@ -459,18 +451,18 @@ namespace DungeonGeneratorNS
                 int attempts = 0;
                 do
                 {
-                    row = Rng.Next(dungeonEdge, dungeon.Height - roomHeight - dungeonEdge + 1);
-                    col = Rng.Next(dungeonEdge, dungeon.Width - roomWidth - dungeonEdge + 1);
-                    room = new Room(row, col, roomHeight, roomWidth);
+                    row = Rng.Next(dungeonEdge, Dungeon.Height - roomHeight - dungeonEdge + 1);
+                    col = Rng.Next(dungeonEdge, Dungeon.Width - roomWidth - dungeonEdge + 1);
+                    room = new Room(Dungeon, row, col, roomHeight, roomWidth);
                     ++attempts;
-                } while (!room.CanRoomFit(dungeon) && attempts != 100);
+                } while (!room.CanRoomFit() && attempts != 100);
                 if (attempts == 100)
                 {
                     break;
                 }
 
                 room.InitializeArea();
-                dungeon.CarveRoom(room);
+                Dungeon.CarveRoom(room);
                 remainingRoomTiles -= roomHeight * roomWidth;
             }
         }
@@ -478,11 +470,11 @@ namespace DungeonGeneratorNS
         public DungeonGenerator(int height, int width)
         {
             Dungeon = new Dungeon(height, width);
-            GenerateRooms(Dungeon, 0.9, 3, 3, 9, 9);
-            GenerateDoors(Dungeon, 0.1);
-            GenerateCorridors(Dungeon, 0.2);
-            MakeDungeonACompleteGraph(Dungeon, 0.2);
-            GenerateStairsAndKey(Dungeon);
+            GenerateRooms(0.9, 3, 3, 9, 9);
+            GenerateDoors(0.1);
+            GenerateCorridors(0.2);
+            MakeDungeonACompleteGraph(0.2);
+            GenerateStairsAndKey();
         }
 
         static DungeonGenerator()

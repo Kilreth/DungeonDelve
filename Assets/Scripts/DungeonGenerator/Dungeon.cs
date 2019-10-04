@@ -10,9 +10,9 @@ namespace DungeonGeneratorNS
     {
         public int Height { get; }
         public int Width { get; }
-        public Tile[,] Tiles { get; private set; }
-        public List<Room> Rooms { get; private set; }
-        public List<Path> Paths { get; private set; }
+        public Tile[,] Tiles { get; }
+        public List<Room> Rooms { get; }
+        public List<Path> Paths { get; }
 
         public List<Room> FindUnconnectedRooms(Room start)
         {
@@ -255,8 +255,6 @@ namespace DungeonGeneratorNS
         /// </summary>
         public void Initialize()
         {
-            Tiles = new Tile[Height, Width];
-
             // Impervious granite edge of the dungeon
             for (int row = 0; row < Height; row++)
             {
@@ -283,6 +281,7 @@ namespace DungeonGeneratorNS
         {
             Height = height;
             Width = width;
+            Tiles = new Tile[Height, Width];
             Initialize();
             Rooms = new List<Room>();
             Paths = new List<Path>();
