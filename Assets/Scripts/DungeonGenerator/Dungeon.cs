@@ -14,6 +14,17 @@ namespace DungeonGeneratorNS
         public List<Room> Rooms { get; }
         public List<Path> Paths { get; }
 
+        public List<Room> GetConnectedDungeon()
+        {
+            List<Room> roomsFromStart;
+            do
+            {
+                roomsFromStart = FindConnectedRooms(GetRandomRoom());
+            }
+            while (roomsFromStart.Count * 2 < Rooms.Count);
+            return roomsFromStart;
+        }
+
         public List<Room> FindUnconnectedRooms(Room start)
         {
             return RoomGraphTraversal(start, false);

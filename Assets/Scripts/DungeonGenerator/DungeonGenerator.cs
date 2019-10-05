@@ -15,38 +15,37 @@ namespace DungeonGeneratorNS
         /// <summary>
         /// Choose a random start room.
         /// Choose the farthest room from that as the goal room.
-        /// Choose a room with medium distance to place the key in.
+        /// Choose other unique rooms to scatter keys in.
         /// 
         /// Rooms are ordered by BFS so the heuristic is number of rooms+paths crossed.
         /// </summary>
-        public void GenerateStairsAndKey()
+        public void GeneratePortalsAndKeys(int numberOfKeys)
         {
             // Although very unlikely, it is possible not all rooms at this point are connected
-            // Choose a random room that belongs to the connected dungeon
-            Room startRoom;
-            List<Room> roomsFromStart;
-            do
-            {
-                startRoom = Dungeon.GetRandomRoom();
-                roomsFromStart = Dungeon.FindConnectedRooms(startRoom);
-            }
-            while (roomsFromStart.Count * 2 < Dungeon.Rooms.Count);
-            int totalRooms = roomsFromStart.Count;
+            // Only use rooms that belong to the connected dungeon
+            List<Room> rooms = Dungeon.GetConnectedDungeon();
+            int totalRooms = rooms.Count;
 
-            // DEBUG: Draw BFS order on screen
-            for (int i = 0; i < totalRooms; ++i)
-            {
-                roomsFromStart[i].GetRandomTile().Text = i.ToString();
-            }
+            // Start room is the start of the search
+            rooms[0].AddItem(new ItemNS.StartPortal());
 
             // The goal room is the farthest room encountered in the breadth-first search
-            // The room with the key is somewhere in the middle
-            Room goalRoom = roomsFromStart[totalRooms - 1];
-            Room keyRoom  = roomsFromStart[Rng.Next((int)(totalRooms * 0.4), (int)(totalRooms * 0.6))];
+            rooms[totalRooms - 1].AddItem(new ItemNS.EndPortal());
 
-            startRoom.GetRandomTile().Block = Block.StairsUp;
-            goalRoom.GetRandomTile().Block = Block.StairsDown;
-            keyRoom.GetRandomTile().Block = Block.Key;
+            // Scatter keys across all rooms except start and goal rooms
+            if (numberOfKeys > rooms.Count - 2)
+            {
+                numberOfKeys = rooms.Count - 2;
+            }
+            for (int key = 0; key < numberOfKeys; ++key)
+            {
+                int roomIndex = Rng.Next(1, rooms.Count - 1);
+                rooms[roomIndex].AddItem(new ItemNS.Key());
+                rooms.RemoveAt(roomIndex);
+            }
+
+            // Example code for placing a key within a certain distance from the start room
+            // Room keyRoom  = rooms[Rng.Next((int)(totalRooms * 0.4), (int)(totalRooms * 0.6))];
         }
 
         /// <summary>
@@ -474,7 +473,7 @@ namespace DungeonGeneratorNS
             GenerateDoors(0.1);
             GenerateCorridors(0.2);
             MakeDungeonACompleteGraph(0.2);
-            GenerateStairsAndKey();
+            GeneratePortalsAndKeys(10);
         }
 
         static DungeonGenerator()

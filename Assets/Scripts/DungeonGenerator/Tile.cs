@@ -20,6 +20,17 @@ namespace DungeonGeneratorNS
         public Block Block { get; set; }
         public Direction Direction { get; set; }
         public Area Area { get; set; }
+        public Item Item { get; private set; }
+
+        public bool AddItem(Item item)
+        {
+            if (Item == null)
+            {
+                Item = item;
+                return true;
+            }
+            return false;
+        }
 
         public static bool IsWalkable(Tile tile)
         {
@@ -46,6 +57,11 @@ namespace DungeonGeneratorNS
             else if (direction == Direction.Right)
                 return Direction.Left;
             throw new ArgumentNullException("direction", "Invert undefined for this direction");
+        }
+
+        public override string ToString()
+        {
+            return string.Format("(row {0}, col {1}, block {2})", Row, Col, Block);
         }
 
         /// <summary>
@@ -99,5 +115,5 @@ namespace DungeonGeneratorNS
     /// Path:    Vacant tiles that make corridors connecting doors
     /// Door:    Vacant tiles connecting rooms and paths
     /// </summary>
-    public enum Block { Granite, Rock, Room, Wall, Path, Door, StairsUp, StairsDown, Key, WALKABLE }
+    public enum Block { Granite, Rock, Room, Wall, Path, Door, StairsUp, StairsDown, WALKABLE }
 }

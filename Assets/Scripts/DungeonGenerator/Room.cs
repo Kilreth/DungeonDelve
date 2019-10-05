@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DungeonGeneratorNS
 {
     /// <summary>
-    /// A Room represents the vacant tiles in a room.
+    /// A Room represents the walkable tiles in a room.
     /// A Room may create an Outer room which includes surrounding wall tiles.
     /// </summary>
     public class Room : Area
@@ -30,9 +30,28 @@ namespace DungeonGeneratorNS
             }
         }
         private Room outer;
-
+        public List<Tile> Tiles
+        {
+            get
+            {
+                if (tiles == null)
+                {
+                    tiles = new List<Tile>();
+                    for (int row = FirstRow; row < FirstRow + Height; ++row)
+                    {
+                        for (int col = FirstCol; col < FirstCol + Width; ++col)
+                        {
+                            tiles.Add(Dungeon.GetTile(row, col));
+                        }
+                    }
+                }
+                return tiles;
+            }
+        }
+        private List<Tile> tiles;
         public List<Tile> Doors { get; }
         private List<Tile> walls;
+        private List<Tile> vacantTiles;
 
         /// <summary>
         /// Determines if a room can be placed where it is, or if it must be discarded.
@@ -161,6 +180,38 @@ namespace DungeonGeneratorNS
             foreach (Tile tile in walls)
             {
                 tile.Debug = true;
+            }
+        }
+
+        public Tile AddItem(Item item)
+        {
+            if (vacantTiles == null)
+            {
+                FindTilesThatCanHoldObjects();
+            }
+
+            int index = DungeonGenerator.Rng.Next(0, vacantTiles.Count);
+            Tile tile = vacantTiles[index];
+            if (!tile.AddItem(item))
+            {
+                throw new InvalidOperationException(string.Format("Tile {0} already contains an item: {1}", tile, tile.Item));
+            }
+            vacantTiles.RemoveAt(index);
+            return tile;
+        }
+
+        /// <summary>
+        /// Return a list of walkable tiles to place items on, minus tiles that would block a door if filled.
+        /// </summary>
+        private void FindTilesThatCanHoldObjects()
+        {
+            vacantTiles = new List<Tile>(Tiles);    // shallow clone
+            for (int i = vacantTiles.Count - 1; i >= 0; --i)
+            {
+                if (Dungeon.IsTileAdjacentTo(vacantTiles[i], Block.Door))
+                {
+                    vacantTiles.RemoveAt(i);
+                }
             }
         }
 
