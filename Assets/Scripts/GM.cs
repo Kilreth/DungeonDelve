@@ -7,6 +7,8 @@ public class GM : MonoBehaviour
     public static GM Instance;
 
     public float BlockScale = 2;
+    [HideInInspector]
+    public GameObject Player { get; private set; }
     public static System.Random Rng { get; private set; }
 
     private InstantiateDungeon instantiateDungeon;
@@ -29,5 +31,6 @@ public class GM : MonoBehaviour
         GM.Rng = new System.Random();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
+        Player = instantiateDungeon.Player;
     }
 }

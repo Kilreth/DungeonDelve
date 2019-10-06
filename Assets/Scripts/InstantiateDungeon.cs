@@ -98,6 +98,11 @@ public class InstantiateDungeon : MonoBehaviour
                 }
             }
         }
+
+        if (Player == null)
+        {
+            throw new InvalidOperationException("No start portal in the dungeon");
+        }
     }
 
     private GameObject InstantiateObject(GameObject prefab, int row, int col, bool scale, GameObject parent=null)
@@ -122,7 +127,7 @@ public class InstantiateDungeon : MonoBehaviour
         if (prefab == null)
         {
             return new Vector3(col * GM.Instance.BlockScale,
-                               0,   // also consiider GM.Instance.BlockScale
+                               0,   // also consider GM.Instance.BlockScale
                                row * GM.Instance.BlockScale);
         }
         return new Vector3((col + prefab.transform.position.x) * GM.Instance.BlockScale,
