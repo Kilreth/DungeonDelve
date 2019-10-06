@@ -28,6 +28,7 @@ public class GM : MonoBehaviour
 
     private void InitializeGame()
     {
+        QualitySettings.vSyncCount = 1;
         GM.Rng = new System.Random();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
