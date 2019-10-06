@@ -308,6 +308,8 @@ MonoBehaviour:
   dropHeight: 0.7
   throwStrength: 0.8
   crumbDropRate: 0.5
+  pickUpRadius: 0.5
+  pickUpDistance: 1.5
 --- !u!108 &-2276258133701700699
 Light:
   m_ObjectHideFlags: 0
@@ -315,7 +317,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 1, g: 0.8377877, b: 0.3254717, a: 1}
