@@ -9,7 +9,7 @@ public class GM : MonoBehaviour
     public float BlockScale = 2;
     [HideInInspector]
     public GameObject Player { get; private set; }
-    public static System.Random Rng { get; private set; }
+    public System.Random Random { get; private set; }
 
     private InstantiateDungeon instantiateDungeon;
 
@@ -29,7 +29,7 @@ public class GM : MonoBehaviour
     private void InitializeGame()
     {
         QualitySettings.vSyncCount = 1;
-        GM.Rng = new System.Random();
+        Random = new System.Random(0);
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
         Player = instantiateDungeon.Player;

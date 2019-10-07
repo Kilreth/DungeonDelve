@@ -62,10 +62,10 @@ public class Textures : MonoBehaviour
         List<byte> rgb = new List<byte>();
         rgb.Add(MinColor);
         rgb.Add(MaxColor);
-        rgb.Add((byte)GM.Rng.Next(MinColor, MaxColor));
+        rgb.Add((byte)GM.Instance.Random.Next(MinColor, MaxColor));
 
-        byte red = GetAndRemove(rgb, UnityEngine.Random.Range(0, 3));
-        byte green = GetAndRemove(rgb, UnityEngine.Random.Range(0, 2));
+        byte red = GetAndRemove(rgb, GM.Instance.Random.Next(0, 3));
+        byte green = GetAndRemove(rgb, GM.Instance.Random.Next(0, 2));
         byte blue = rgb[0];
 
         Material material = new Material(WallMaterial);

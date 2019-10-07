@@ -94,7 +94,7 @@ namespace DungeonGeneratorNS
 
             // How many doors will we make?
             int numDoors = (int) (walls.Count * doorToWallRatio);
-            numDoors += DungeonGenerator.Rng.Next(-1, 2);   // add -1, 0, or 1
+            numDoors += GM.Instance.Random.Next(-1, 2);   // add -1, 0, or 1
             if (numDoors < 1)
             {
                 numDoors = 1;
@@ -122,7 +122,7 @@ namespace DungeonGeneratorNS
                 // // Because rooms can share walls, some wall tiles may already be doors from another room!
                 // // So check the actual tile as well as this room's list of doors
 
-                Tile door = walls[DungeonGenerator.Rng.Next(0, walls.Count)];
+                Tile door = walls[GM.Instance.Random.Next(0, walls.Count)];
                 if (!Doors.Contains(door) && door.Block != Block.Door
                     && !Dungeon.IsTileSurroundedBy(door, Block.Door)
                     && Dungeon.GetTileByDirection(door).Block != Block.Granite)
@@ -190,7 +190,7 @@ namespace DungeonGeneratorNS
                 FindTilesThatCanHoldObjects();
             }
 
-            int index = DungeonGenerator.Rng.Next(0, vacantTiles.Count);
+            int index = GM.Instance.Random.Next(0, vacantTiles.Count);
             Tile tile = vacantTiles[index];
             if (!tile.AddItem(item))
             {
@@ -217,8 +217,8 @@ namespace DungeonGeneratorNS
 
         public Tile GetRandomTile()
         {
-            int row = DungeonGenerator.Rng.Next(FirstRow, FirstRow + Height);
-            int col = DungeonGenerator.Rng.Next(FirstCol, FirstCol + Width);
+            int row = GM.Instance.Random.Next(FirstRow, FirstRow + Height);
+            int col = GM.Instance.Random.Next(FirstCol, FirstCol + Width);
             return Dungeon.GetTile(row, col);
         }
 

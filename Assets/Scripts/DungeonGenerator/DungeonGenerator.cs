@@ -10,7 +10,6 @@ namespace DungeonGeneratorNS
     public class DungeonGenerator
     {
         public Dungeon Dungeon { get; }
-        public static Random Rng { get; }
 
         /// <summary>
         /// Choose a random start room.
@@ -39,13 +38,13 @@ namespace DungeonGeneratorNS
             }
             for (int key = 0; key < numberOfKeys; ++key)
             {
-                int roomIndex = Rng.Next(1, rooms.Count - 1);
+                int roomIndex = GM.Instance.Random.Next(1, rooms.Count - 1);
                 rooms[roomIndex].AddItem(new ItemNS.Key());
                 rooms.RemoveAt(roomIndex);
             }
 
             // Example code for placing a key within a certain distance from the start room
-            // Room keyRoom  = rooms[Rng.Next((int)(totalRooms * 0.4), (int)(totalRooms * 0.6))];
+            // Room keyRoom  = rooms[GM.Instance.Random.Next((int)(totalRooms * 0.4), (int)(totalRooms * 0.6))];
         }
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace DungeonGeneratorNS
                 {
                     r.FlagDebug();
                 }
-                Room room = unconnectedRooms[Rng.Next(0, unconnectedRooms.Count)];
+                Room room = unconnectedRooms[GM.Instance.Random.Next(0, unconnectedRooms.Count)];
                 Tile door = room.GenerateDoor();
                 if (door != null)
                 {
@@ -438,8 +437,8 @@ namespace DungeonGeneratorNS
                 int roomHeight, roomWidth;
                 do
                 {
-                    roomHeight = Rng.Next(minRoomHeight, maxRoomHeight + 1);
-                    roomWidth  = Rng.Next(minRoomWidth,  maxRoomWidth  + 1);
+                    roomHeight = GM.Instance.Random.Next(minRoomHeight, maxRoomHeight + 1);
+                    roomWidth  = GM.Instance.Random.Next(minRoomWidth,  maxRoomWidth  + 1);
                 } while (roomHeight * roomWidth > remainingRoomTiles);
 
                 // Create the room and put it in a random place
@@ -450,8 +449,8 @@ namespace DungeonGeneratorNS
                 int attempts = 0;
                 do
                 {
-                    row = Rng.Next(dungeonEdge, Dungeon.Height - roomHeight - dungeonEdge + 1);
-                    col = Rng.Next(dungeonEdge, Dungeon.Width - roomWidth - dungeonEdge + 1);
+                    row = GM.Instance.Random.Next(dungeonEdge, Dungeon.Height - roomHeight - dungeonEdge + 1);
+                    col = GM.Instance.Random.Next(dungeonEdge, Dungeon.Width - roomWidth - dungeonEdge + 1);
                     room = new Room(Dungeon, row, col, roomHeight, roomWidth);
                     ++attempts;
                 } while (!room.CanRoomFit() && attempts != 100);
@@ -474,11 +473,6 @@ namespace DungeonGeneratorNS
             GenerateCorridors(0.2);
             MakeDungeonACompleteGraph(0.2);
             GeneratePortalsAndKeys(10);
-        }
-
-        static DungeonGenerator()
-        {
-            Rng = new Random();
         }
     }
 }

@@ -30,8 +30,6 @@ public class InstantiateDungeon : MonoBehaviour
 
     public void CreateDungeon()
     {
-        Initialize();
-
         BlockPrefabs = new Dictionary<Block, GameObject>
         {
             { Block.Granite, PrefabsInEditor.wall },
@@ -57,6 +55,7 @@ public class InstantiateDungeon : MonoBehaviour
 
         DungeonGenerator = new DungeonGenerator(60, 80);
         Dungeon = DungeonGenerator.Dungeon;
+        InitializeMaterials();
         CreateDungeonObjects();
     }
 
@@ -135,7 +134,7 @@ public class InstantiateDungeon : MonoBehaviour
                            (row + prefab.transform.position.z) * GM.Instance.BlockScale);
     }
 
-    private void Initialize()
+    private void InitializeMaterials()
     {
         texturesScript = GetComponent<Textures>();
         wallMaterials = texturesScript.PopulateWallMaterials(8);

@@ -225,7 +225,7 @@ namespace DungeonGeneratorNS
 
         public Room GetRandomRoom()
         {
-            return Rooms[DungeonGenerator.Rng.Next(0, Rooms.Count)];
+            return Rooms[GM.Instance.Random.Next(0, Rooms.Count)];
         }
 
         /// <summary>
