@@ -24,7 +24,7 @@ public class Breadcrumbs : MonoBehaviour
     void Start()
     {
         BreadcrumbsParent = new GameObject("Breadcrumbs");
-        player = GM.Instance.Player;
+        player = gameObject;
         playerCollider = player.GetComponent<Collider>();
     }
 

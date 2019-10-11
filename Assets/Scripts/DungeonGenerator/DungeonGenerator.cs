@@ -472,7 +472,7 @@ namespace DungeonGeneratorNS
             GenerateDoors(0.1);
             GenerateCorridors(0.2);
             MakeDungeonACompleteGraph(0.2);
-            GeneratePortalsAndKeys(10);
+            GeneratePortalsAndKeys(GM.Instance.TotalKeys);
         }
     }
 }

@@ -7,6 +7,7 @@ public class GM : MonoBehaviour
     public static GM Instance;
 
     public float BlockScale = 2;
+    public int TotalKeys = 10;
     [HideInInspector]
     public GameObject Player { get; private set; }
     public System.Random Random { get; private set; }
