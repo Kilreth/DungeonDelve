@@ -9,6 +9,8 @@ public class GM : MonoBehaviour
     public float BlockScale = 2;
     public int TotalKeys = 10;
     [HideInInspector]
+    public Canvas Canvas { get; private set; }
+    [HideInInspector]
     public GameObject Player { get; private set; }
     public System.Random Random { get; private set; }
 
@@ -30,6 +32,7 @@ public class GM : MonoBehaviour
     private void InitializeGame()
     {
         QualitySettings.vSyncCount = 1;
+        Canvas = FindObjectOfType<Canvas>();
         Random = new System.Random(0);
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
