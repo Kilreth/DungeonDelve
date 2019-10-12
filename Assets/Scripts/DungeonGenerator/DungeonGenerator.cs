@@ -468,6 +468,7 @@ namespace DungeonGeneratorNS
         public DungeonGenerator(int height, int width)
         {
             Dungeon = new Dungeon(height, width);
+            Area.ResetAreaIdCount();
             GenerateRooms(0.9, 3, 3, 9, 9);
             GenerateDoors(0.1);
             GenerateCorridors(0.2);

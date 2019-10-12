@@ -63,6 +63,7 @@ public class InstantiateDungeon : MonoBehaviour
     {
         BlocksParent = new GameObject("Blocks");
         ItemsParent = new GameObject("Items");
+        Player = null;
 
         for (int row = 0; row < Dungeon.Height; ++row)
         {

@@ -51,9 +51,14 @@ namespace DungeonGeneratorNS
             }
         }
 
-        static Area()
+        public static void ResetAreaIdCount()
         {
             NextId = 0;
+        }
+
+        static Area()
+        {
+            ResetAreaIdCount();
         }
     }
 }

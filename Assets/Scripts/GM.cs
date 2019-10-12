@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
@@ -25,13 +26,42 @@ public class GM : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(this);
+            InitializeGameManager();
+        }
+    }
+
+    private void InitializeGameManager()
+    {
+        QualitySettings.vSyncCount = 1;
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Dungeon")
+        {
             InitializeGame();
+        }
+        else
+        {
+            // Free the mouse cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
     private void InitializeGame()
     {
-        QualitySettings.vSyncCount = 1;
         Canvas = FindObjectOfType<Canvas>();
         Random = new System.Random(0);
         instantiateDungeon = GetComponent<InstantiateDungeon>();

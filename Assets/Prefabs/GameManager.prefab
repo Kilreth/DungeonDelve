@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7128764168518751107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7128764168518751105}
+  - component: {fileID: 7128764168518751110}
+  - component: {fileID: 7128764168518751104}
+  - component: {fileID: 7128764168518751111}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7128764168518751105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128764168518751107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7128764168518751110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128764168518751107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd92b5d19a93694a920375d93dcbeb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockScale: 2
+  TotalKeys: 10
+--- !u!114 &7128764168518751104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128764168518751107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b3f55a6fa34cb46b78593ec6f41ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabsInEditor:
+    player: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+    path: {fileID: 2969866473574698823, guid: 3ad1ee9429e231f498c254e0587ea5d4, type: 3}
+    wall: {fileID: 4174532304131956657, guid: d9ad9336e0fc1824cb78b7fd9b425bc4, type: 3}
+    stairs: {fileID: 7818140426123675869, guid: 9b61b022e98afe24a9e6436528998804,
+      type: 3}
+    portal: {fileID: 7320128239834605457, guid: 86d704a4428d91b44bf603eca5ef8c02,
+      type: 3}
+    key: {fileID: 3800981192170324373, guid: f2c0468bf6ecfdb4fb9878f80df731bc, type: 3}
+--- !u!114 &7128764168518751111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128764168518751107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48864be9f0d67a4e8f3194c2149a86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WallTexturesInEditor:
+    wall1: {fileID: 2800000, guid: 552efc850d56000418cabe74689c9954, type: 3}
+    wall2: {fileID: 2800000, guid: 3f3702bc77cddd14c96c7e23359eb9c0, type: 3}
+    wall3: {fileID: 2800000, guid: c5586eb814a0b4b4290646ae4729e145, type: 3}
+    wall4: {fileID: 2800000, guid: ec0695a2aa0429f40b4e28381d4d994e, type: 3}
+    wall5: {fileID: 2800000, guid: 21c7119aa5242f84fa33a14e6da70f51, type: 3}
+    wall6: {fileID: 2800000, guid: c749fdd3b54df92408a4df5b2df7c0f7, type: 3}
+    wall7: {fileID: 2800000, guid: 607841103411217489ad4a94a1c50e57, type: 3}
+    wall8: {fileID: 2800000, guid: 556539bc71fe7434aba4fc160ea918b9, type: 3}
+  WallMaterial: {fileID: 2100000, guid: 08cdbf92f36591d449115fd72684e25f, type: 2}
