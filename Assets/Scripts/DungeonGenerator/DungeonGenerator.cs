@@ -12,11 +12,8 @@ namespace DungeonGeneratorNS
         public Dungeon Dungeon { get; }
 
         /// <summary>
-        /// Choose a random start room.
-        /// Choose the farthest room from that as the goal room.
-        /// Choose other unique rooms to scatter keys in.
-        /// 
-        /// Rooms are ordered by BFS so the heuristic is number of rooms+paths crossed.
+        /// Choose a random room to place the start portal.
+        /// Scatter keys across other unique rooms.
         /// </summary>
         public void GeneratePortalsAndKeys(int numberOfKeys)
         {
@@ -28,17 +25,14 @@ namespace DungeonGeneratorNS
             // Start room is the start of the search
             rooms[0].AddItem(new ItemNS.StartPortal());
 
-            // The goal room is the farthest room encountered in the breadth-first search
-            rooms[totalRooms - 1].AddItem(new ItemNS.EndPortal());
-
-            // Scatter keys across all rooms except start and goal rooms
-            if (numberOfKeys > rooms.Count - 2)
+            // Scatter keys across all rooms except start room
+            if (numberOfKeys > rooms.Count - 1)
             {
-                numberOfKeys = rooms.Count - 2;
+                numberOfKeys = rooms.Count - 1;
             }
             for (int key = 0; key < numberOfKeys; ++key)
             {
-                int roomIndex = GM.Instance.Random.Next(1, rooms.Count - 1);
+                int roomIndex = GM.Instance.Random.Next(1, rooms.Count);
                 rooms[roomIndex].AddItem(new ItemNS.Key());
                 rooms.RemoveAt(roomIndex);
             }

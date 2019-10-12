@@ -31,6 +31,10 @@ public class Breadcrumbs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GM.Instance.GameState != GameState.Active)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time > nextDrop)
         {
             DropBreadcrumb();

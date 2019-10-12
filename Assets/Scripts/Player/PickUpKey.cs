@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class PickUpKey : MonoBehaviour
 {
     private Text KeyText;
+    private GameObject WinScreen;
     private int keysFound = 0;
 
     void Start()
     {
-        KeyText = GM.Instance.Canvas.transform.Find("KeyText").gameObject.GetComponent<Text>();
+        KeyText = GM.Instance.Canvas.transform.Find("KeyCount").gameObject.GetComponent<Text>();
+        WinScreen = GM.Instance.Canvas.transform.Find("WinScreen").gameObject;
+        WinScreen.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,8 +30,14 @@ public class PickUpKey : MonoBehaviour
             KeyText.text = ++keysFound + "/" + GM.Instance.TotalKeys;
             if (keysFound >= GM.Instance.TotalKeys)
             {
-                // broadcast win, end game
+                ShowWinScreen();
             }
         }
+    }
+
+    private void ShowWinScreen()
+    {
+        WinScreen.SetActive(true);
+        GM.Instance.GameState = GameState.Won;
     }
 }

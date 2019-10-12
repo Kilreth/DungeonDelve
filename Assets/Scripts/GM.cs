@@ -9,6 +9,7 @@ public class GM : MonoBehaviour
 
     public float BlockScale = 2;
     public int TotalKeys = 10;
+    public GameState GameState;
     [HideInInspector]
     public Canvas Canvas { get; private set; }
     [HideInInspector]
@@ -63,9 +64,12 @@ public class GM : MonoBehaviour
     private void InitializeGame()
     {
         Canvas = FindObjectOfType<Canvas>();
-        Random = new System.Random(0);
+        Random = new System.Random(1);
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
         Player = instantiateDungeon.Player;
+        GameState = GameState.Active;
     }
 }
+
+public enum GameState { Active, Won }
