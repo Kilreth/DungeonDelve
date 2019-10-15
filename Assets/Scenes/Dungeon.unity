@@ -720,21 +720,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2391482991645089006, guid: cccb86318ab01334c80d2523441b23aa,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.50507855
-      objectReference: {fileID: 0}
-    - target: {fileID: 2391482991645089006, guid: cccb86318ab01334c80d2523441b23aa,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.14440194
-      objectReference: {fileID: 0}
-    - target: {fileID: 2391482991645089006, guid: cccb86318ab01334c80d2523441b23aa,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.5566038
-      objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -799,6 +784,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.0754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645089006, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.50507855
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645089006, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.14440194
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645089006, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5566038
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cccb86318ab01334c80d2523441b23aa, type: 3}
@@ -917,7 +917,7 @@ RectTransform:
   m_AnchorMin: {x: 0.13, y: 0.9}
   m_AnchorMax: {x: 0.13, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 170, y: 70}
+  m_SizeDelta: {x: 180, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705825778
 MonoBehaviour:
@@ -950,7 +950,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\U0001F511\U0001F5110/10"
+  m_Text: 16/16
 --- !u!222 &1705825779
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1255,6 +1255,11 @@ PrefabInstance:
       propertyPath: m_Text
       value: Finish
       objectReference: {fileID: 0}
+    - target: {fileID: 2391482991843963401, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 52
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cccb86318ab01334c80d2523441b23aa, type: 3}
 --- !u!1001 &4777938366723173336
@@ -1402,6 +1407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: TotalKeys
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0deef97b9e469234c87595e22de1b1a5, type: 3}

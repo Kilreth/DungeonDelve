@@ -13,12 +13,9 @@ public class Breadcrumbs : MonoBehaviour
     [SerializeField]
     private float throwStrength = 0.8f;
     [SerializeField]
-    private float crumbDropRate = 0.5f;
-    [SerializeField]
     private float pickUpRadius = 0.5f;
     [SerializeField]
     private float pickUpDistance = 1.5f;
-    private float nextDrop = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +32,7 @@ public class Breadcrumbs : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time > nextDrop)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             DropBreadcrumb();
         }
@@ -58,8 +55,6 @@ public class Breadcrumbs : MonoBehaviour
 
     private void DropBreadcrumb()
     {
-        nextDrop = Time.time + crumbDropRate;
-
         Vector3 position = new Vector3(player.transform.position.x,
                                        player.transform.position.y + dropHeight,
                                        player.transform.position.z);

@@ -14,6 +14,7 @@ public class PickUpKey : MonoBehaviour
         KeyText = GM.Instance.Canvas.transform.Find("KeyCount").gameObject.GetComponent<Text>();
         WinScreen = GM.Instance.Canvas.transform.Find("WinScreen").gameObject;
         WinScreen.SetActive(false);
+        RefreshUI();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,12 +28,18 @@ public class PickUpKey : MonoBehaviour
             }
             Destroy(key);
 
-            KeyText.text = ++keysFound + "/" + GM.Instance.TotalKeys;
+            ++keysFound;
+            RefreshUI();
             if (keysFound >= GM.Instance.TotalKeys)
             {
                 ShowWinScreen();
             }
         }
+    }
+
+    private void RefreshUI()
+    {
+        KeyText.text = keysFound + "/" + GM.Instance.TotalKeys;
     }
 
     private void ShowWinScreen()

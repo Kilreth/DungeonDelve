@@ -8,6 +8,8 @@ public class GM : MonoBehaviour
     public static GM Instance;
 
     public float BlockScale = 2;
+    public int Rows = 30;
+    public int Cols = 40;
     public int TotalKeys = 10;
     public GameState GameState;
     [HideInInspector]
@@ -64,7 +66,7 @@ public class GM : MonoBehaviour
     private void InitializeGame()
     {
         Canvas = FindObjectOfType<Canvas>();
-        Random = new System.Random(1);
+        Random = new System.Random();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
         Player = instantiateDungeon.Player;
