@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 280691917}
   - component: {fileID: 280691919}
   - component: {fileID: 280691918}
+  - component: {fileID: 280691920}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -487,6 +488,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280691916}
   m_CullTransparentMesh: 0
+--- !u!114 &280691920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280691916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6fa082884dbf014a983b9488a8c231f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnStates:
+  - state: Default
+  - state: DungeonSelect
 --- !u!1 &387444918
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +601,7 @@ RectTransform:
   - {fileID: 157005401}
   - {fileID: 1600263081}
   - {fileID: 1670322551}
+  - {fileID: 1599897520}
   - {fileID: 1527536908}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -851,7 +868,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -992,7 +1009,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1022,7 +1039,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 220
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1127,6 +1144,104 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStates:
   - state: DungeonSelect
+  - state: Instructions
+--- !u!1 &1599897519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1599897520}
+  - component: {fileID: 1599897522}
+  - component: {fileID: 1599897521}
+  - component: {fileID: 1599897523}
+  m_Layer: 5
+  m_Name: InstructionsText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1599897520
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599897519}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 387444922}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.57}
+  m_AnchorMax: {x: 0.5, y: 0.57}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1720, y: 980}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1599897521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599897519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8301887, g: 0.21537916, b: 0.8168914, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 73ca883ff6d0df14aa830c90bf0aecb3, type: 3}
+    m_FontSize: 58
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 60
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "        The dim corridors wind aimlessly, looping upon themselves. You
+    wonder when someone last set foot here.\n        Will you see your way through
+    the entire dungeon, finding every key needed to leave?\r\n\r\n        ~ WASD or
+    arrow keys to move\r\n        ~ Left-Shift to sprint\r\n        ~ Left-click to
+    drop a breadcrumb\r\n        ~ E to pick up breadcrumbs in front of you\r\n        ~
+    Walk over a key to pick it up\r\n        ~ <b>Collect all keys to clear the dungeon!</b>"
+--- !u!222 &1599897522
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599897519}
+  m_CullTransparentMesh: 0
+--- !u!114 &1599897523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599897519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6fa082884dbf014a983b9488a8c231f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnStates:
+  - state: Instructions
 --- !u!1001 &1600263080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1138,6 +1253,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StandardDungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645088995, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1207,7 +1327,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1150
+      value: 870
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1331,6 +1451,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExpandedDungeon
       objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645088995, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1399,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1200
+      value: 900
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1679,7 +1804,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 420
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1749,7 +1874,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Default
+      value: Instructions
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991843963401, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}

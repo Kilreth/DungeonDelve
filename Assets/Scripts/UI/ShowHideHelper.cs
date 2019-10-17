@@ -7,10 +7,7 @@ public class ShowHideHelper : MonoBehaviour
     [System.Serializable]
     public class ShowOnState
     {
-        [SerializeField]
         public string state;
-
-        // optionally some other fields
     }
 
     [SerializeField]
