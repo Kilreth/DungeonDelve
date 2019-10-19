@@ -160,10 +160,16 @@ namespace DungeonGeneratorNS
                 surrounding.Add(GetTile(tile.Row + 1, tile.Col - 1));
                 surrounding.Add(GetTile(tile.Row + 1, tile.Col + 1));
             }
-            if (from != null)
+
+            // This is harmless if "from" tile is null
+            surrounding.Remove(from);
+
+            // Null tiles are tiles outside the dungeon boundary -- eg. (-1, 0). Remove these
+            while (surrounding.Contains(null))
             {
-                surrounding.Remove(from);
+                surrounding.Remove(null);
             }
+
             return surrounding;
         }
 
@@ -221,7 +227,11 @@ namespace DungeonGeneratorNS
 
         public Tile GetTile(int row, int col)
         {
-            return Tiles[row, col];
+            if (IsTileWithinDungeon(row, col))
+            {
+                return Tiles[row, col];
+            }
+            return null;
         }
 
         public Room GetRandomRoom()

@@ -1491,5 +1491,55 @@ PrefabInstance:
       propertyPath: TotalKeys
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.Rows
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.Cols
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.TotalKeys
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.MinRoomHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.MinRoomWidth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.MaxRoomHeight
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.MaxRoomWidth
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.TargetRoomToDungeonRatio
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.DoorsToWallRatio
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128764168518751110, guid: 0deef97b9e469234c87595e22de1b1a5,
+        type: 3}
+      propertyPath: DungeonParameters.CorridorTurnChance
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0deef97b9e469234c87595e22de1b1a5, type: 3}

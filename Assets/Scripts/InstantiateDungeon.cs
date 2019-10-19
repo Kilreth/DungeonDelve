@@ -77,6 +77,13 @@ public class InstantiateDungeon : MonoBehaviour
             {
                 Tile tile = dungeon.GetTile(row, col);
 
+                // If the player will never see this block, don't instantiate it
+                if ((tile.Block == Block.Rock || tile.Block == Block.Granite)
+                    && !dungeon.IsTileAdjacentTo(tile, Block.WALKABLE))
+                {
+                    continue;
+                }
+
                 // Instantiate block
                 GameObject prefab = blockPrefabs[tile.Block];
                 GameObject block = InstantiateObject(prefab, row, col, true, blocksParent);
