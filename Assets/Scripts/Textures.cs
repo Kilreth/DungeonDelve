@@ -26,7 +26,18 @@ public class Textures : MonoBehaviour
     public static readonly byte MinColor = 18;
     public static readonly byte MaxColor = 58;
 
-    public List<Material> PopulateWallMaterials(int repetitionsPerTexture)
+    /// <summary>
+    /// For every room in the dungeon, create a material with
+    /// a random color and one of several brick patterns.
+    ///
+    /// Rooms[i] is assigned materials[i].
+    ///
+    /// The brick patterns are used in turn,
+    /// meaning each pattern will be used equally.
+    /// </summary>
+    /// <param name="total"></param>
+    /// <returns></returns>
+    public List<Material> PopulateWallMaterials(int total)
     {
         List<Texture> wallTextures = new List<Texture>
         {
@@ -40,7 +51,6 @@ public class Textures : MonoBehaviour
             WallTexturesInEditor.wall8
         };
 
-        int total = repetitionsPerTexture * totalWallTextures;
         List<Material> materials = new List<Material>();
         for (int i = 0; i < total; ++i)
         {
@@ -50,6 +60,16 @@ public class Textures : MonoBehaviour
         return materials;
     }
 
+    /// <summary>
+    /// Returns a copy of the base wall material in a randomly-generated color.
+    ///
+    /// RGB values:
+    ///   - one value is 18
+    ///   - one value is 58
+    ///   - one value is somewhere between 18 and 58
+    ///
+    /// This produces any color in a dark hue.
+    /// </summary>
     public Material RandomWallMaterial()
     {
         byte GetAndRemove(List<byte> list, int index)

@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class PickUpKey : MonoBehaviour
 {
-    private Text KeyText;
-    private GameObject WinScreen;
+    private Text keyText;
+    private GameObject winScreen;
     private int keysFound = 0;
 
     void Start()
     {
-        KeyText = GM.Instance.Canvas.transform.Find("KeyCount").gameObject.GetComponent<Text>();
-        WinScreen = GM.Instance.Canvas.transform.Find("WinScreen").gameObject;
-        WinScreen.SetActive(false);
-        RefreshUI();
+        keyText = GM.Instance.Canvas.transform.Find("KeyCount").gameObject.GetComponent<Text>();
+        winScreen = GM.Instance.Canvas.transform.Find("WinScreen").gameObject;
+        winScreen.SetActive(false);
+        RefreshKeyUI();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,7 +29,7 @@ public class PickUpKey : MonoBehaviour
             Destroy(key);
 
             ++keysFound;
-            RefreshUI();
+            RefreshKeyUI();
             if (keysFound >= GM.Instance.TotalKeys)
             {
                 ShowWinScreen();
@@ -37,14 +37,14 @@ public class PickUpKey : MonoBehaviour
         }
     }
 
-    private void RefreshUI()
+    private void RefreshKeyUI()
     {
-        KeyText.text = keysFound + "/" + GM.Instance.TotalKeys;
+        keyText.text = keysFound + "/" + GM.Instance.TotalKeys;
     }
 
     private void ShowWinScreen()
     {
-        WinScreen.SetActive(true);
+        winScreen.SetActive(true);
         GM.Instance.GameState = GameState.Won;
     }
 }

@@ -13,6 +13,7 @@ namespace DungeonGeneratorNS
         public Tile[,] Tiles { get; }
         public List<Room> Rooms { get; }
         public List<Path> Paths { get; }
+        public Tile StartTile;
 
         public List<Room> GetConnectedDungeon()
         {

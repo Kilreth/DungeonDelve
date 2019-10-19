@@ -25,7 +25,4 @@ public class ShowHideHelper : MonoBehaviour
         }
         gameObject.SetActive(false);
     }
-
-    //[SerializeField]
-    //private List<GOArray> _list2;
 }

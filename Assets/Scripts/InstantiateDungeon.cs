@@ -17,20 +17,27 @@ public class InstantiateDungeon : MonoBehaviour
         public GameObject key;
     }
     public PrefabsSelect PrefabsInEditor;
-    public Dictionary<Block, GameObject> BlockPrefabs;
-    public Dictionary<string, GameObject> Prefabs;
-    public GameObject BlocksParent { get; private set; }
-    public GameObject ItemsParent { get; private set; }
-    public GameObject Player { get; private set; }
-    public DungeonGenerator DungeonGenerator { get; private set; }
-    public Dungeon Dungeon { get; private set; }
-
-    private Textures texturesScript;
+    private Dictionary<Block, GameObject> blockPrefabs;
+    private Dictionary<string, GameObject> prefabs;
+    private GameObject blocksParent;
+    private GameObject itemsParent;
     private List<Material> wallMaterials;
+
+    private DungeonGenerator dungeonGenerator;
+    private Dungeon dungeon;
 
     public void CreateDungeon()
     {
-        BlockPrefabs = new Dictionary<Block, GameObject>
+        dungeonGenerator = new DungeonGenerator(60, 80);
+        dungeon = dungeonGenerator.Dungeon;
+        LoadPrefabs();
+        InitializeMaterials();
+        CreateDungeonObjects();
+    }
+
+    private void LoadPrefabs()
+    {
+        blockPrefabs = new Dictionary<Block, GameObject>
         {
             { Block.Granite, PrefabsInEditor.wall },
             { Block.Rock,    PrefabsInEditor.wall },
@@ -44,65 +51,57 @@ public class InstantiateDungeon : MonoBehaviour
             { Block.StairsDown, PrefabsInEditor.stairs },
         };
 
-        Prefabs = new Dictionary<string, GameObject>
+        prefabs = new Dictionary<string, GameObject>
         {
             { "Key",         PrefabsInEditor.key },
             { "StartPortal", PrefabsInEditor.portal },
-            { "EndPortal",   PrefabsInEditor.portal },
 
             { "Player",      PrefabsInEditor.player },
         };
+    }
 
-        DungeonGenerator = new DungeonGenerator(60, 80);
-        Dungeon = DungeonGenerator.Dungeon;
-        InitializeMaterials();
-        CreateDungeonObjects();
+    private void InitializeMaterials()
+    {
+        wallMaterials = GetComponent<Textures>().PopulateWallMaterials(dungeon.Rooms.Count);
     }
 
     private void CreateDungeonObjects()
     {
-        BlocksParent = new GameObject("Blocks");
-        ItemsParent = new GameObject("Items");
-        Player = null;
+        blocksParent = new GameObject("Blocks");
+        itemsParent = new GameObject("Items");
 
-        for (int row = 0; row < Dungeon.Height; ++row)
+        for (int row = 0; row < dungeon.Height; ++row)
         {
-            for (int col = 0; col < Dungeon.Width; ++col)
+            for (int col = 0; col < dungeon.Width; ++col)
             {
-                Tile tile = Dungeon.GetTile(row, col);
+                Tile tile = dungeon.GetTile(row, col);
 
                 // Instantiate block
-                GameObject prefab = BlockPrefabs[tile.Block];
-                GameObject block = InstantiateObject(prefab, row, col, true, BlocksParent);
+                GameObject prefab = blockPrefabs[tile.Block];
+                GameObject block = InstantiateObject(prefab, row, col, true, blocksParent);
 
                 // If a room wall, apply an assigned material featuring a color and pattern
-                if (BlockPrefabs[tile.Block] == PrefabsInEditor.wall && tile.Area != null)
+                if (blockPrefabs[tile.Block] == PrefabsInEditor.wall && tile.Area != null)
                 {
                     block.GetComponent<Renderer>().material = wallMaterials[tile.Area.Id];
                 }
 
-                // Instantiate item if one exists
+                // Instantiate item (eg. key, start portal) if one exists
                 if (tile.Item != null)
                 {
+                    // add wall texture to the floor block under the item for increased visibility
                     block.GetComponent<Renderer>().material = wallMaterials[tile.Area.Id];
-                    prefab = Prefabs[tile.Item.Name];
-                    GameObject item = InstantiateObject(prefab, row, col, true, ItemsParent);
-                    if (tile.Item.Name == "StartPortal")
-                    {
-                        if (Player != null)
-                        {
-                            throw new InvalidOperationException("More than one start portal in the dungeon");
-                        }
-                        Player = InstantiateObject(Prefabs["Player"], row, col, false);
-                    }
+
+                    prefab = prefabs[tile.Item.Name];
+                    InstantiateObject(prefab, row, col, true, itemsParent);
                 }
             }
         }
+    }
 
-        if (Player == null)
-        {
-            throw new InvalidOperationException("No start portal in the dungeon");
-        }
+    public GameObject InstantiatePlayer()
+    {
+        return InstantiateObject(prefabs["Player"], dungeon.StartTile.Row, dungeon.StartTile.Col, false);
     }
 
     private GameObject InstantiateObject(GameObject prefab, int row, int col, bool scale, GameObject parent=null)
@@ -133,11 +132,5 @@ public class InstantiateDungeon : MonoBehaviour
         return new Vector3((col + prefab.transform.position.x) * GM.Instance.BlockScale,
                                   prefab.transform.position.y  * GM.Instance.BlockScale,
                            (row + prefab.transform.position.z) * GM.Instance.BlockScale);
-    }
-
-    private void InitializeMaterials()
-    {
-        texturesScript = GetComponent<Textures>();
-        wallMaterials = texturesScript.PopulateWallMaterials(8);
     }
 }

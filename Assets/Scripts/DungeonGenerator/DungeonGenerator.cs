@@ -23,7 +23,7 @@ namespace DungeonGeneratorNS
             int totalRooms = rooms.Count;
 
             // Start room is the start of the search
-            rooms[0].AddItem(new ItemNS.StartPortal());
+            Dungeon.StartTile = rooms[0].AddItem(new ItemNS.StartPortal());
 
             // Scatter keys across all rooms except start room
             if (numberOfKeys > rooms.Count - 1)

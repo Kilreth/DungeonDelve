@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// The Game Manager (GM) orchestrates dungeon creation, and makes
+/// dungeon parameters and scene objects accessible by static reference.
+/// </summary>
 public class GM : MonoBehaviour
 {
     public static GM Instance;
 
+    // Parameters of the dungeon, set by LoadScene.cs when loading the scene
     public float BlockScale = 2;
     public int Rows = 30;
     public int Cols = 40;
-    public int TotalKeys = 10;
+    public int TotalKeys = 4;
+
     public GameState GameState;
+    public System.Random Random { get; private set; }
     [HideInInspector]
     public Canvas Canvas { get; private set; }
     [HideInInspector]
     public GameObject Player { get; private set; }
-    public System.Random Random { get; private set; }
 
     private InstantiateDungeon instantiateDungeon;
 
@@ -34,6 +40,7 @@ public class GM : MonoBehaviour
         }
     }
 
+    // Setup that needs to happen when starting game from any scene
     private void InitializeGameManager()
     {
         QualitySettings.vSyncCount = 1;
@@ -63,15 +70,27 @@ public class GM : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up the dungeon.
+    /// The dungeon parameters in GM.Instance should already be set by LoadScene.cs:
+    ///   - BlockSize
+    ///   - Rows
+    ///   - Cols
+    ///   - TotalKeys
+    /// </summary>
     private void InitializeGame()
     {
         Canvas = FindObjectOfType<Canvas>();
         Random = new System.Random();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
-        Player = instantiateDungeon.Player;
+        Player = instantiateDungeon.InstantiatePlayer();
         GameState = GameState.Active;
     }
 }
 
+/// <summary>
+/// GameState "Won" prevents the player from moving and from dropping breadcrumbs.
+/// It also makes the cursor visible.
+/// </summary>
 public enum GameState { Active, Won }

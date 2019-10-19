@@ -30,7 +30,7 @@ namespace DungeonGeneratorNS
         public void InitializeArea()
         {
             To = new HashSet<Area>();
-            Id = ++NextId;
+            Id = NextId++;
         }
 
         public override int GetHashCode()

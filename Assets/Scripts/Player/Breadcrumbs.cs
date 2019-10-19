@@ -5,7 +5,7 @@ using UnityEngine;
 public class Breadcrumbs : MonoBehaviour
 {
     public GameObject Breadcrumb;           // prefab
-    private GameObject BreadcrumbsParent;   // empty object
+    private GameObject breadcrumbsParent;   // empty object
     private GameObject player;
     private Collider playerCollider;
     [SerializeField]
@@ -20,7 +20,7 @@ public class Breadcrumbs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BreadcrumbsParent = new GameObject("Breadcrumbs");
+        breadcrumbsParent = new GameObject("Breadcrumbs");
         player = gameObject;
         playerCollider = player.GetComponent<Collider>();
     }
@@ -58,7 +58,7 @@ public class Breadcrumbs : MonoBehaviour
         Vector3 position = new Vector3(player.transform.position.x,
                                        player.transform.position.y + dropHeight,
                                        player.transform.position.z);
-        GameObject breadcrumb = Instantiate(Breadcrumb, position, Random.rotation, BreadcrumbsParent.transform);
+        GameObject breadcrumb = Instantiate(Breadcrumb, position, Random.rotation, breadcrumbsParent.transform);
         breadcrumb.GetComponent<Rigidbody>().AddForce(
             player.transform.forward * GM.Instance.BlockScale * throwStrength, ForceMode.Impulse);
         Physics.IgnoreCollision(playerCollider, breadcrumb.GetComponent<Collider>());
