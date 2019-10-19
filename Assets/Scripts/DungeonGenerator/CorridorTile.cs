@@ -31,7 +31,7 @@ namespace DungeonGeneratorNS
                 throw new InvalidOperationException("All directions already explored");
             }
             if (DirectionsToTry.Contains(PreviousDirection)
-                && GM.Instance.Random.NextDouble() > chanceToTurn)
+                && DungeonGenerator.Random.NextDouble() > chanceToTurn)
             {
                 DirectionsToTry.Remove(PreviousDirection);
                 return PreviousDirection;
@@ -39,7 +39,7 @@ namespace DungeonGeneratorNS
             int index;
             do
             {
-                index = GM.Instance.Random.Next(0, DirectionsToTry.Count);
+                index = DungeonGenerator.Random.Next(0, DirectionsToTry.Count);
             } while (DirectionsToTry[index] == PreviousDirection && DirectionsToTry.Count > 1);
             Direction direction = DirectionsToTry[index];
             DirectionsToTry.RemoveAt(index);

@@ -1387,7 +1387,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadStandardDungeon
+      value: Load
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1436,9 +1436,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600263082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8f268cacde070942baea3b1910a5f99, type: 3}
+  m_Script: {fileID: 11500000, guid: e06fe784f1a668440b01e0512477071d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameters:
+    Rows: 30
+    Cols: 40
+    TotalKeys: 4
+    MinRoomHeight: 3
+    MinRoomWidth: 3
+    MaxRoomHeight: 6
+    MaxRoomWidth: 6
+    TargetRoomToDungeonRatio: 0.9
+    DoorsToWallRatio: 0.1
+    CorridorTurnChance: 0.2
 --- !u!1001 &1670322550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1584,7 +1595,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadExpandedDungeon
+      value: Load
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1633,9 +1644,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1670322552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8f268cacde070942baea3b1910a5f99, type: 3}
+  m_Script: {fileID: 11500000, guid: e06fe784f1a668440b01e0512477071d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameters:
+    Rows: 60
+    Cols: 80
+    TotalKeys: 16
+    MinRoomHeight: 3
+    MinRoomWidth: 3
+    MaxRoomHeight: 9
+    MaxRoomWidth: 9
+    TargetRoomToDungeonRatio: 0.9
+    DoorsToWallRatio: 0.1
+    CorridorTurnChance: 0.2
 --- !u!1 &1757010094
 GameObject:
   m_ObjectHideFlags: 0

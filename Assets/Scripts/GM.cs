@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,12 +12,10 @@ public class GM : MonoBehaviour
 {
     public static GM Instance;
 
-    // Parameters of the dungeon, set by LoadScene.cs when loading the scene
-    public float BlockScale = 2;
-    public int Rows = 30;
-    public int Cols = 40;
-    public int TotalKeys = 4;
+    // Parameters of the dungeon, set by LoadDungeonScene.cs before loading the scene
+    public DungeonParameters DungeonParameters;
 
+    public float BlockScale = 2;
     public GameState GameState;
     public System.Random Random { get; private set; }
     [HideInInspector]
@@ -70,16 +69,13 @@ public class GM : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Sets up the dungeon.
-    /// The dungeon parameters in GM.Instance should already be set by LoadScene.cs:
-    ///   - BlockSize
-    ///   - Rows
-    ///   - Cols
-    ///   - TotalKeys
-    /// </summary>
     private void InitializeGame()
     {
+        if (DungeonParameters == null)
+        {
+            throw new InvalidOperationException("Dungeon parameters object in Game Manager is null");
+        }
+
         Canvas = FindObjectOfType<Canvas>();
         Random = new System.Random();
         instantiateDungeon = GetComponent<InstantiateDungeon>();

@@ -9,22 +9,4 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene(level);
     }
-
-    public void LoadStandardDungeon()
-    {
-        GM.Instance.BlockScale = 2;
-        GM.Instance.Rows = 30;
-        GM.Instance.Cols = 40;
-        GM.Instance.TotalKeys = 4;
-        Load("Dungeon");
-    }
-
-    public void LoadExpandedDungeon()
-    {
-        GM.Instance.BlockScale = 2;
-        GM.Instance.Rows = 60;
-        GM.Instance.Cols = 80;
-        GM.Instance.TotalKeys = 16;
-        Load("Dungeon");
-    }
 }

@@ -7,13 +7,17 @@ public class PickUpKey : MonoBehaviour
 {
     private Text keyText;
     private GameObject winScreen;
-    private int keysFound = 0;
+    private int keysFound;
+    private int totalKeys;
 
     void Start()
     {
         keyText = GM.Instance.Canvas.transform.Find("KeyCount").gameObject.GetComponent<Text>();
         winScreen = GM.Instance.Canvas.transform.Find("WinScreen").gameObject;
         winScreen.SetActive(false);
+
+        keysFound = 0;
+        totalKeys = GM.Instance.DungeonParameters.TotalKeys;
         RefreshKeyUI();
     }
 
@@ -30,7 +34,7 @@ public class PickUpKey : MonoBehaviour
 
             ++keysFound;
             RefreshKeyUI();
-            if (keysFound >= GM.Instance.TotalKeys)
+            if (keysFound >= totalKeys)
             {
                 ShowWinScreen();
             }
@@ -39,7 +43,7 @@ public class PickUpKey : MonoBehaviour
 
     private void RefreshKeyUI()
     {
-        keyText.text = keysFound + "/" + GM.Instance.TotalKeys;
+        keyText.text = keysFound + "/" + totalKeys;
     }
 
     private void ShowWinScreen()

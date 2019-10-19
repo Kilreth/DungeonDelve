@@ -28,7 +28,8 @@ public class InstantiateDungeon : MonoBehaviour
 
     public void CreateDungeon()
     {
-        dungeonGenerator = new DungeonGenerator(60, 80);
+        dungeonGenerator = new DungeonGenerator(GM.Instance.DungeonParameters,
+                                                GM.Instance.Random);
         dungeon = dungeonGenerator.Dungeon;
         LoadPrefabs();
         InitializeMaterials();
