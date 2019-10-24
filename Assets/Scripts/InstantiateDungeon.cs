@@ -108,11 +108,14 @@ public class InstantiateDungeon : MonoBehaviour
                 // Instantiate item (eg. key, start portal) if one exists
                 if (tile.Item != null)
                 {
-                    // add wall texture to the floor block under the item for increased visibility
-                    //block.GetComponent<Renderer>().material = wallMaterials[tile.Area.Id];
-
                     prefab = itemPrefabs[tile.Item.Name];
-                    InstantiateObject(prefab, row, col, true, itemsParent);
+                    GameObject item = InstantiateObject(prefab, row, col, true, itemsParent);
+
+                    // add wall texture to the pad under a key for increased visibility
+                    if (prefab == prefabs.key)
+                    {
+                        item.GetComponent<Renderer>().material = wallMaterials[tile.Area.Id];
+                    }
                 }
             }
         }

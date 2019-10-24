@@ -1397,7 +1397,7 @@ PrefabInstance:
     - target: {fileID: 2391482991843963401, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_Text
-      value: Standard dungeon   (30 * 40, 4 keys)
+      value: Standard dungeon   (30 x 40, 6 keys)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cccb86318ab01334c80d2523441b23aa, type: 3}
@@ -1442,7 +1442,7 @@ MonoBehaviour:
   parameters:
     Rows: 30
     Cols: 40
-    TotalKeys: 4
+    TotalKeys: 6
     MinRoomHeight: 3
     MinRoomWidth: 3
     MaxRoomHeight: 6
@@ -1605,7 +1605,7 @@ PrefabInstance:
     - target: {fileID: 2391482991843963401, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_Text
-      value: Expanded dungeon   (60 * 80, 16 keys)
+      value: Expanded dungeon   (60 x 80, 16 keys)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cccb86318ab01334c80d2523441b23aa, type: 3}

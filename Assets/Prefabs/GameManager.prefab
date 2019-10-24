@@ -45,8 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd92b5d19a93694a920375d93dcbeb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DungeonParameters:
+    Rows: 30
+    Cols: 40
+    TotalKeys: 6
+    MinRoomHeight: 3
+    MinRoomWidth: 3
+    MaxRoomHeight: 6
+    MaxRoomWidth: 6
+    TargetRoomToDungeonRatio: 0.9
+    DoorsToWallRatio: 0.1
+    CorridorTurnChance: 0.2
   BlockScale: 2
-  TotalKeys: 10
+  GameState: 0
 --- !u!114 &7128764168518751104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,15 +70,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b3f55a6fa34cb46b78593ec6f41ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabsInEditor:
+  prefabs:
     player: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
-    path: {fileID: 2969866473574698823, guid: 3ad1ee9429e231f498c254e0587ea5d4, type: 3}
+    floor: {fileID: 5768885647456851186, guid: 6f0fd54e218bb1d44af9e43960b76a9d, type: 3}
     wall: {fileID: 4174532304131956657, guid: d9ad9336e0fc1824cb78b7fd9b425bc4, type: 3}
-    stairs: {fileID: 7818140426123675869, guid: 9b61b022e98afe24a9e6436528998804,
-      type: 3}
     portal: {fileID: 7320128239834605457, guid: 86d704a4428d91b44bf603eca5ef8c02,
       type: 3}
-    key: {fileID: 3800981192170324373, guid: f2c0468bf6ecfdb4fb9878f80df731bc, type: 3}
+    key: {fileID: 1159061366274272290, guid: 7369cacac2821e94aa390100ec09eaf7, type: 3}
 --- !u!114 &7128764168518751111
 MonoBehaviour:
   m_ObjectHideFlags: 0
