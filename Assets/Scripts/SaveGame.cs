@@ -9,20 +9,19 @@ public class SaveGame
     public DungeonParameters DungeonParameters;
     public Vector3 PlayerPosition;
     public Quaternion PlayerRotation;
-    //public List<BreadcrumbSave> Breadcrumbs;
+    public List<BreadcrumbSave> Breadcrumbs;
 
-    public SaveGame(DungeonParameters dungeonParameters, GameObject player)
+    public SaveGame(DungeonParameters dungeonParameters, GameObject player, GameObject breadcrumbsParent)
     {
         DungeonParameters = dungeonParameters;
         PlayerPosition = player.transform.position;
         PlayerRotation = player.transform.rotation;
+        Breadcrumbs = new List<BreadcrumbSave>();
+        foreach (Transform child in breadcrumbsParent.transform)
+        {
+            Breadcrumbs.Add(new BreadcrumbSave(child.position, child.rotation));
+        }
     }
-
-    /*Breadcrumbs = new List<BreadcrumbSave>();
-    foreach (Transform child in breadcrumbs.transform)
-    {
-        Breadcrumbs.Add(new BreadcrumbSave(child.position, child.rotation));
-    }*/
 }
 
 /// <summary>

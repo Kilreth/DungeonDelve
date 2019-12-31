@@ -8,7 +8,17 @@ public class Breadcrumbs : MonoBehaviour
     public GameObject Breadcrumb;
 
     // All instantiated breadcrumbs are children of this empty GameObject
-    public GameObject BreadcrumbsParent { get; private set; }
+    public GameObject BreadcrumbsParent
+    {
+        get
+        {
+            if (_breadcrumbsParent == null)
+                _breadcrumbsParent = new GameObject("Breadcrumbs");
+            return _breadcrumbsParent;
+        }
+        private set { _breadcrumbsParent = value; }
+    }
+    private GameObject _breadcrumbsParent;
 
     private GameObject player;
     private Collider playerCollider;
@@ -24,7 +34,6 @@ public class Breadcrumbs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BreadcrumbsParent = new GameObject("Breadcrumbs");
         player = gameObject;
         playerCollider = player.GetComponent<Collider>();
     }

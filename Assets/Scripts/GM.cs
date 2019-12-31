@@ -105,13 +105,20 @@ public class GM : MonoBehaviour
     {
         InitializeGameCommon();
         Player = instantiateDungeon.InstantiateLoadedPlayer(SaveGame.PlayerPosition, SaveGame.PlayerRotation);
+
+        // Instantiate breadcrumbs
+        Breadcrumbs breadcrumbsScript = Player.GetComponent<Breadcrumbs>();
+        foreach (BreadcrumbSave b in SaveGame.Breadcrumbs)
+        {
+            Instantiate(breadcrumbsScript.Breadcrumb, b.Position, b.Rotation,
+                            breadcrumbsScript.BreadcrumbsParent.transform);
+        }
     }
 
     public void SaveGameToFile()
     {
-        //GameObject breadcrumbs = Player.GetComponent<Breadcrumbs>().BreadcrumbsParent;
-        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player));
-        //SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters.Seed, Player, breadcrumbs), slot);
+        GameObject breadcrumbsParent = Player.GetComponent<Breadcrumbs>().BreadcrumbsParent;
+        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player, breadcrumbsParent));
     }
 }
 
