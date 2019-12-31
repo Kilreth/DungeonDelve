@@ -7,25 +7,21 @@ using UnityEngine;
 public class SaveGame
 {
     public DungeonParameters DungeonParameters;
-    //public Vector3 PlayerPosition;
-    //public Quaternion PlayerRotation;
+    public Vector3 PlayerPosition;
+    public Quaternion PlayerRotation;
     //public List<BreadcrumbSave> Breadcrumbs;
 
-    public SaveGame(DungeonParameters dungeonParameters)
+    public SaveGame(DungeonParameters dungeonParameters, GameObject player)
     {
         DungeonParameters = dungeonParameters;
-    }
-
-    /*public SaveGame(int seed, GameObject player, GameObject breadcrumbs)
-    {
-        Seed = seed;
         PlayerPosition = player.transform.position;
         PlayerRotation = player.transform.rotation;
-        Breadcrumbs = new List<BreadcrumbSave>();
-        foreach (Transform child in breadcrumbs.transform)
-        {
-            Breadcrumbs.Add(new BreadcrumbSave(child.position, child.rotation));
-        }
+    }
+
+    /*Breadcrumbs = new List<BreadcrumbSave>();
+    foreach (Transform child in breadcrumbs.transform)
+    {
+        Breadcrumbs.Add(new BreadcrumbSave(child.position, child.rotation));
     }*/
 }
 

@@ -90,7 +90,6 @@ public class GM : MonoBehaviour
         Canvas = FindObjectOfType<Canvas>();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
-        Player = instantiateDungeon.InstantiatePlayer();
         GameState = GameState.Active;
     }
 
@@ -99,17 +98,19 @@ public class GM : MonoBehaviour
         // Initialize the dungeon seed *before* generating the dungeon
         DungeonParameters.Seed = UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue);
         InitializeGameCommon();
+        Player = instantiateDungeon.InstantiateNewPlayer();
     }
 
     private void InitializeLoadedGame()
     {
         InitializeGameCommon();
+        Player = instantiateDungeon.InstantiateLoadedPlayer(SaveGame.PlayerPosition, SaveGame.PlayerRotation);
     }
 
     public void SaveGameToFile()
     {
         //GameObject breadcrumbs = Player.GetComponent<Breadcrumbs>().BreadcrumbsParent;
-        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters));
+        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player));
         //SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters.Seed, Player, breadcrumbs), slot);
     }
 }

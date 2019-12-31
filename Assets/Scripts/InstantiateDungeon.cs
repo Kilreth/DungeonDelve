@@ -121,9 +121,14 @@ public class InstantiateDungeon : MonoBehaviour
         }
     }
 
-    public GameObject InstantiatePlayer()
+    public GameObject InstantiateNewPlayer()
     {
         return InstantiateObject(prefabs.player, dungeon.StartTile.Row, dungeon.StartTile.Col, false);
+    }
+
+    public GameObject InstantiateLoadedPlayer(Vector3 position, Quaternion rotation)
+    {
+        return Instantiate(prefabs.player, position, rotation);
     }
 
     private GameObject InstantiateObject(GameObject prefab, int row, int col, bool scale, GameObject parent=null)
