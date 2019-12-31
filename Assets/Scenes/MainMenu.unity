@@ -906,6 +906,36 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 713305255}
+    - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadDungeonFromSave
+      objectReference: {fileID: 0}
+    - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2391482991843963401, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_Text
@@ -939,6 +969,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStates:
   - state: Default
+--- !u!114 &713305255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713305249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06fe784f1a668440b01e0512477071d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameters:
+    Rows: 0
+    Cols: 0
+    TotalKeys: 0
+    Seed: 0
+    MinRoomHeight: 0
+    MinRoomWidth: 0
+    MaxRoomHeight: 0
+    MaxRoomWidth: 0
+    TargetRoomToDungeonRatio: 0
+    DoorsToWallRatio: 0
+    CorridorTurnChance: 0
 --- !u!1001 &879335988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1531,7 +1585,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Load
+      value: LoadNewDungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1587,6 +1641,7 @@ MonoBehaviour:
     Rows: 30
     Cols: 40
     TotalKeys: 6
+    Seed: 0
     MinRoomHeight: 3
     MinRoomWidth: 3
     MaxRoomHeight: 6
@@ -1739,7 +1794,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Load
+      value: LoadNewDungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089005, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -1795,6 +1850,7 @@ MonoBehaviour:
     Rows: 60
     Cols: 80
     TotalKeys: 16
+    Seed: 0
     MinRoomHeight: 3
     MinRoomWidth: 3
     MaxRoomHeight: 9

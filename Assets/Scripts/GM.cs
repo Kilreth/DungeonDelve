@@ -15,6 +15,10 @@ public class GM : MonoBehaviour
     // Parameters of the dungeon, set by LoadDungeonScene.cs before loading the scene
     public DungeonParameters DungeonParameters;
 
+    // Saved game data: player and breadcrumb positions, in addition to dungeon parameters
+    // Will be null if generating a new dungeon
+    public SaveGame SaveGame;
+
     public float BlockScale = 2;
     public GameState GameState;
     public System.Random Random { get; private set; }
@@ -59,7 +63,14 @@ public class GM : MonoBehaviour
     {
         if (scene.name == "Dungeon")
         {
-            InitializeGame();
+            if (SaveGame == null)
+            {
+                InitializeNewGame();
+            }
+            else
+            {
+                InitializeLoadedGame();
+            }
         }
         else
         {
@@ -69,19 +80,37 @@ public class GM : MonoBehaviour
         }
     }
 
-    private void InitializeGame()
+    // Common behavior between InitializeNewGame() and InitializeLoadedGame()
+    private void InitializeGameCommon()
     {
         if (DungeonParameters == null)
-        {
             throw new InvalidOperationException("Dungeon parameters object in Game Manager is null");
-        }
 
+        Random = new System.Random(DungeonParameters.Seed);
         Canvas = FindObjectOfType<Canvas>();
-        Random = new System.Random();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
         Player = instantiateDungeon.InstantiatePlayer();
         GameState = GameState.Active;
+    }
+
+    private void InitializeNewGame()
+    {
+        // Initialize the dungeon seed *before* generating the dungeon
+        DungeonParameters.Seed = UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue);
+        InitializeGameCommon();
+    }
+
+    private void InitializeLoadedGame()
+    {
+        InitializeGameCommon();
+    }
+
+    public void SaveGameToFile()
+    {
+        //GameObject breadcrumbs = Player.GetComponent<Breadcrumbs>().BreadcrumbsParent;
+        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters));
+        //SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters.Seed, Player, breadcrumbs), slot);
     }
 }
 

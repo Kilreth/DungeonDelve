@@ -1,13 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class DungeonParameters
 {
     public int Rows;
     public int Cols;
     public int TotalKeys;
+
+    // Initialize the Random object in the Game Manager with this seed
+    // The same seed always generates the same dungeon
+    public int Seed;
 
     // Smaller dungeon sizes (eg. 30x40) should have smaller max room sizes
     public int MinRoomHeight;
