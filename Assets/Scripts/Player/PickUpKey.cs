@@ -25,13 +25,7 @@ public class PickUpKey : MonoBehaviour
     {
         if (other.gameObject.tag == "Key")
         {
-            GameObject key = other.gameObject;
-            while (key.transform.parent.gameObject.tag == "Key")
-            {
-                key = key.transform.parent.gameObject;
-            }
-            Destroy(key);
-
+            Destroy(other.gameObject);
             ++keysFound;
             RefreshKeyUI();
             if (keysFound >= totalKeys)

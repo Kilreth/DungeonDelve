@@ -14,6 +14,7 @@ public class InstantiateDungeon : MonoBehaviour
         public GameObject wall;
         public GameObject portal;
         public GameObject key;
+        public GameObject keyPad;
     }
     [SerializeField]
     private PrefabsSelect prefabs;
@@ -48,7 +49,8 @@ public class InstantiateDungeon : MonoBehaviour
 
         itemPrefabs = new Dictionary<string, GameObject>
         {
-            { "Key",         prefabs.key },
+            { "Key",         prefabs.key    },
+            { "KeyPad",      prefabs.keyPad },
             { "StartPortal", prefabs.portal },
         };
     }
@@ -109,12 +111,12 @@ public class InstantiateDungeon : MonoBehaviour
                 if (tile.Item != null)
                 {
                     prefab = itemPrefabs[tile.Item.Name];
-                    GameObject item = InstantiateObject(prefab, row, col, true, itemsParent);
+                    InstantiateObject(prefab, row, col, true, itemsParent);
 
-                    // add wall texture to the pad under a key for increased visibility
-                    if (prefab == prefabs.key)
+                    // if key, instantiate a pad under it as well
+                    if (tile.Item.Name == "Key")
                     {
-                        item.GetComponent<Renderer>().material = wallMaterials[tile.Area.Id];
+                        InstantiateObject(itemPrefabs["KeyPad"], row, col, true, itemsParent);
                     }
                 }
             }
