@@ -13,6 +13,7 @@ public class SaveGame
     public DungeonParameters DungeonParameters;
     public Vector3 PlayerPosition;
     public Quaternion PlayerRotation;
+    public int KeysCollected;
 
     // Store dungeon-generated items (start portal, keys, keypads, etc.)
     // in one gameobject. Store breadcrumbs in a separate gameobject.
@@ -20,11 +21,13 @@ public class SaveGame
     public List<ItemSave> Items;
     public List<GameObjectSave> Breadcrumbs;
 
-    public SaveGame(DungeonParameters dungeonParameters, GameObject player, GameObject itemsParent, GameObject breadcrumbsParent)
+    public SaveGame(DungeonParameters dungeonParameters, GameObject player, int keysCollected,
+                    GameObject itemsParent, GameObject breadcrumbsParent)
     {
         DungeonParameters = dungeonParameters;
         PlayerPosition = player.transform.position;
         PlayerRotation = player.transform.rotation;
+        KeysCollected = keysCollected;
         Items = new List<ItemSave>();
         Breadcrumbs = new List<GameObjectSave>();
         foreach (Transform child in itemsParent.transform)

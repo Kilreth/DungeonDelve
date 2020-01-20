@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 public class PickUpKey : MonoBehaviour
 {
+    public int KeysCollected { get; private set; }
+    private int totalKeys;
     private Text keyText;
     private GameObject winScreen;
-    private int keysFound;
-    private int totalKeys;
 
-    void Start()
+    public void InitializeKeyCounter(int keysCollected = 0)
     {
         keyText = GM.Instance.Canvas.transform.Find("KeyCount").gameObject.GetComponent<Text>();
         winScreen = GM.Instance.Canvas.transform.Find("WinScreen").gameObject;
         winScreen.SetActive(false);
 
-        keysFound = 0;
+        KeysCollected = keysCollected;
         totalKeys = GM.Instance.DungeonParameters.TotalKeys;
         RefreshKeyUI();
     }
@@ -26,9 +26,9 @@ public class PickUpKey : MonoBehaviour
         if (other.gameObject.tag == "Key")
         {
             Destroy(other.gameObject);
-            ++keysFound;
+            ++KeysCollected;
             RefreshKeyUI();
-            if (keysFound >= totalKeys)
+            if (KeysCollected >= totalKeys)
             {
                 ShowWinScreen();
             }
@@ -37,7 +37,7 @@ public class PickUpKey : MonoBehaviour
 
     private void RefreshKeyUI()
     {
-        keyText.text = keysFound + "/" + totalKeys;
+        keyText.text = KeysCollected + "/" + totalKeys;
     }
 
     private void ShowWinScreen()

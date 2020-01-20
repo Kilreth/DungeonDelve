@@ -100,6 +100,7 @@ public class GM : MonoBehaviour
         InitializeGameCommon();
         instantiateDungeon.InstantiateNewItems();
         Player = instantiateDungeon.InstantiateNewPlayer();
+        Player.GetComponent<PickUpKey>().InitializeKeyCounter();
     }
 
     private void InitializeLoadedGame()
@@ -108,13 +109,16 @@ public class GM : MonoBehaviour
         instantiateDungeon.InstantiateLoadedItems(SaveGame.Items);
         Player = instantiateDungeon.InstantiateLoadedPlayer(SaveGame.PlayerPosition, SaveGame.PlayerRotation);
         Player.GetComponent<Breadcrumbs>().LoadBreadcrumbs(SaveGame.Breadcrumbs);
+        Player.GetComponent<PickUpKey>().InitializeKeyCounter(SaveGame.KeysCollected);
     }
 
     public void SaveGameToFile()
     {
+        int keysCollected = Player.GetComponent<PickUpKey>().KeysCollected;
         GameObject itemsParent = instantiateDungeon.ItemsParent;
         GameObject breadcrumbsParent = Player.GetComponent<Breadcrumbs>().BreadcrumbsParent;
-        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player, itemsParent, breadcrumbsParent));
+        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player,
+                keysCollected, itemsParent, breadcrumbsParent));
     }
 }
 
