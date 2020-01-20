@@ -107,14 +107,7 @@ public class GM : MonoBehaviour
         InitializeGameCommon();
         instantiateDungeon.InstantiateLoadedItems(SaveGame.Items);
         Player = instantiateDungeon.InstantiateLoadedPlayer(SaveGame.PlayerPosition, SaveGame.PlayerRotation);
-
-        // Instantiate breadcrumbs using prefab and parent gameobject from other script
-        Breadcrumbs breadcrumbsScript = Player.GetComponent<Breadcrumbs>();
-        foreach (GameObjectSave b in SaveGame.Breadcrumbs)
-        {
-            Instantiate(breadcrumbsScript.Breadcrumb, b.Position, b.Rotation,
-                            breadcrumbsScript.BreadcrumbsParent.transform);
-        }
+        Player.GetComponent<Breadcrumbs>().LoadBreadcrumbs(SaveGame.Breadcrumbs);
     }
 
     public void SaveGameToFile()
