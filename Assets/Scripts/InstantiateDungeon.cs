@@ -21,8 +21,10 @@ public class InstantiateDungeon : MonoBehaviour
     private Dictionary<Block, GameObject> blockPrefabs;
     private Dictionary<string, GameObject> itemPrefabs;
     private GameObject blocksParent;
-    private GameObject itemsParent;
     private List<Material> wallMaterials;
+
+    [HideInInspector]
+    public GameObject ItemsParent;
 
     private DungeonGenerator dungeonGenerator;
     private Dungeon dungeon;
@@ -35,7 +37,8 @@ public class InstantiateDungeon : MonoBehaviour
         LoadPrefabs();
         InitializeMaterials();
         InstantiateFloor();
-        InstantiateDungeonObjects();
+        InstantiateDungeonBlocks();
+        // InstantiateNewItems() or InstantiateLoadedItems() to be called via GM
     }
 
     private void LoadPrefabs()
@@ -51,6 +54,7 @@ public class InstantiateDungeon : MonoBehaviour
         {
             { "Key",         prefabs.key    },
             { "KeyPad",      prefabs.keyPad },
+            { "Portal",      prefabs.portal },
             { "StartPortal", prefabs.portal },
         };
     }
@@ -75,10 +79,9 @@ public class InstantiateDungeon : MonoBehaviour
                                                 GM.Instance.DungeonParameters.Rows);
     }
 
-    private void InstantiateDungeonObjects()
+    private void InstantiateDungeonBlocks()
     {
         blocksParent = new GameObject("Blocks");
-        itemsParent = new GameObject("Items");
 
         for (int row = 0; row < dungeon.Height; ++row)
         {
@@ -106,20 +109,43 @@ public class InstantiateDungeon : MonoBehaviour
                         block.GetComponent<Renderer>().material = wallMaterials[tile.Area.Id];
                     }
                 }
+            }
+        }
+    }
+
+    public void InstantiateNewItems()
+    {
+        ItemsParent = new GameObject("Items");
+
+        for (int row = 0; row < dungeon.Height; ++row)
+        {
+            for (int col = 0; col < dungeon.Width; ++col)
+            {
+                Tile tile = dungeon.GetTile(row, col);
 
                 // Instantiate item (eg. key, start portal) if one exists
                 if (tile.Item != null)
                 {
-                    prefab = itemPrefabs[tile.Item.Name];
-                    InstantiateObject(prefab, row, col, true, itemsParent);
+                    GameObject prefab = itemPrefabs[tile.Item.Name];
+                    InstantiateObject(prefab, row, col, true, ItemsParent);
 
-                    // if key, instantiate a pad under it as well
+                    // If key, instantiate a pad under it as well
                     if (tile.Item.Name == "Key")
                     {
-                        InstantiateObject(itemPrefabs["KeyPad"], row, col, true, itemsParent);
+                        InstantiateObject(itemPrefabs["KeyPad"], row, col, true, ItemsParent);
                     }
                 }
             }
+        }
+    }
+
+    public void InstantiateLoadedItems(List<ItemSave> items)
+    {
+        ItemsParent = new GameObject("Items");
+        foreach (ItemSave item in items)
+        {
+            Instantiate(itemPrefabs[item.Name], item.Position, item.Rotation,
+                        ItemsParent.transform);
         }
     }
 

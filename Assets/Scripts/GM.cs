@@ -15,7 +15,7 @@ public class GM : MonoBehaviour
     // Parameters of the dungeon, set by LoadDungeonScene.cs before loading the scene
     public DungeonParameters DungeonParameters;
 
-    // Saved game data: player and breadcrumb positions, in addition to dungeon parameters
+    // Saved game data: player, item and breadcrumb positions in addition to dungeon parameters
     // Will be null if generating a new dungeon
     public SaveGame SaveGame;
 
@@ -71,6 +71,7 @@ public class GM : MonoBehaviour
             {
                 InitializeLoadedGame();
             }
+            GameState = GameState.Active;
         }
         else
         {
@@ -90,7 +91,6 @@ public class GM : MonoBehaviour
         Canvas = FindObjectOfType<Canvas>();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
-        GameState = GameState.Active;
     }
 
     private void InitializeNewGame()
@@ -98,17 +98,19 @@ public class GM : MonoBehaviour
         // Initialize the dungeon seed *before* generating the dungeon
         DungeonParameters.Seed = UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue);
         InitializeGameCommon();
+        instantiateDungeon.InstantiateNewItems();
         Player = instantiateDungeon.InstantiateNewPlayer();
     }
 
     private void InitializeLoadedGame()
     {
         InitializeGameCommon();
+        instantiateDungeon.InstantiateLoadedItems(SaveGame.Items);
         Player = instantiateDungeon.InstantiateLoadedPlayer(SaveGame.PlayerPosition, SaveGame.PlayerRotation);
 
-        // Instantiate breadcrumbs
+        // Instantiate breadcrumbs using prefab and parent gameobject from other script
         Breadcrumbs breadcrumbsScript = Player.GetComponent<Breadcrumbs>();
-        foreach (BreadcrumbSave b in SaveGame.Breadcrumbs)
+        foreach (GameObjectSave b in SaveGame.Breadcrumbs)
         {
             Instantiate(breadcrumbsScript.Breadcrumb, b.Position, b.Rotation,
                             breadcrumbsScript.BreadcrumbsParent.transform);
@@ -117,8 +119,9 @@ public class GM : MonoBehaviour
 
     public void SaveGameToFile()
     {
+        GameObject itemsParent = instantiateDungeon.ItemsParent;
         GameObject breadcrumbsParent = Player.GetComponent<Breadcrumbs>().BreadcrumbsParent;
-        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player, breadcrumbsParent));
+        SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player, itemsParent, breadcrumbsParent));
     }
 }
 
