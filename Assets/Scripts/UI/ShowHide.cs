@@ -6,8 +6,7 @@ public class ShowHide : MonoBehaviour
 {
     private static string state;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SetState("Default");
     }
