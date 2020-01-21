@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,8 +18,12 @@ public class LoadDungeonScene : MonoBehaviour
 
     public void LoadDungeonFromSave()
     {
-        GM.Instance.SaveGame = SaveGameSystem.LoadGameFromFile();
-        GM.Instance.DungeonParameters = GM.Instance.SaveGame.DungeonParameters;
-        SceneManager.LoadScene("Dungeon");
+        try
+        {
+            GM.Instance.SaveGame = SaveGameSystem.LoadGameFromFile();
+            GM.Instance.DungeonParameters = GM.Instance.SaveGame.DungeonParameters;
+            SceneManager.LoadScene("Dungeon");
+        }
+        catch (Exception) {}
     }
 }

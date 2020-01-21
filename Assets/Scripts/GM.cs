@@ -69,7 +69,14 @@ public class GM : MonoBehaviour
             }
             else
             {
-                InitializeLoadedGame();
+                try
+                {
+                    InitializeLoadedGame();
+                }
+                catch (Exception)
+                {
+                    SceneManager.LoadScene("MainMenu");
+                }
             }
             GameState = GameState.Active;
         }
