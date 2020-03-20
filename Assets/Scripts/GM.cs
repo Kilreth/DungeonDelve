@@ -47,6 +47,7 @@ public class GM : MonoBehaviour
     private void InitializeGameManager()
     {
         QualitySettings.vSyncCount = 1;
+        SaveGame = null;
     }
 
     void OnEnable()
