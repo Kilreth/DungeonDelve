@@ -4,12 +4,30 @@ using UnityEngine;
 
 public class Breadcrumbs : MonoBehaviour
 {
-    // Breadcrumb prefab to set via Unity editor
-    public GameObject Breadcrumb;
+    // Breadcrumb prefabs to set via Unity editor
+    [SerializeField]
+    private GameObject redBreadcrumb = null;
+    [SerializeField]
+    private GameObject blueBreadcrumb = null;
+    [SerializeField]
+    private GameObject greenBreadcrumb = null;
+
+    // The current color prefab to be dropped
+    private GameObject currentBreadcrumb;
 
     // All instantiated breadcrumbs are children of this empty GameObject
+    [HideInInspector]
     public GameObject BreadcrumbsParent;
 
+    // UI anchor transforms to get from the Canvas object
+    private RectTransform UIRed;
+    private RectTransform UIBlue;
+    private RectTransform UIGreen;
+
+    // An arrow that hovers over the active UI breadcrumb
+    private RectTransform selectedIndicator;
+
+    // Parameters related to dropping breadcrumbs
     private GameObject player;
     private Collider playerCollider;
     [SerializeField]
@@ -24,20 +42,31 @@ public class Breadcrumbs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // This object will already be populated if we loaded a save
         if (BreadcrumbsParent == null)
             BreadcrumbsParent = new GameObject("Breadcrumbs");
 
         player = gameObject;
         playerCollider = player.GetComponent<Collider>();
+
+        UIRed = GM.Instance.Canvas.transform.Find(
+            "RedBreadcrumb").gameObject.GetComponent<RectTransform>();
+        UIGreen = GM.Instance.Canvas.transform.Find(
+            "GreenBreadcrumb").gameObject.GetComponent<RectTransform>();
+        UIBlue = GM.Instance.Canvas.transform.Find(
+            "BlueBreadcrumb").gameObject.GetComponent<RectTransform>();
+        selectedIndicator = GM.Instance.Canvas.transform.Find(
+            "SelectedIndicator").gameObject.GetComponent<RectTransform>();
+
+        SelectBreadcrumb(blueBreadcrumb, UIBlue);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (GM.Instance.GameState != GameState.Active)
-        {
             return;
-        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             DropBreadcrumb();
@@ -46,6 +75,18 @@ public class Breadcrumbs : MonoBehaviour
         {
             PickUpBreadcrumbs();
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectBreadcrumb(blueBreadcrumb, UIBlue);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectBreadcrumb(redBreadcrumb, UIRed);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectBreadcrumb(greenBreadcrumb, UIGreen);
+        }
     }
 
     public void LoadBreadcrumbs(List<GameObjectSave> breadcrumbs)
@@ -53,9 +94,16 @@ public class Breadcrumbs : MonoBehaviour
         BreadcrumbsParent = new GameObject("Breadcrumbs");
         foreach (GameObjectSave b in breadcrumbs)
         {
-            Instantiate(Breadcrumb, b.Position, b.Rotation,
+            Instantiate(currentBreadcrumb, b.Position, b.Rotation,
                         BreadcrumbsParent.transform);
         }
+    }
+
+    private void SelectBreadcrumb(GameObject chosenBreadcrumb, RectTransform UIBreadcrumb)
+    {
+        currentBreadcrumb = chosenBreadcrumb;
+        selectedIndicator.anchorMin = new Vector2(UIBreadcrumb.anchorMin.x, selectedIndicator.anchorMin.y);
+        selectedIndicator.anchorMax = new Vector2(UIBreadcrumb.anchorMax.x, selectedIndicator.anchorMax.y);
     }
 
     private void PickUpBreadcrumbs()
@@ -74,7 +122,7 @@ public class Breadcrumbs : MonoBehaviour
         Vector3 position = new Vector3(player.transform.position.x,
                                        player.transform.position.y + dropHeight,
                                        player.transform.position.z);
-        GameObject breadcrumb = Instantiate(Breadcrumb, position, Random.rotation, BreadcrumbsParent.transform);
+        GameObject breadcrumb = Instantiate(currentBreadcrumb, position, Random.rotation, BreadcrumbsParent.transform);
         breadcrumb.GetComponent<Rigidbody>().AddForce(
             player.transform.forward * GM.Instance.BlockScale * throwStrength, ForceMode.Impulse);
         Physics.IgnoreCollision(playerCollider, breadcrumb.GetComponent<Collider>());

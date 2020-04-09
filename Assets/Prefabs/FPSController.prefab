@@ -380,8 +380,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1154f41dbeb36cf4b9fffcf68b3f9d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Breadcrumb: {fileID: 3053647468570332786, guid: 3322e915378ab3542b7192b53dc22c0f,
+  redBreadcrumb: {fileID: 6017250301459342549, guid: 5a76ce2aa696d834e8990c9891f0f057,
     type: 3}
+  blueBreadcrumb: {fileID: 1905837203394675129, guid: 7fdbd3f9d14662f4fab8991934b8806b,
+    type: 3}
+  greenBreadcrumb: {fileID: 2302604445796768833, guid: fdc0dd421ca4e2e4aa824b0ed1a49383,
+    type: 3}
+  BreadcrumbsParent: {fileID: 0}
   dropHeight: 0.7
   throwStrength: 0.8
   pickUpRadius: 0.5
