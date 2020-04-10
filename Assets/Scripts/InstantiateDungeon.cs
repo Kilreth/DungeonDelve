@@ -10,6 +10,7 @@ public class InstantiateDungeon : MonoBehaviour
     public struct PrefabsSelect
     {
         public GameObject player;
+        public GameObject ceiling;
         public GameObject floor;
         public GameObject wall;
         public GameObject portal;
@@ -37,6 +38,7 @@ public class InstantiateDungeon : MonoBehaviour
         LoadPrefabs();
         InitializeMaterials();
         InstantiateFloor();
+        InstantiateCeiling();
         InstantiateDungeonBlocks();
         // InstantiateNewItems() or InstantiateLoadedItems() to be called via GM
     }
@@ -64,17 +66,26 @@ public class InstantiateDungeon : MonoBehaviour
         wallMaterials = GetComponent<Textures>().PopulateWallMaterials(dungeon.Rooms.Count);
     }
 
+    public void InstantiateCeiling()
+    {
+        InstantiateFloorOrCeiling(GM.Instance.BlockScale * 3 + 1, prefabs.ceiling);
+    }
     public void InstantiateFloor()
+    {
+        InstantiateFloorOrCeiling(GM.Instance.BlockScale / 2, prefabs.floor);
+    }
+
+    public void InstantiateFloorOrCeiling(float yPosition, GameObject prefab)
     {
         Vector3 scale = new Vector3(GM.Instance.BlockScale * GM.Instance.DungeonParameters.Cols,
                                     GM.Instance.BlockScale,
                                     GM.Instance.BlockScale * GM.Instance.DungeonParameters.Rows);
         Vector3 position = new Vector3((scale.x - GM.Instance.BlockScale) / 2,
-                                                  GM.Instance.BlockScale  / 2,
+                                                  yPosition,
                                        (scale.z - GM.Instance.BlockScale) / 2);
-        GameObject floor = Instantiate(prefabs.floor, position, Quaternion.identity);
-        floor.transform.localScale = scale;
-        Material material = floor.GetComponent<Renderer>().material;
+        GameObject gameObj = Instantiate(prefab, position, Quaternion.identity);
+        gameObj.transform.localScale = scale;
+        Material material = gameObj.GetComponent<Renderer>().material;
         material.mainTextureScale = new Vector2(GM.Instance.DungeonParameters.Cols,
                                                 GM.Instance.DungeonParameters.Rows);
     }

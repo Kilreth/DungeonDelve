@@ -72,6 +72,8 @@ MonoBehaviour:
       CorridorTurnChance: 0
     PlayerPosition: {x: 0, y: 0, z: 0}
     PlayerRotation: {x: 0, y: 0, z: 0, w: 0}
+    KeysCollected: 0
+    Items: []
     Breadcrumbs: []
   BlockScale: 2
   GameState: 0
@@ -89,6 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
     player: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+    ceiling: {fileID: 7075365173419588477, guid: 8b826061e55b6d74282359a6153f1143,
+      type: 3}
     floor: {fileID: 5768885647456851186, guid: 6f0fd54e218bb1d44af9e43960b76a9d, type: 3}
     wall: {fileID: 4174532304131956657, guid: d9ad9336e0fc1824cb78b7fd9b425bc4, type: 3}
     portal: {fileID: 7320128239834605457, guid: 86d704a4428d91b44bf603eca5ef8c02,
@@ -96,6 +100,7 @@ MonoBehaviour:
     key: {fileID: 3800981192170324373, guid: f2c0468bf6ecfdb4fb9878f80df731bc, type: 3}
     keyPad: {fileID: 3076276867487872804, guid: 94933930e671c0f4c9b416a50d279bc0,
       type: 3}
+  ItemsParent: {fileID: 0}
 --- !u!114 &7128764168518751111
 MonoBehaviour:
   m_ObjectHideFlags: 0
