@@ -19,7 +19,14 @@ public class SaveGame
     // in one gameobject. Store breadcrumbs in a separate gameobject.
     // This keeps all objects organized in the editor.
     public List<ItemSave> Items;
-    public List<GameObjectSave> Breadcrumbs;
+    public List<ItemSave> Breadcrumbs;
+
+    public Dictionary<string, string> BreadcrumbNameToChar = new Dictionary<string, string>()
+    {
+        { "BreadcrumbRed(Clone)"  , "r" },
+        { "BreadcrumbGreen(Clone)", "g" },
+        { "BreadcrumbBlue(Clone)" , "b" },
+    };
 
     public SaveGame(DungeonParameters dungeonParameters, GameObject player, int keysCollected,
                     GameObject itemsParent, GameObject breadcrumbsParent)
@@ -29,7 +36,7 @@ public class SaveGame
         PlayerRotation = player.transform.rotation;
         KeysCollected = keysCollected;
         Items = new List<ItemSave>();
-        Breadcrumbs = new List<GameObjectSave>();
+        Breadcrumbs = new List<ItemSave>();
         foreach (Transform child in itemsParent.transform)
         {
             string name = child.name;
@@ -41,39 +48,25 @@ public class SaveGame
         }
         foreach (Transform child in breadcrumbsParent.transform)
         {
-            Breadcrumbs.Add(new GameObjectSave(child.position, child.rotation));
+            Breadcrumbs.Add(new ItemSave(
+                BreadcrumbNameToChar[child.name], child.position, child.rotation));
         }
     }
 }
 
 /// <summary>
-/// A version of GameObjectSave that includes an assignable name string.
-/// This identifies what type of item is being saved or loaded.
+/// A representation of GameObjects that can be serialized.
 /// </summary>
 [Serializable]
-public class ItemSave : GameObjectSave
+public class ItemSave
 {
     public string Name;
-
-    public ItemSave(string name, Vector3 position, Quaternion rotation)
-        : base(position, rotation)
-    {
-        Name = name;
-    }
-}
-
-/// <summary>
-/// For serialization in saving and loading.
-/// This basic version with only transform parameters is used for breadcrumbs.
-/// </summary>
-[Serializable]
-public class GameObjectSave
-{
     public Vector3 Position;
     public Quaternion Rotation;
 
-    public GameObjectSave(Vector3 position, Quaternion rotation)
+    public ItemSave(string name, Vector3 position, Quaternion rotation)
     {
+        Name = name;
         Position = position;
         Rotation = rotation;
     }

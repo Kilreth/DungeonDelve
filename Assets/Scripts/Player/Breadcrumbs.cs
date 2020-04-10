@@ -89,12 +89,19 @@ public class Breadcrumbs : MonoBehaviour
         }
     }
 
-    public void LoadBreadcrumbs(List<GameObjectSave> breadcrumbs)
+    public void LoadBreadcrumbs(List<ItemSave> breadcrumbs)
     {
-        BreadcrumbsParent = new GameObject("Breadcrumbs");
-        foreach (GameObjectSave b in breadcrumbs)
+        Dictionary<string, GameObject> colorToPrefab = new Dictionary<string, GameObject>()
         {
-            Instantiate(currentBreadcrumb, b.Position, b.Rotation,
+            { "r", redBreadcrumb },
+            { "g", greenBreadcrumb },
+            { "b", blueBreadcrumb },
+        };
+
+        BreadcrumbsParent = new GameObject("Breadcrumbs");
+        foreach (ItemSave b in breadcrumbs)
+        {
+            Instantiate(colorToPrefab[b.Name], b.Position, b.Rotation,
                         BreadcrumbsParent.transform);
         }
     }
