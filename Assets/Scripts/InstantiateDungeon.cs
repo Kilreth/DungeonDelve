@@ -17,7 +17,7 @@ public class InstantiateDungeon : MonoBehaviour
         public GameObject keyPad;
     }
     [SerializeField]
-    private PrefabsSelect prefabs;
+    private PrefabsSelect prefabs = new PrefabsSelect();
     private Dictionary<Block, GameObject> blockPrefabs;
     private Dictionary<string, GameObject> itemPrefabs;
     private GameObject blocksParent;

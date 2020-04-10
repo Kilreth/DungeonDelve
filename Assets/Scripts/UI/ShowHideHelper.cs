@@ -17,7 +17,7 @@ public class ShowHideHelper : MonoBehaviour
     public Selectable Selectable;
 
     [SerializeField]
-    private ShowOnState[] showOnStates;
+    private ShowOnState[] showOnStates = null;
 
     private void DetermineInteractable()
     {

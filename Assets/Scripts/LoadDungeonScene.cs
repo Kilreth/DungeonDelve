@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class LoadDungeonScene : MonoBehaviour
 {
     [SerializeField]
-    private DungeonParameters parameters;
+    private DungeonParameters parameters = null;
 
     public void LoadNewDungeon()
     {
