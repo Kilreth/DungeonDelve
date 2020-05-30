@@ -1678,9 +1678,10 @@ MonoBehaviour:
   m_Text: "        The dim corridors wind aimlessly, looping upon themselves. You
     wonder when someone last set foot here.\n        Will you see your way through
     the entire dungeon, finding every key needed to leave?\r\n\r\n        ~ WASD or
-    arrow keys to move\r\n        ~ Left-Shift to sprint\r\n        ~ Left-click to
-    drop a breadcrumb\r\n        ~ E to pick up breadcrumbs in front of you\r\n        ~
-    Walk over a key to pick it up\r\n        ~ <b>Collect all keys to clear the dungeon!</b>"
+    arrow keys to move\r\n        ~ Left-Shift to sprint\r\n        ~ 1, 2, 3 to choose
+    breadcrumb color\n        ~ Left-click to drop a breadcrumb\r\n        ~ E to
+    pick up breadcrumbs in front of you\r\n        ~ Walk over a key to pick it up\r\n
+    \       ~ <b>Collect all keys to clear the dungeon!</b>"
 --- !u!222 &1599897522
 CanvasRenderer:
   m_ObjectHideFlags: 0
