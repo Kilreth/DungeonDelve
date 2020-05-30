@@ -113,13 +113,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48864be9f0d67a4e8f3194c2149a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallTexturesInEditor:
-    wall1: {fileID: 2800000, guid: 552efc850d56000418cabe74689c9954, type: 3}
-    wall2: {fileID: 2800000, guid: 3f3702bc77cddd14c96c7e23359eb9c0, type: 3}
-    wall3: {fileID: 2800000, guid: c5586eb814a0b4b4290646ae4729e145, type: 3}
-    wall4: {fileID: 2800000, guid: ec0695a2aa0429f40b4e28381d4d994e, type: 3}
-    wall5: {fileID: 2800000, guid: 21c7119aa5242f84fa33a14e6da70f51, type: 3}
-    wall6: {fileID: 2800000, guid: c749fdd3b54df92408a4df5b2df7c0f7, type: 3}
-    wall7: {fileID: 2800000, guid: 607841103411217489ad4a94a1c50e57, type: 3}
-    wall8: {fileID: 2800000, guid: 556539bc71fe7434aba4fc160ea918b9, type: 3}
+  wallTextures:
+  - {fileID: 2800000, guid: 552efc850d56000418cabe74689c9954, type: 3}
+  - {fileID: 2800000, guid: 3f3702bc77cddd14c96c7e23359eb9c0, type: 3}
+  - {fileID: 2800000, guid: c5586eb814a0b4b4290646ae4729e145, type: 3}
+  - {fileID: 2800000, guid: ec0695a2aa0429f40b4e28381d4d994e, type: 3}
+  - {fileID: 2800000, guid: 21c7119aa5242f84fa33a14e6da70f51, type: 3}
+  - {fileID: 2800000, guid: c749fdd3b54df92408a4df5b2df7c0f7, type: 3}
+  - {fileID: 2800000, guid: 607841103411217489ad4a94a1c50e57, type: 3}
+  - {fileID: 2800000, guid: 556539bc71fe7434aba4fc160ea918b9, type: 3}
+  - {fileID: 2800000, guid: 9c17d6ea5c924674f938535893247818, type: 3}
+  - {fileID: 2800000, guid: 6ea3ea785dd448741b5d60fe8e515571, type: 3}
+  - {fileID: 2800000, guid: e8508bf2f25c5944c9aad151e7d99da1, type: 3}
+  - {fileID: 2800000, guid: 3b0da9b2284c4164a8d6ef081a874dd1, type: 3}
+  - {fileID: 2800000, guid: 7b6feed1c326a0c4aa256d034ef80cc1, type: 3}
+  - {fileID: 2800000, guid: e838f1e8d45fb834e80ab1eb634f9053, type: 3}
+  - {fileID: 2800000, guid: b6d5610672acb784aa46755e33266b24, type: 3}
+  - {fileID: 2800000, guid: e9abfca5234a1ae49bdc9515ef8b5d0b, type: 3}
   WallMaterial: {fileID: 2100000, guid: 08cdbf92f36591d449115fd72684e25f, type: 2}

@@ -6,20 +6,8 @@ using DungeonGeneratorNS;
 
 public class Textures : MonoBehaviour
 {
-    [Serializable]
-    public struct WallTextures
-    {
-        public Texture wall1;
-        public Texture wall2;
-        public Texture wall3;
-        public Texture wall4;
-        public Texture wall5;
-        public Texture wall6;
-        public Texture wall7;
-        public Texture wall8;
-    }
-    public WallTextures WallTexturesInEditor;
-    private readonly int totalWallTextures = 8;
+    [SerializeField]
+    private Texture[] wallTextures = null;
 
     public Material WallMaterial;
 
@@ -39,23 +27,12 @@ public class Textures : MonoBehaviour
     /// <returns></returns>
     public List<Material> PopulateWallMaterials(int total)
     {
-        List<Texture> wallTextures = new List<Texture>
-        {
-            WallTexturesInEditor.wall1,
-            WallTexturesInEditor.wall2,
-            WallTexturesInEditor.wall3,
-            WallTexturesInEditor.wall4,
-            WallTexturesInEditor.wall5,
-            WallTexturesInEditor.wall6,
-            WallTexturesInEditor.wall7,
-            WallTexturesInEditor.wall8
-        };
-
         List<Material> materials = new List<Material>();
         for (int i = 0; i < total; ++i)
         {
-            materials.Add(RandomWallMaterial());
-            materials[i].mainTexture = wallTextures[i % totalWallTextures];
+            Material m = RandomWallMaterial();
+            m.mainTexture = wallTextures[i % wallTextures.Length];
+            materials.Add(m);
         }
         return materials;
     }
