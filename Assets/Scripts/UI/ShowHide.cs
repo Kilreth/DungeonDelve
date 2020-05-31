@@ -2,31 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Assign this to the Canvas, and call SetState() for every menu transition.
+/// </summary>
 public class ShowHide : MonoBehaviour
 {
-    private static string state;
+    [SerializeField]
+    private string defaultState;
 
     void Awake()
     {
-        SetState("Default");
+        SetState(defaultState);
     }
 
-    public void SetState(string newState)
+    /// <summary>
+    /// Ask each UI object to show or hide according to the new state.
+    /// </summary>
+    /// <param name="state"></param>
+    public void SetState(string state)
     {
-        state = newState;
-        ShowAndHideItems(gameObject.transform);
-    }
-
-    public void ShowAndHideItems(Transform parent)
-    {
-        foreach (Transform child in parent)
+        foreach (Transform child in gameObject.transform)
         {
-            ShowHideHelper showHideData = child.gameObject.GetComponent<ShowHideHelper>();
-            if (showHideData != null)
+            ShowHideHelper showHideHelper = child.gameObject.GetComponent<ShowHideHelper>();
+            if (showHideHelper != null)
             {
-                showHideData.ShowOrHide(state);
+                showHideHelper.ShowOrHide(state);
             }
-            ShowAndHideItems(child);
         }
     }
 }

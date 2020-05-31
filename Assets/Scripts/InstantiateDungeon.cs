@@ -25,7 +25,7 @@ public class InstantiateDungeon : MonoBehaviour
     private List<Material> wallMaterials;
 
     [HideInInspector]
-    public GameObject ItemsParent;
+    public GameObject ItemsParent { get; private set; }
 
     private DungeonGenerator dungeonGenerator;
     private Dungeon dungeon;

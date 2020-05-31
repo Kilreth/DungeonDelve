@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Assign this to every UI object which shows and hides in various menus.
+/// </summary>
 public class ShowHideHelper : MonoBehaviour
 {
-    [System.Serializable]
-    public class ShowOnState
-    {
-        public string state;
-    }
-
     // If controlling a UI object that should be disabled at times
     // (eg. the Continue button when no save exists), assign this in
     // the inspector and implement the logic in DetermineInteractable().
     public Selectable Selectable;
 
     [SerializeField]
-    private ShowOnState[] showOnStates = null;
+    private string[] showOnStates = null;
 
     private void DetermineInteractable()
     {
@@ -25,19 +22,14 @@ public class ShowHideHelper : MonoBehaviour
             return;
 
         if (gameObject.name == "Continue")
-        {
-            if (SaveGameSystem.DoesSaveGameFileExist())
-                Selectable.interactable = true;
-            else
-                Selectable.interactable = false;
-        }
+            Selectable.interactable = SaveGameSystem.DoesSaveGameFileExist();
     }
 
-    public void ShowOrHide(string state)
+    public void ShowOrHide(string newState)
     {
-        foreach (ShowOnState showOnState in showOnStates)
+        foreach (string state in showOnStates)
         {
-            if (state == showOnState.state)
+            if (state == newState)
             {
                 gameObject.SetActive(true);
                 DetermineInteractable();
