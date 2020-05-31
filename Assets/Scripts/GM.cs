@@ -27,6 +27,8 @@ public class GM : MonoBehaviour
     [HideInInspector]
     public GameObject Player { get; private set; }
 
+    public bool MapActive;
+
     private InstantiateDungeon instantiateDungeon;
 
     private void Awake()
@@ -99,6 +101,7 @@ public class GM : MonoBehaviour
         Canvas = FindObjectOfType<Canvas>();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
+        MapActive = false;
     }
 
     private void InitializeNewGame()

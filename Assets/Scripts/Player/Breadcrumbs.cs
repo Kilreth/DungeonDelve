@@ -64,7 +64,7 @@ public class Breadcrumbs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GM.Instance.GameState != GameState.Active)
+        if (GM.Instance.GameState != GameState.Active || GM.Instance.MapActive)
             return;
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
