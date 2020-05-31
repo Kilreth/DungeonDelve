@@ -7,17 +7,16 @@ public class DungeonMap : MonoBehaviour
     [SerializeField]
     private Camera dungeonMapCameraPrefab;
 
+    [SerializeField]
+    private float zoomSensitivity;
+    private bool dragging;
+
     // Start is called before the first frame update
     void Start()
     {
         playerCamera = gameObject.transform.Find(
             "FirstPersonCharacter").gameObject.GetComponent<Camera>();
-        dungeonMapCamera = Instantiate(
-            dungeonMapCameraPrefab,
-            new Vector3(GM.Instance.DungeonParameters.Cols / 2,
-                        GM.Instance.DungeonParameters.Rows / 2,
-                        10),
-            dungeonMapCameraPrefab.transform.rotation);
+        dungeonMapCamera = Instantiate(dungeonMapCameraPrefab);
         dungeonMapCamera.enabled = false;
     }
 
@@ -31,21 +30,50 @@ public class DungeonMap : MonoBehaviour
             else
                 ShowDungeonMap();
         }
+        if (GM.Instance.MapActive)
+        {
+            float zoomInput = Input.GetAxis("Mouse ScrollWheel");
+            dungeonMapCamera.orthographicSize -= zoomInput * zoomSensitivity;
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+                dragging = true;
+            else if (Input.GetKeyUp(KeyCode.Mouse0))
+                dragging = false;
+
+            if (dragging)
+            {
+                float xOffset = Input.GetAxis("Mouse X");
+                float yOffset = Input.GetAxis("Mouse Y");
+
+                // transform.Translate() is relative to the object's rotation,
+                // so yOffset is passed to y instead of z
+                dungeonMapCamera.transform.Translate(-xOffset, -yOffset, 0);
+            }
+        }
     }
 
-    public void ShowDungeonMap()
+    private void ShowDungeonMap()
     {
         GM.Instance.MapActive = true;
         GM.Instance.Canvas.enabled = false;
         playerCamera.enabled = false;
         dungeonMapCamera.enabled = true;
+        CenterCameraOnPlayer();
     }
 
-    public void HideDungeonMap()
+    private void HideDungeonMap()
     {
         GM.Instance.MapActive = false;
         GM.Instance.Canvas.enabled = true;
         playerCamera.enabled = true;
         dungeonMapCamera.enabled = false;
+    }
+
+    private void CenterCameraOnPlayer()
+    {
+        dungeonMapCamera.transform.position = new Vector3(
+            GM.Instance.Player.transform.position.x,
+            30,
+            GM.Instance.Player.transform.position.z);
     }
 }
