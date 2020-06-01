@@ -22,10 +22,15 @@ public class GM : MonoBehaviour
     public float BlockScale = 2;
     public GameState GameState;
     public System.Random Random { get; private set; }
+
     [HideInInspector]
     public Canvas Canvas { get; private set; }
     [HideInInspector]
     public GameObject Player { get; private set; }
+    [HideInInspector]
+    public GameObject BlocksParent { get; private set; }
+    [HideInInspector]
+    public GameObject UnreachableBlocksParent { get; private set; }
 
     public bool MapActive;
 
@@ -101,6 +106,8 @@ public class GM : MonoBehaviour
         Canvas = FindObjectOfType<Canvas>();
         instantiateDungeon = GetComponent<InstantiateDungeon>();
         instantiateDungeon.CreateDungeon();
+        BlocksParent = instantiateDungeon.BlocksParent;
+        UnreachableBlocksParent = instantiateDungeon.UnreachableBlocksParent;
         MapActive = false;
     }
 

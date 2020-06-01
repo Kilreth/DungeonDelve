@@ -21,8 +21,12 @@ public class InstantiateDungeon : MonoBehaviour
     private PrefabsSelect prefabs = new PrefabsSelect();
     private Dictionary<Block, GameObject> blockPrefabs;
     private Dictionary<string, GameObject> itemPrefabs;
-    private GameObject blocksParent;
     private List<Material> wallMaterials;
+
+    [HideInInspector]
+    public GameObject BlocksParent { get; private set; }
+    [HideInInspector]
+    public GameObject UnreachableBlocksParent { get; private set; }
 
     [HideInInspector]
     public GameObject ItemsParent { get; private set; }
@@ -92,7 +96,8 @@ public class InstantiateDungeon : MonoBehaviour
 
     private void InstantiateDungeonBlocks()
     {
-        blocksParent = new GameObject("Blocks");
+        BlocksParent = new GameObject("Blocks");
+        UnreachableBlocksParent = new GameObject("UnreachableBlocks");
 
         for (int row = 0; row < dungeon.Height; ++row)
         {
@@ -101,27 +106,30 @@ public class InstantiateDungeon : MonoBehaviour
                 Tile tile = dungeon.GetTile(row, col);
                 GameObject prefab;
 
-                // If the player will never see this block, don't instantiate it
-                if ((tile.Block == Block.Rock || tile.Block == Block.Granite)
-                    && !dungeon.IsTileAdjacentTo(tile, Block.WALKABLE))
-                {
-                    continue;
-                }
-
                 // Instantiate block, if it is not a ground block
                 if (!Tile.IsWalkable(tile))
                 {
                     prefab = blockPrefabs[tile.Block];
-                    GameObject block = InstantiateObject(prefab, row, col, true, blocksParent);
+                    GameObject block = InstantiateObject(prefab, row, col, true);
 
                     // If a room wall, apply an assigned material featuring a color and pattern
                     if (blockPrefabs[tile.Block] == prefabs.wall && tile.Area != null)
                     {
                         block.GetComponent<Renderer>().material = wallMaterials[tile.Area.Id];
                     }
+
+                    // If this block cannot be seen in first person, put it under a
+                    // different parent GameObject. This parent (and consequently all
+                    // its blocks) will only be active when viewing the overhead map.
+                    if ((tile.Block == Block.Rock || tile.Block == Block.Granite)
+                            && !dungeon.IsTileAdjacentTo(tile, Block.WALKABLE))
+                        block.transform.SetParent(UnreachableBlocksParent.transform);
+                    else
+                        block.transform.SetParent(BlocksParent.transform);
                 }
             }
         }
+        UnreachableBlocksParent.SetActive(false);
     }
 
     public void InstantiateNewItems()

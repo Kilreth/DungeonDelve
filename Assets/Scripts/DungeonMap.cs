@@ -9,6 +9,8 @@ public class DungeonMap : MonoBehaviour
 
     [SerializeField]
     private float zoomSensitivity;
+    [SerializeField]
+    private float dragSensitivity;
     private bool dragging;
 
     // Start is called before the first frame update
@@ -32,8 +34,10 @@ public class DungeonMap : MonoBehaviour
         }
         if (GM.Instance.MapActive)
         {
-            float zoomInput = Input.GetAxis("Mouse ScrollWheel");
-            dungeonMapCamera.orthographicSize -= zoomInput * zoomSensitivity;
+            dungeonMapCamera.orthographicSize -= (Input.GetAxis("Mouse ScrollWheel")
+                * dungeonMapCamera.orthographicSize * zoomSensitivity);
+            if (dungeonMapCamera.orthographicSize < 1)
+                dungeonMapCamera.orthographicSize = 1;
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
                 dragging = true;
@@ -42,8 +46,8 @@ public class DungeonMap : MonoBehaviour
 
             if (dragging)
             {
-                float xOffset = Input.GetAxis("Mouse X");
-                float yOffset = Input.GetAxis("Mouse Y");
+                float xOffset = Input.GetAxis("Mouse X") * dungeonMapCamera.orthographicSize * dragSensitivity;
+                float yOffset = Input.GetAxis("Mouse Y") * dungeonMapCamera.orthographicSize * dragSensitivity;
 
                 // transform.Translate() is relative to the object's rotation,
                 // so yOffset is passed to y instead of z
@@ -54,6 +58,7 @@ public class DungeonMap : MonoBehaviour
 
     private void ShowDungeonMap()
     {
+        GM.Instance.UnreachableBlocksParent.SetActive(true);
         GM.Instance.MapActive = true;
         GM.Instance.Canvas.enabled = false;
         playerCamera.enabled = false;
@@ -63,6 +68,7 @@ public class DungeonMap : MonoBehaviour
 
     private void HideDungeonMap()
     {
+        GM.Instance.UnreachableBlocksParent.SetActive(false);
         GM.Instance.MapActive = false;
         GM.Instance.Canvas.enabled = true;
         playerCamera.enabled = true;

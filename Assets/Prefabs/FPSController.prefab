@@ -430,7 +430,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeonMapCameraPrefab: {fileID: 4144006493492991315, guid: 38c95007da456624291517597a53444e,
     type: 3}
-  zoomSensitivity: 5
+  zoomSensitivity: 0.5
+  dragSensitivity: 0.08
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
