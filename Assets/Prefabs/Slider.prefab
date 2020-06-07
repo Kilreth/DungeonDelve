@@ -237,6 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3871793431998892941}
   - component: {fileID: 3871793431998892940}
+  - component: {fileID: 923058817998113424}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -316,7 +317,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 923058817998113424}
+        m_MethodName: UpdateText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &923058817998113424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3871793431998892942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8954103389c1454dbb150dd1e5bd93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 3871793431998892940}
+  text: {fileID: 3871793430635873137}
 --- !u!1 &3871793432309951522
 GameObject:
   m_ObjectHideFlags: 0
