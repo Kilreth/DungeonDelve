@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class CustomizeDungeon : MonoBehaviour
+{
+    [SerializeField]
+    private Slider rows;
+    [SerializeField]
+    private Slider columns;
+    [SerializeField]
+    private Slider keys;
+
+    [SerializeField]
+    private Slider minRoomHeight;
+    [SerializeField]
+    private Slider minRoomWidth;
+    [SerializeField]
+    private Slider maxRoomHeight;
+    [SerializeField]
+    private Slider maxRoomWidth;
+
+    [SerializeField]
+    private Slider roomToDungeonRatio;
+    [SerializeField]
+    private Slider doorToWallRatio;
+    [SerializeField]
+    private Slider corridorTurnChance;
+
+    [SerializeField]
+    private InputField seed;
+
+    [SerializeField]
+    private LoadDungeonScene loadDungeonScene;
+
+    [SerializeField]
+    private DungeonParameters[] presets = null;
+
+    public void CreateDungeonFromSliders()
+    {
+        LoadParametersFromSliders();
+        CreateDungeon();
+    }
+
+    public void CreateDungeonFromPreset(int preset)
+    {
+        GM.Instance.DungeonParameters = presets[preset].Clone();
+        GM.Instance.DungeonParameters.Seed = Int32.MaxValue;
+        CreateDungeon();
+    }
+
+    private void CreateDungeon()
+    {
+        loadDungeonScene.LoadNewDungeon();
+    }
+
+    private void LoadParametersFromSliders()
+    {
+        GM.Instance.DungeonParameters = new DungeonParameters
+        {
+            Rows = (int)rows.value,
+            Cols = (int)columns.value,
+            TotalKeys = (int)keys.value,
+            MinRoomHeight = (int)minRoomHeight.value,
+            MinRoomWidth = (int)minRoomWidth.value,
+            MaxRoomHeight = (int)maxRoomHeight.value,
+            MaxRoomWidth = (int)maxRoomWidth.value,
+            TargetRoomToDungeonRatio = Math.Round(roomToDungeonRatio.value, 2),
+            DoorsToWallRatio = Math.Round(doorToWallRatio.value, 2),
+            CorridorTurnChance = Math.Round(corridorTurnChance.value, 2),
+            Seed = HashSeed(seed.text),
+        };
+
+        if (seed.text == "")
+        {
+            // No seed defined by the user, so prompt the Game Manager to choose
+            // a random one. The max int value does this.
+            GM.Instance.DungeonParameters.Seed = Int32.MaxValue;
+        }
+        else
+        {
+            GM.Instance.DungeonParameters.Seed = HashSeed(seed.text);
+            if (GM.Instance.DungeonParameters.Seed == Int32.MaxValue)
+                --GM.Instance.DungeonParameters.Seed;
+        }
+    }
+
+    public void LoadSlidersFromPreset(int index)
+    {
+        DungeonParameters preset = presets[index];
+        rows.value = preset.Rows;
+        columns.value = preset.Cols;
+        keys.value = preset.TotalKeys;
+        minRoomHeight.value = preset.MinRoomHeight;
+        minRoomWidth.value = preset.MinRoomWidth;
+        maxRoomHeight.value = preset.MaxRoomHeight;
+        maxRoomWidth.value = preset.MaxRoomWidth;
+        roomToDungeonRatio.value = (float) preset.TargetRoomToDungeonRatio;
+        doorToWallRatio.value = (float) preset.DoorsToWallRatio;
+        corridorTurnChance.value = (float) preset.CorridorTurnChance;
+        // Leave the defined seed as-is
+    }
+
+    // String hashing in the standard library isn't guaranteed to be persistent,
+    // so we implement a simple hash function instead. I've arbitrarily chosen
+    // int over long because seeds don't need to be huge.
+    public static int HashSeed(string seed)
+    {
+        if (Int32.TryParse(seed, out int number))
+            return number;
+
+        // https://stackoverflow.com/questions/7666509/hash-function-for-string
+        int hash = 5381;
+        foreach (char c in seed)
+        {
+            hash = hash * 33 + Convert.ToInt32(c);
+        }
+        return hash;
+    }
+}

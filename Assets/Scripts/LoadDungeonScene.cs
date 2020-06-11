@@ -12,7 +12,6 @@ public class LoadDungeonScene : MonoBehaviour
     public void LoadNewDungeon()
     {
         GM.Instance.SaveGame = null;
-        GM.Instance.DungeonParameters = parameters;
         SceneManager.LoadScene("Dungeon");
     }
 

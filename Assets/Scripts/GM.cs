@@ -113,8 +113,10 @@ public class GM : MonoBehaviour
 
     private void InitializeNewGame()
     {
-        // Initialize the dungeon seed *before* generating the dungeon
-        DungeonParameters.Seed = UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue);
+        // Int32.MaxValue is reserved to mean "choose a random seed"
+        if (DungeonParameters.Seed == Int32.MaxValue)
+            DungeonParameters.Seed = UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue);
+
         InitializeGameCommon();
         instantiateDungeon.InstantiateNewItems();
         Player = instantiateDungeon.InstantiateNewPlayer();

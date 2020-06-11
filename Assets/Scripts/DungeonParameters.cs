@@ -57,4 +57,10 @@ public class DungeonParameters
     // A low value of 0.2 works well.
 
     public double CorridorTurnChance;
+
+    // All class members are simple types, so a shallow clone is perfect.
+    public DungeonParameters Clone()
+    {
+        return (DungeonParameters) this.MemberwiseClone();
+    }
 }
