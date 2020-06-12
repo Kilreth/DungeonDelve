@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class LoadDungeonScene : MonoBehaviour
 {
-    [SerializeField]
-    private DungeonParameters parameters = null;
-
     public void LoadNewDungeon()
     {
         GM.Instance.SaveGame = null;

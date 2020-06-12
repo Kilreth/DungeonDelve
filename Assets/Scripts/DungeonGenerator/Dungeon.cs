@@ -17,12 +17,16 @@ namespace DungeonGeneratorNS
 
         public List<Room> GetConnectedDungeon()
         {
+            // We want the largest set of connected rooms. This may not necessarily
+            // be a majority of rooms, so gradually lower the target size of the set.
             List<Room> roomsFromStart;
+            int tries = 0;
             do
             {
+                ++tries;
                 roomsFromStart = FindConnectedRooms(GetRandomRoom());
             }
-            while (roomsFromStart.Count * 2 < Rooms.Count);
+            while (roomsFromStart.Count * 2 < Rooms.Count - tries);
             return roomsFromStart;
         }
 

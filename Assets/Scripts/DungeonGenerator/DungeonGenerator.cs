@@ -16,7 +16,7 @@ namespace DungeonGeneratorNS
         /// Choose a random room to place the start portal.
         /// Scatter keys across other unique rooms.
         /// </summary>
-        public void GenerateItems(int numberOfKeys)
+        public void GenerateItems(ref int numberOfKeys)
         {
             // Although very unlikely, it is possible not all rooms at this point are connected
             // Only use rooms that belong to the connected dungeon
@@ -473,7 +473,7 @@ namespace DungeonGeneratorNS
             GenerateDoors(parameters.DoorsToWallRatio);
             GenerateCorridors(parameters.CorridorTurnChance);
             MakeDungeonACompleteGraph(parameters.CorridorTurnChance);
-            GenerateItems(parameters.TotalKeys);
+            GenerateItems(ref parameters.TotalKeys);
         }
     }
 }

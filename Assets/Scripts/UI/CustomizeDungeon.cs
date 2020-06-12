@@ -7,36 +7,49 @@ using UnityEngine.UI;
 public class CustomizeDungeon : MonoBehaviour
 {
     [SerializeField]
-    private Slider rows;
+    private Slider rows = null;
     [SerializeField]
-    private Slider columns;
+    private Slider columns = null;
     [SerializeField]
-    private Slider keys;
+    private Slider keys = null;
 
     [SerializeField]
-    private Slider minRoomHeight;
+    private Slider minRoomHeight = null;
     [SerializeField]
-    private Slider minRoomWidth;
+    private Slider minRoomWidth = null;
     [SerializeField]
-    private Slider maxRoomHeight;
+    private Slider maxRoomHeight = null;
     [SerializeField]
-    private Slider maxRoomWidth;
+    private Slider maxRoomWidth = null;
 
     [SerializeField]
-    private Slider roomToDungeonRatio;
+    private Slider roomToDungeonRatio = null;
     [SerializeField]
-    private Slider doorToWallRatio;
+    private Slider doorToWallRatio = null;
     [SerializeField]
-    private Slider corridorTurnChance;
+    private Slider corridorTurnChance = null;
 
     [SerializeField]
-    private InputField seed;
+    private InputField seed = null;
 
     [SerializeField]
-    private LoadDungeonScene loadDungeonScene;
+    private LoadDungeonScene loadDungeonScene = null;
 
     [SerializeField]
     private DungeonParameters[] presets = null;
+
+    void Awake()
+    {
+        LoadSlidersFromPreset(0);
+    }
+
+    void Update()
+    {
+        if (minRoomHeight.value > maxRoomHeight.value)
+            maxRoomHeight.value = minRoomHeight.value;
+        if (minRoomWidth.value > maxRoomWidth.value)
+            maxRoomWidth.value = minRoomWidth.value;
+    }
 
     public void CreateDungeonFromSliders()
     {

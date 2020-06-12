@@ -208,14 +208,16 @@ namespace DungeonGeneratorNS
         }
 
         /// <summary>
-        /// Return a list of walkable tiles to place items on, minus tiles that would block a door if filled.
+        /// Return a list of walkable tiles to place items on.
+        /// If the room is at least 3x3, exclude tiles that would block a door if filled.
         /// </summary>
         private void FindTilesThatCanHoldObjects()
         {
             vacantTiles = new List<Tile>(Tiles);    // shallow clone
             for (int i = vacantTiles.Count - 1; i >= 0; --i)
             {
-                if (Dungeon.IsTileAdjacentTo(vacantTiles[i], Block.Door))
+                if (this.Height >= 3 && this.Width >= 3
+                    && Dungeon.IsTileAdjacentTo(vacantTiles[i], Block.Door))
                 {
                     vacantTiles.RemoveAt(i);
                 }

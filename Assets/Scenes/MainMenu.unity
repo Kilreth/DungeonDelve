@@ -379,7 +379,7 @@ PrefabInstance:
     - target: {fileID: 3871793431998892941, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.8
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3871793431998892941, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
@@ -389,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 3871793431998892941, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.8
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3871793431998892941, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
@@ -1283,7 +1283,7 @@ PrefabInstance:
     - target: {fileID: 3871793431998892940, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
       propertyPath: m_Value
-      value: 0.9
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3871793432309951521, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
@@ -1318,7 +1318,7 @@ PrefabInstance:
     - target: {fileID: 3871793430635873137, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
       propertyPath: m_Text
-      value: 90%
+      value: 50%
       objectReference: {fileID: 0}
     - target: {fileID: 3871793430635873138, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
@@ -2255,7 +2255,7 @@ PrefabInstance:
     - target: {fileID: 3871793431998892941, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3871793431998892941, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
@@ -2265,7 +2265,7 @@ PrefabInstance:
     - target: {fileID: 3871793431998892941, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3871793431998892941, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
@@ -2578,18 +2578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06fe784f1a668440b01e0512477071d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parameters:
-    Rows: 0
-    Cols: 0
-    TotalKeys: 0
-    Seed: 0
-    MinRoomHeight: 0
-    MinRoomWidth: 0
-    MaxRoomHeight: 0
-    MaxRoomWidth: 0
-    TargetRoomToDungeonRatio: 0
-    DoorsToWallRatio: 0
-    CorridorTurnChance: 0
 --- !u!1001 &752339303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2852,7 +2840,7 @@ MonoBehaviour:
     MinRoomWidth: 3
     MaxRoomHeight: 6
     MaxRoomWidth: 6
-    TargetRoomToDungeonRatio: 0.9
+    TargetRoomToDungeonRatio: 0.5
     DoorsToWallRatio: 0.1
     CorridorTurnChance: 0.2
   - Rows: 60
@@ -2863,7 +2851,7 @@ MonoBehaviour:
     MinRoomWidth: 3
     MaxRoomHeight: 9
     MaxRoomWidth: 9
-    TargetRoomToDungeonRatio: 0.9
+    TargetRoomToDungeonRatio: 0.5
     DoorsToWallRatio: 0.1
     CorridorTurnChance: 0.2
 --- !u!114 &765907154
@@ -2878,18 +2866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06fe784f1a668440b01e0512477071d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parameters:
-    Rows: 0
-    Cols: 0
-    TotalKeys: 0
-    Seed: 0
-    MinRoomHeight: 0
-    MinRoomWidth: 0
-    MaxRoomHeight: 0
-    MaxRoomWidth: 0
-    TargetRoomToDungeonRatio: 0
-    DoorsToWallRatio: 0
-    CorridorTurnChance: 0
 --- !u!1001 &844167419
 PrefabInstance:
   m_ObjectHideFlags: 0

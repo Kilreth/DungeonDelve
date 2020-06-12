@@ -71,22 +71,19 @@ public class GM : MonoBehaviour
     {
         if (scene.name == "Dungeon")
         {
-            if (SaveGame == null)
+            try
             {
-                InitializeNewGame();
-            }
-            else
-            {
-                try
-                {
+                if (SaveGame == null)
+                    InitializeNewGame();
+                else
                     InitializeLoadedGame();
-                }
-                catch (Exception)
-                {
-                    SceneManager.LoadScene("MainMenu");
-                }
+
+                GameState = GameState.Active;
             }
-            GameState = GameState.Active;
+            catch (Exception)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
         else
         {
