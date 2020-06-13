@@ -75,7 +75,7 @@ public class CustomizeDungeon : MonoBehaviour
         {
             Rows = (int)rows.value,
             Cols = (int)columns.value,
-            TotalKeys = (int)keys.value,
+            TotalKeys = KeysSliderToRealValue((int)keys.value, (int)keys.maxValue),
             MinRoomHeight = (int)minRoomHeight.value,
             MinRoomWidth = (int)minRoomWidth.value,
             MaxRoomHeight = (int)maxRoomHeight.value,
@@ -114,6 +114,18 @@ public class CustomizeDungeon : MonoBehaviour
         doorToWallRatio.value = (float) preset.DoorsToWallRatio;
         corridorTurnChance.value = (float) preset.CorridorTurnChance;
         // Leave the defined seed as-is
+    }
+
+    public static int KeysSliderToRealValue(int sliderValue, int sliderMaxValue)
+    {
+        if (sliderValue == sliderMaxValue)
+            return Int32.MaxValue;
+        else if (sliderValue > 60)
+            return 100 * sliderValue - 5900;
+        else if (sliderValue > 50)
+            return 5 * sliderValue - 200;
+        else
+            return sliderValue;
     }
 
     // String hashing in the standard library isn't guaranteed to be persistent,
