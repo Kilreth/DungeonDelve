@@ -18,6 +18,30 @@ namespace DungeonGeneratorNS
         public int Id { get; private set; }
         public static int NextId { get; set; }
 
+        public bool IsRecursivelyConnectedTo(Area other)
+        {
+            HashSet<Area> visited = new HashSet<Area>();
+            Queue<Area> queue = new Queue<Area>();
+            queue.Enqueue(this);
+            visited.Add(this);
+            while (queue.Count > 0)
+            {
+                Area area = queue.Dequeue();
+                foreach (Area neighbor in area.To)
+                {
+                    if (neighbor == other)
+                        return true;
+
+                    if (!visited.Contains(neighbor))
+                    {
+                        queue.Enqueue(neighbor);
+                        visited.Add(neighbor);
+                    }
+                }
+            }
+            return false;
+        }
+
         public void ConnectTo(Area other)
         {
             if (other != this)

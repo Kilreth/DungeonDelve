@@ -72,30 +72,16 @@ namespace DungeonGeneratorNS
             }
 
             if (returnConnectedRooms)
-            {
                 return visitedRooms;
-            }
             else
             {
                 List<Room> unvisitedRooms = new List<Room>();
                 foreach (Room room in Rooms)
-                {
                     if (!visited.Contains(room))
-                    {
                         unvisitedRooms.Add(room);
-                    }
-                }
 
                 // We determine the unconnected rooms as the smaller of the two lists
-
-                if (unvisitedRooms.Count < visitedRooms.Count)
-                {
-                    return unvisitedRooms;
-                }
-                else
-                {
-                    return visitedRooms;
-                }
+                return unvisitedRooms.Count < visitedRooms.Count ? unvisitedRooms : visitedRooms;
             }
         }
 

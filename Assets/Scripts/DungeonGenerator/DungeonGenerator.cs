@@ -76,10 +76,6 @@ namespace DungeonGeneratorNS
                     bool allowConnectionToConnectedArea = false;
                     GenerateCorridor(door, chanceToTurn, allowConnectionToConnectedArea);
                 }
-                else
-                {
-                    return;
-                }
 
                 unconnectedRooms = Dungeon.FindUnconnectedRooms(Dungeon.GetRandomRoom());
                 ++tries;
@@ -369,7 +365,8 @@ namespace DungeonGeneratorNS
         {
             foreach (Tile adj in adjacents)
             {
-                if (!area.To.Contains(adj.Area))
+                //if (!area.To.Contains(adj.Area))
+                if (!area.IsRecursivelyConnectedTo(adj.Area))
                 {
                     return true;
                 }
