@@ -163,8 +163,9 @@ public class InstantiateDungeon : MonoBehaviour
         ItemsParent = new GameObject("Items");
         foreach (ItemSave item in items)
         {
-            Instantiate(itemPrefabs[item.Name], item.Position, item.Rotation,
-                        ItemsParent.transform);
+            GameObject obj = Instantiate(
+                itemPrefabs[item.Name], item.Position, item.Rotation, ItemsParent.transform);
+            obj.transform.localScale = item.Scale;
         }
     }
 

@@ -44,12 +44,12 @@ public class SaveGame
             {
                 name = name.Remove(name.Length - SaveGame.CloneSuffix.Length);
             }
-            Items.Add(new ItemSave(name, child.position, child.rotation));
+            Items.Add(new ItemSave(name, child.position, child.rotation, child.localScale));
         }
         foreach (Transform child in breadcrumbsParent.transform)
         {
             Breadcrumbs.Add(new ItemSave(
-                BreadcrumbNameToChar[child.name], child.position, child.rotation));
+                BreadcrumbNameToChar[child.name], child.position, child.rotation, child.localScale));
         }
     }
 }
@@ -63,11 +63,13 @@ public class ItemSave
     public string Name;
     public Vector3 Position;
     public Quaternion Rotation;
+    public Vector3 Scale;
 
-    public ItemSave(string name, Vector3 position, Quaternion rotation)
+    public ItemSave(string name, Vector3 position, Quaternion rotation, Vector3 scale)
     {
         Name = name;
         Position = position;
         Rotation = rotation;
+        Scale = scale;
     }
 }
