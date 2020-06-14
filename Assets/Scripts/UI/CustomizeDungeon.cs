@@ -60,7 +60,7 @@ public class CustomizeDungeon : MonoBehaviour
     public void CreateDungeonFromPreset(int preset)
     {
         GM.Instance.DungeonParameters = presets[preset].Clone();
-        GM.Instance.DungeonParameters.Seed = Int32.MaxValue;
+        GM.Instance.UseRandomSeed = true;
         CreateDungeon();
     }
 
@@ -86,18 +86,7 @@ public class CustomizeDungeon : MonoBehaviour
             Seed = HashSeed(seed.text),
         };
 
-        if (seed.text == "")
-        {
-            // No seed defined by the user, so prompt the Game Manager to choose
-            // a random one. The max int value does this.
-            GM.Instance.DungeonParameters.Seed = Int32.MaxValue;
-        }
-        else
-        {
-            GM.Instance.DungeonParameters.Seed = HashSeed(seed.text);
-            if (GM.Instance.DungeonParameters.Seed == Int32.MaxValue)
-                --GM.Instance.DungeonParameters.Seed;
-        }
+        GM.Instance.UseRandomSeed = seed.text == "";
     }
 
     public void LoadSlidersFromPreset(int index)

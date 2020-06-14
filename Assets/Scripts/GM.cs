@@ -33,6 +33,7 @@ public class GM : MonoBehaviour
     public GameObject UnreachableBlocksParent { get; private set; }
 
     public bool MapActive;
+    public bool UseRandomSeed;
 
     private InstantiateDungeon instantiateDungeon;
 
@@ -110,8 +111,7 @@ public class GM : MonoBehaviour
 
     private void InitializeNewGame()
     {
-        // Int32.MaxValue is reserved to mean "choose a random seed"
-        if (DungeonParameters.Seed == Int32.MaxValue)
+        if (UseRandomSeed)
             DungeonParameters.Seed = UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue);
 
         InitializeGameCommon();

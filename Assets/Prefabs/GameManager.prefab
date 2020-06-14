@@ -54,7 +54,7 @@ MonoBehaviour:
     MinRoomWidth: 3
     MaxRoomHeight: 6
     MaxRoomWidth: 6
-    TargetRoomToDungeonRatio: 0.9
+    TargetRoomToDungeonRatio: 0.5
     DoorsToWallRatio: 0.1
     CorridorTurnChance: 0.2
   SaveGame:
@@ -78,6 +78,7 @@ MonoBehaviour:
   BlockScale: 2
   GameState: 0
   MapActive: 0
+  UseRandomSeed: 1
 --- !u!114 &7128764168518751104
 MonoBehaviour:
   m_ObjectHideFlags: 0
