@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -6954180923910474240}
   - component: {fileID: 1467047552326038176}
   - component: {fileID: 8631553052826696623}
+  - component: {fileID: 6787095277980260419}
   m_Layer: 0
   m_Name: FPSController
   m_TagString: Untagged
@@ -432,6 +433,21 @@ MonoBehaviour:
     type: 3}
   zoomSensitivity: 0.5
   dragSensitivity: 0.08
+--- !u!114 &6787095277980260419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1398dc910af54b489f092f50cfd82a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugCanvas: {fileID: 9005094401857385258, guid: 1811919c44fb13c4f845672c77782882,
+    type: 3}
+  dungeonParameterValues: {fileID: 0}
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0

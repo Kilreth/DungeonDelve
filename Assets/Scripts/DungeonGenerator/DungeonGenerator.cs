@@ -80,6 +80,7 @@ namespace DungeonGeneratorNS
                 unconnectedRooms = Dungeon.FindUnconnectedRooms(Dungeon.GetRandomRoom());
                 ++tries;
             }
+            int a = 0;
         }
 
         /// <summary>

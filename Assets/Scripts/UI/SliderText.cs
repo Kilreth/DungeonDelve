@@ -21,6 +21,11 @@ public class SliderText : MonoBehaviour
         if (slider.wholeNumbers)
             text.text = slider.value.ToString();
         else
-            text.text = String.Format("{0:P0}", slider.value).Replace(" %", "%");
+            text.text = FormatPercent(slider.value);
+    }
+
+    public static string FormatPercent(double d)
+    {
+        return string.Format("{0:P0}", d).Replace(" %", "%");
     }
 }

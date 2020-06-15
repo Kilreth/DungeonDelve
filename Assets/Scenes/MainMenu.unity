@@ -2875,7 +2875,7 @@ MonoBehaviour:
     CorridorTurnChance: 0.2
   - Rows: 40
     Cols: 60
-    TotalKeys: 12
+    TotalKeys: 13
     Seed: 0
     MinRoomHeight: 3
     MinRoomWidth: 3
