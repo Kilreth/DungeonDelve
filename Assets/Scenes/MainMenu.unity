@@ -175,7 +175,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -476,7 +476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &104706786
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1227,8 +1227,8 @@ RectTransform:
   - {fileID: 1600263081}
   - {fileID: 1670322551}
   - {fileID: 514977620}
-  - {fileID: 1527536908}
   - {fileID: 765907151}
+  - {fileID: 1527536908}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2964,7 +2964,7 @@ RectTransform:
   - {fileID: 1542110229}
   - {fileID: 899106293}
   m_Father: {fileID: 387444922}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3303,7 +3303,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -3803,7 +3803,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 73ca883ff6d0df14aa830c90bf0aecb3, type: 3}
-    m_FontSize: 60
+    m_FontSize: 58
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -3892,10 +3892,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 73ca883ff6d0df14aa830c90bf0aecb3, type: 3}
-    m_FontSize: 60
+    m_FontSize: 58
     m_FontStyle: 2
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 5
     m_MaxSize: 60
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -4428,7 +4428,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
@@ -4626,7 +4626,7 @@ PrefabInstance:
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2391482991645089004, guid: cccb86318ab01334c80d2523441b23aa,
         type: 3}
