@@ -12,7 +12,8 @@ public class PickUpKey : MonoBehaviour
 
     public void InitializeKeyCounter(int keysCollected = 0)
     {
-        keyText = GM.Instance.Canvas.transform.Find("KeyCount").gameObject.GetComponent<Text>();
+        keyText = GM.Instance.Canvas.transform.Find("KeySprite"
+                        ).gameObject.transform.Find("KeyCount").GetComponent<Text>();
         winScreen = GM.Instance.Canvas.transform.Find("WinScreen").gameObject;
         winScreen.SetActive(false);
 
