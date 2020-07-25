@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using TMPro;
 
 public class PickUpKey : MonoBehaviour
 {
     public int KeysCollected { get; private set; }
     private int totalKeys;
-    private Text keyText;
+    private TextMeshProUGUI keyText;
     private GameObject winScreen;
 
     public void InitializeKeyCounter(int keysCollected = 0)
     {
         keyText = GM.Instance.Canvas.transform.Find("KeySprite"
-                        ).gameObject.transform.Find("KeyCount").GetComponent<Text>();
+                        ).gameObject.transform.Find("KeyCount").GetComponent<TextMeshProUGUI>();
         winScreen = GM.Instance.Canvas.transform.Find("WinScreen").gameObject;
         winScreen.SetActive(false);
 

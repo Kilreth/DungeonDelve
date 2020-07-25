@@ -85,8 +85,8 @@ MonoBehaviour:
 
     20%'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce38966015b537149beba6de29c22afe, type: 2}
-  m_sharedMaterial: {fileID: 1444099520734325220, guid: ce38966015b537149beba6de29c22afe,
+  m_fontAsset: {fileID: 11400000, guid: 20aaaca6bcfb7b54bada8bb9c27e6633, type: 2}
+  m_sharedMaterial: {fileID: 4386973661723680775, guid: 20aaaca6bcfb7b54bada8bb9c27e6633,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -361,8 +361,8 @@ MonoBehaviour:
 
     Corridor Turn Chance'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce38966015b537149beba6de29c22afe, type: 2}
-  m_sharedMaterial: {fileID: 1444099520734325220, guid: ce38966015b537149beba6de29c22afe,
+  m_fontAsset: {fileID: 11400000, guid: 20aaaca6bcfb7b54bada8bb9c27e6633, type: 2}
+  m_sharedMaterial: {fileID: 4386973661723680775, guid: 20aaaca6bcfb7b54bada8bb9c27e6633,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
