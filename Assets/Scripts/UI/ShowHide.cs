@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Assign this to the Canvas, and call SetState() for every menu transition.
@@ -9,9 +11,15 @@ public class ShowHide : MonoBehaviour
 {
     [SerializeField]
     private string defaultState;
+    [SerializeField]
+    private string[] matchWidthStates;
+    [SerializeField]
+    private string[] matchHeightStates;
+    private CanvasScaler canvasScaler;
 
     void Awake()
     {
+        canvasScaler = transform.GetComponent<CanvasScaler>();
         SetState(defaultState);
     }
 
@@ -29,5 +37,10 @@ public class ShowHide : MonoBehaviour
                 showHideHelper.ShowOrHide(state);
             }
         }
+
+        if (matchHeightStates.Contains(state))
+            canvasScaler.matchWidthOrHeight = 1;
+        else if (matchWidthStates.Contains(state))
+            canvasScaler.matchWidthOrHeight = 0;
     }
 }

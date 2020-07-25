@@ -7,9 +7,14 @@ public class ScaleTextOnRatio : MonoBehaviour
 {
     public TextMeshProUGUI TextPro;
     public Text Text;
-    public float BaseRatio;
+    public float BaseRatio = 1.777f;
     public float DefaultSize;
     public float Power = 1;
+
+    void Awake()
+    {
+        Update();
+    }
 
     // Update is called once per frame
     void Update()
