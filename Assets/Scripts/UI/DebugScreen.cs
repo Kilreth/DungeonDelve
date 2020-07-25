@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class DebugScreen : MonoBehaviour
 {
     [SerializeField]
     private Canvas debugCanvas;
-    private Text dungeonParameterValues;
+    private TextMeshProUGUI dungeonParameterValues;
 
     void Awake()
     {
         debugCanvas = Instantiate(debugCanvas);
-        dungeonParameterValues = debugCanvas.GetComponentsInChildren<Text>().First(
+        dungeonParameterValues = debugCanvas.GetComponentsInChildren<TextMeshProUGUI>().First(
             x => x.name == "ParameterValues");
         debugCanvas.enabled = false;
     }

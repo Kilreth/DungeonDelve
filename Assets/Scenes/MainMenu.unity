@@ -455,7 +455,7 @@ MonoBehaviour:
     spaceCount: 46
     wordCount: 32
     linkCount: 0
-    lineCount: 5
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -3454,8 +3454,8 @@ MonoBehaviour:
     TargetRoomToDungeonRatio: 0.2
     DoorsToWallRatio: 0.4
     CorridorTurnChance: 1
-  - Rows: 60
-    Cols: 80
+  - Rows: 30
+    Cols: 40
     TotalKeys: 16
     Seed: 0
     MinRoomHeight: 1
@@ -6799,7 +6799,7 @@ PrefabInstance:
     - target: {fileID: 3871793430635873137, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
       propertyPath: m_Text
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45489b6e5a9c6c54c91eff3a7628ed12, type: 3}
