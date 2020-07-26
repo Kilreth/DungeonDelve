@@ -14,6 +14,7 @@ public class SaveGame
     public Vector3 PlayerPosition;
     public Quaternion PlayerRotation;
     public int KeysCollected;
+    public float TimeElapsed;
 
     // Store dungeon-generated items (start portal, keys, keypads, etc.)
     // in one gameobject. Store breadcrumbs in a separate gameobject.
@@ -28,13 +29,15 @@ public class SaveGame
         { "BreadcrumbBlue(Clone)" , "b" },
     };
 
-    public SaveGame(DungeonParameters dungeonParameters, GameObject player, int keysCollected,
-                    GameObject itemsParent, GameObject breadcrumbsParent)
+    public SaveGame(DungeonParameters dungeonParameters, GameObject player,
+                    GameObject itemsParent, GameObject breadcrumbsParent,
+                    int keysCollected, float timeElapsed)
     {
         DungeonParameters = dungeonParameters;
         PlayerPosition = player.transform.position;
         PlayerRotation = player.transform.rotation;
         KeysCollected = keysCollected;
+        TimeElapsed = timeElapsed;
         Items = new List<ItemSave>();
         Breadcrumbs = new List<ItemSave>();
         foreach (Transform child in itemsParent.transform)

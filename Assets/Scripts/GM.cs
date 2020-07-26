@@ -23,6 +23,9 @@ public class GM : MonoBehaviour
     public GameState GameState;
     public System.Random Random { get; private set; }
 
+    private float timeElapsed;
+    private float timeAtDungeonLoad;
+
     [HideInInspector]
     public Canvas Canvas { get; private set; }
     [HideInInspector]
@@ -106,6 +109,7 @@ public class GM : MonoBehaviour
         instantiateDungeon.CreateDungeon();
         BlocksParent = instantiateDungeon.BlocksParent;
         UnreachableBlocksParent = instantiateDungeon.UnreachableBlocksParent;
+        timeAtDungeonLoad = Time.time;
         MapActive = false;
     }
 
@@ -118,6 +122,7 @@ public class GM : MonoBehaviour
         instantiateDungeon.InstantiateNewItems();
         Player = instantiateDungeon.InstantiateNewPlayer();
         Player.GetComponent<PickUpKey>().InitializeKeyCounter();
+        timeElapsed = 0;
     }
 
     private void InitializeLoadedGame()
@@ -127,6 +132,7 @@ public class GM : MonoBehaviour
         Player = instantiateDungeon.InstantiateLoadedPlayer(SaveGame.PlayerPosition, SaveGame.PlayerRotation);
         Player.GetComponent<Breadcrumbs>().LoadBreadcrumbs(SaveGame.Breadcrumbs);
         Player.GetComponent<PickUpKey>().InitializeKeyCounter(SaveGame.KeysCollected);
+        timeElapsed = SaveGame.TimeElapsed;
     }
 
     public void SaveGameToFile()
@@ -135,7 +141,12 @@ public class GM : MonoBehaviour
         GameObject itemsParent = instantiateDungeon.ItemsParent;
         GameObject breadcrumbsParent = Player.GetComponent<Breadcrumbs>().BreadcrumbsParent;
         SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player,
-                keysCollected, itemsParent, breadcrumbsParent));
+            itemsParent, breadcrumbsParent, keysCollected, GetTimeElapsed()));
+    }
+
+    public float GetTimeElapsed()
+    {
+        return timeElapsed + Time.time - timeAtDungeonLoad;
     }
 }
 
