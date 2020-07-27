@@ -34,6 +34,8 @@ public class GM : MonoBehaviour
     public GameObject BlocksParent { get; private set; }
     [HideInInspector]
     public GameObject UnreachableBlocksParent { get; private set; }
+    [HideInInspector]
+    public GameObject ItemsParent { get; private set; }
 
     public bool MapActive;
     public bool UseRandomSeed;
@@ -120,6 +122,7 @@ public class GM : MonoBehaviour
 
         InitializeGameCommon();
         instantiateDungeon.InstantiateNewItems();
+        ItemsParent = instantiateDungeon.ItemsParent;
         Player = instantiateDungeon.InstantiateNewPlayer();
         Player.GetComponent<PickUpKey>().InitializeKeyCounter();
         timeElapsed = 0;
@@ -129,6 +132,7 @@ public class GM : MonoBehaviour
     {
         InitializeGameCommon();
         instantiateDungeon.InstantiateLoadedItems(SaveGame.Items);
+        ItemsParent = instantiateDungeon.ItemsParent;
         Player = instantiateDungeon.InstantiateLoadedPlayer(SaveGame.PlayerPosition, SaveGame.PlayerRotation);
         Player.GetComponent<Breadcrumbs>().LoadBreadcrumbs(SaveGame.Breadcrumbs);
         Player.GetComponent<PickUpKey>().InitializeKeyCounter(SaveGame.KeysCollected);
@@ -138,10 +142,9 @@ public class GM : MonoBehaviour
     public void SaveGameToFile()
     {
         int keysCollected = Player.GetComponent<PickUpKey>().KeysCollected;
-        GameObject itemsParent = instantiateDungeon.ItemsParent;
         GameObject breadcrumbsParent = Player.GetComponent<Breadcrumbs>().BreadcrumbsParent;
         SaveGameSystem.SaveGameToFile(new SaveGame(DungeonParameters, Player,
-            itemsParent, breadcrumbsParent, keysCollected, GetTimeElapsed()));
+            ItemsParent, breadcrumbsParent, keysCollected, GetTimeElapsed()));
     }
 
     public float GetTimeElapsed()

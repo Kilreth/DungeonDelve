@@ -405,6 +405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac6d99dfab37a44d804c07e4a4cc590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foundKeyPrefab: {fileID: 8111732387634126881, guid: c11a03180920c5748b0909e6c9e89deb,
+    type: 3}
 --- !u!114 &1467047552326038176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +449,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugCanvas: {fileID: 9005094401857385258, guid: 1811919c44fb13c4f845672c77782882,
     type: 3}
-  dungeonParameterValues: {fileID: 0}
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0

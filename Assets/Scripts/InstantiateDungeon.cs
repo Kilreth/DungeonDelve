@@ -16,6 +16,7 @@ public class InstantiateDungeon : MonoBehaviour
         public GameObject portal;
         public GameObject key;
         public GameObject keyPad;
+        public GameObject foundKey;
     }
     [SerializeField]
     private PrefabsSelect prefabs = new PrefabsSelect();
@@ -60,6 +61,7 @@ public class InstantiateDungeon : MonoBehaviour
         {
             { "Key",         prefabs.key    },
             { "KeyPad",      prefabs.keyPad },
+            { "FoundKey",    prefabs.foundKey },
             { "Portal",      prefabs.portal },
             { "StartPortal", prefabs.portal },
         };

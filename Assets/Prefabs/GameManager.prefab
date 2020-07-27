@@ -73,6 +73,7 @@ MonoBehaviour:
     PlayerPosition: {x: 0, y: 0, z: 0}
     PlayerRotation: {x: 0, y: 0, z: 0, w: 0}
     KeysCollected: 0
+    TimeElapsed: 0
     Items: []
     Breadcrumbs: []
   BlockScale: 2
@@ -101,6 +102,8 @@ MonoBehaviour:
       type: 3}
     key: {fileID: 3800981192170324373, guid: f2c0468bf6ecfdb4fb9878f80df731bc, type: 3}
     keyPad: {fileID: 3076276867487872804, guid: 94933930e671c0f4c9b416a50d279bc0,
+      type: 3}
+    foundKey: {fileID: 8111732387634126881, guid: c11a03180920c5748b0909e6c9e89deb,
       type: 3}
 --- !u!114 &7128764168518751111
 MonoBehaviour:

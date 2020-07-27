@@ -9,6 +9,8 @@ public class PickUpKey : MonoBehaviour
     private TextMeshProUGUI keyText;
     private GameObject winScreen;
     private TextMeshProUGUI timeElapsedText;
+    [SerializeField]
+    private GameObject foundKeyPrefab;
 
     public void InitializeKeyCounter(int keysCollected = 0)
     {
@@ -28,6 +30,12 @@ public class PickUpKey : MonoBehaviour
     {
         if (other.gameObject.tag == "Key")
         {
+            Instantiate(foundKeyPrefab,
+                        new Vector3(other.transform.position.x,
+                                    foundKeyPrefab.transform.position.y,
+                                    other.transform.position.z),
+                        foundKeyPrefab.transform.rotation,
+                        GM.Instance.ItemsParent.transform);
             Destroy(other.gameObject);
             ++KeysCollected;
             RefreshKeyUI();
