@@ -89,6 +89,7 @@ public class GM : MonoBehaviour
             catch (Exception)
             {
                 SceneManager.LoadScene("MainMenu");
+                GameState = GameState.MainMenu;
             }
         }
         else
@@ -96,6 +97,8 @@ public class GM : MonoBehaviour
             // Free the mouse cursor
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
+            GameState = GameState.MainMenu;
         }
     }
 
@@ -154,7 +157,9 @@ public class GM : MonoBehaviour
 }
 
 /// <summary>
-/// GameState "Won" prevents the player from moving and from dropping breadcrumbs.
+/// GameState "Won" prevents the player from moving or dropping breadcrumbs.
 /// It also makes the cursor visible.
+///
+/// GameState "Inactive" means we are not in a dungeon.
 /// </summary>
-public enum GameState { Active, Won }
+public enum GameState { Active, Won, MainMenu }

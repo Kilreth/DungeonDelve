@@ -42,6 +42,12 @@ public class PickUpKey : MonoBehaviour
             if (KeysCollected >= totalKeys)
             {
                 ShowWinScreen();
+                Jukebox.Instance.DuckBGM();
+                Jukebox.Instance.PlaySFX("Victory");
+            }
+            else
+            {
+                Jukebox.Instance.PlaySFX("Pick up key", 0.4f);
             }
         }
     }

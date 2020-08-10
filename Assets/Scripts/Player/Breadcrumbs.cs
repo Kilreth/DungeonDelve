@@ -122,6 +122,7 @@ public class Breadcrumbs : MonoBehaviour
         {
             Destroy(collisions[i].transform.gameObject);
         }
+        Jukebox.Instance.PlaySFX("Pick up breadcrumbs");
     }
 
     private void DropBreadcrumb()
@@ -133,5 +134,6 @@ public class Breadcrumbs : MonoBehaviour
         breadcrumb.GetComponent<Rigidbody>().AddForce(
             player.transform.forward * GM.Instance.BlockScale * throwStrength, ForceMode.Impulse);
         Physics.IgnoreCollision(playerCollider, breadcrumb.GetComponent<Collider>());
+        Jukebox.Instance.PlaySFX("Drop breadcrumb", UnityEngine.Random.Range(0.6f, 1.2f));
     }
 }
