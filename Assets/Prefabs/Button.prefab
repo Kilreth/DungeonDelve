@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6075692080031638758}
   - component: {fileID: 7188144292271712011}
   - component: {fileID: 7104857291595827505}
+  - component: {fileID: 7648346966354990316}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -60,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7921569, g: 0.38431373, b: 0.85882354, a: 1}
+  m_Color: {r: 0.7921569, g: 0.38431373, b: 0.85882354, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -129,6 +130,21 @@ MonoBehaviour:
           m_StringArgument: DungeonSelect
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7648346966354990316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2343302828959789301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa698c970215d6d40974347fe53bf6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalColor: {r: 0.66145056, g: 0.1511659, b: 0.745283, a: 1}
+  highlightedColor: {r: 0.81450635, g: 0.3722855, b: 0.8867924, a: 1}
+  pressedColor: {r: 0.4567339, g: 0, b: 0.49056602, a: 1}
 --- !u!1 &3285660571912772454
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,22 +204,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce38966015b537149beba6de29c22afe, type: 2}
-  m_sharedMaterial: {fileID: 1444099520734325220, guid: ce38966015b537149beba6de29c22afe,
+  m_fontAsset: {fileID: 11400000, guid: e2d82d1145458c745819bc3ab3334368, type: 2}
+  m_sharedMaterial: {fileID: -3137449834140106638, guid: e2d82d1145458c745819bc3ab3334368,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4291897529
+  m_fontColor: {r: 0.727072, g: 0.15873085, b: 0.8207547, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -221,13 +237,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 32.25
+  m_fontSize: 30.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0

@@ -10,6 +10,18 @@ public class SliderText : MonoBehaviour
     [SerializeField]
     private Text text;
 
+    public void UpdateBGMVolume()
+    {
+        UpdateText();
+        Jukebox.Instance.AudioSourceBGM.volume = slider.value;
+    }
+
+    public void UpdateSFXVolume()
+    {
+        UpdateText();
+        Jukebox.Instance.AudioSourceSFX.volume = slider.value;
+    }
+
     public void UpdateKeysText()
     {
         int scaled = CustomizeDungeon.KeysSliderToRealValue((int)slider.value, (int)slider.maxValue);

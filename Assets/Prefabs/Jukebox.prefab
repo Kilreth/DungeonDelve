@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998bfc17505870143be2c716196a7ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSourceBGM: {fileID: 5256363730359541102}
-  audioSourceSFX: {fileID: 3113926298692259645}
+  AudioSourceBGM: {fileID: 5256363730359541102}
+  AudioSourceSFX: {fileID: 3113926298692259645}
   soundClips:
   - {fileID: 8300000, guid: 6d80d15f9703b0c4c9cbab74a5d111bd, type: 3}
   - {fileID: 8300000, guid: 40d338e674febd4449cdea25754ce1b8, type: 3}

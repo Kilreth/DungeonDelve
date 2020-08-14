@@ -7,10 +7,8 @@ public class Jukebox : MonoBehaviour
 {
     public static Jukebox Instance;
 
-    [SerializeField]
-    private AudioSource audioSourceBGM;
-    [SerializeField]
-    private AudioSource audioSourceSFX;
+    public AudioSource AudioSourceBGM;
+    public AudioSource AudioSourceSFX;
 
     [SerializeField]
     private AudioClip[] soundClips = null;
@@ -34,7 +32,7 @@ public class Jukebox : MonoBehaviour
 
     private void InitializeJukebox()
     {
-        audioSourceBGM.loop = true;
+        AudioSourceBGM.loop = true;
         soundNameToClip = new Dictionary<string, AudioClip>();
         for (int i = 0; i < soundNames.Length; ++i)
             soundNameToClip[soundNames[i]] = soundClips[i];
@@ -52,23 +50,23 @@ public class Jukebox : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        audioSourceBGM.Stop();
-        audioSourceSFX.Stop();
+        AudioSourceBGM.Stop();
+        AudioSourceSFX.Stop();
         if (scene.name == "MainMenu")
         {
-            audioSourceBGM.clip = soundNameToClip["Title theme"];
-            audioSourceBGM.Play();
+            AudioSourceBGM.clip = soundNameToClip["Title theme"];
+            AudioSourceBGM.Play();
         }
         else if (scene.name == "Dungeon")
         {
-            audioSourceBGM.clip = soundNameToClip["Dungeon theme"];
-            audioSourceBGM.Play();
+            AudioSourceBGM.clip = soundNameToClip["Dungeon theme"];
+            AudioSourceBGM.Play();
         }
     }
 
     public void PlaySFX(string name, float volumeScale=1)
     {
-        audioSourceSFX.PlayOneShot(soundNameToClip[name], volumeScale);
+        AudioSourceSFX.PlayOneShot(soundNameToClip[name], volumeScale);
     }
 
     // If multiple sound names are given, play one at random.
@@ -91,13 +89,13 @@ public class Jukebox : MonoBehaviour
         {
             time = Time.time - startTime;
             if (time <= 0.5f)
-                audioSourceBGM.volume = 1 - time * 2;
+                AudioSourceBGM.volume = 1 - time * 2;
             else if (time <= 3)
-                audioSourceBGM.volume = 0;
+                AudioSourceBGM.volume = 0;
             else
-                audioSourceBGM.volume = (time - 3) / 3;
+                AudioSourceBGM.volume = (time - 3) / 3;
             yield return null;
         }
-        audioSourceBGM.volume = 1;
+        AudioSourceBGM.volume = 1;
     }
 }
