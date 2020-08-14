@@ -353,7 +353,7 @@ MonoBehaviour:
 
     Min Room Width
 
-    Max Room Height
+    Max Room Width
 
     Room to Dungeon Ratio
 
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6368381429036518952}
-    characterCount: 147
+    characterCount: 146
     spriteCount: 0
     spaceCount: 26
     wordCount: 27
