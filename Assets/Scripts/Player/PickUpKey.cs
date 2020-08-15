@@ -47,7 +47,7 @@ public class PickUpKey : MonoBehaviour
             }
             else
             {
-                Jukebox.Instance.PlaySFX("Pick up key", 0.4f);
+                Jukebox.Instance.PlaySFX("Pick up key");
             }
         }
     }

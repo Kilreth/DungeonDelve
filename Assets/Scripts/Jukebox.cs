@@ -10,6 +10,9 @@ public class Jukebox : MonoBehaviour
     public AudioSource AudioSourceBGM;
     public AudioSource AudioSourceSFX;
 
+    public float BGMVolume;
+    public float SFXVolume;
+
     [SerializeField]
     private AudioClip[] soundClips = null;
     [SerializeField]
@@ -36,6 +39,9 @@ public class Jukebox : MonoBehaviour
         soundNameToClip = new Dictionary<string, AudioClip>();
         for (int i = 0; i < soundNames.Length; ++i)
             soundNameToClip[soundNames[i]] = soundClips[i];
+
+        AudioSourceBGM.volume = BGMVolume = PlayerPrefs.GetFloat("BGM volume", 1);
+        AudioSourceSFX.volume = SFXVolume = PlayerPrefs.GetFloat("SFX volume", 1);
     }
 
     void OnEnable()
@@ -89,13 +95,13 @@ public class Jukebox : MonoBehaviour
         {
             time = Time.time - startTime;
             if (time <= 0.5f)
-                AudioSourceBGM.volume = 1 - time * 2;
+                AudioSourceBGM.volume = BGMVolume * (1 - time * 2);
             else if (time <= 3)
                 AudioSourceBGM.volume = 0;
             else
-                AudioSourceBGM.volume = (time - 3) / 3;
+                AudioSourceBGM.volume = BGMVolume * (time - 3) / 3;
             yield return null;
         }
-        AudioSourceBGM.volume = 1;
+        AudioSourceBGM.volume = BGMVolume;
     }
 }
