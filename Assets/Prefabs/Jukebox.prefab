@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioSourceBGM: {fileID: 5256363730359541102}
   AudioSourceSFX: {fileID: 3113926298692259645}
+  BGMVolume: 0
+  SFXVolume: 0
   soundClips:
   - {fileID: 8300000, guid: 6d80d15f9703b0c4c9cbab74a5d111bd, type: 3}
   - {fileID: 8300000, guid: 40d338e674febd4449cdea25754ce1b8, type: 3}
@@ -54,6 +56,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97b05accea74a694c96d26f00dae1791, type: 3}
   - {fileID: 8300000, guid: eadad533c8a08d9409f7dc5b1f3876ca, type: 3}
   - {fileID: 8300000, guid: e99a051c09446eb489988890782708c9, type: 3}
+  - {fileID: 8300000, guid: ed05fef5205441c438e073a7b9dd871c, type: 3}
   soundNames:
   - Title theme
   - Dungeon theme
@@ -61,6 +64,7 @@ MonoBehaviour:
   - Pick up key
   - Drop breadcrumb
   - Pick up breadcrumbs
+  - UI highlight
 --- !u!82 &5256363730359541102
 AudioSource:
   m_ObjectHideFlags: 0

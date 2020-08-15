@@ -29,9 +29,9 @@ public class ButtonHighlight : MonoBehaviour,
     void OnEnable()
     {
         if (button.interactable)
-        {
             text.color = normalColor;
-        }
+        else
+            text.color = pressedColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -39,30 +39,25 @@ public class ButtonHighlight : MonoBehaviour,
         if (button.interactable)
         {
             text.color = highlightedColor;
+            Jukebox.Instance.PlaySFX("UI highlight");
         }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (button.interactable)
-        {
             text.color = pressedColor;
-        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         if (button.interactable)
-        {
             text.color = highlightedColor;
-        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (button.interactable)
-        {
             text.color = normalColor;
-        }
     }
 }
