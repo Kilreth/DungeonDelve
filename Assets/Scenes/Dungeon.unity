@@ -1336,6 +1336,23 @@ PrefabInstance:
       propertyPath: m_text
       value: Finish
       objectReference: {fileID: 0}
+    - target: {fileID: 1890569501375861174, guid: 755ce7b00972c0347b1099d3cef1d700,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 20aaaca6bcfb7b54bada8bb9c27e6633,
+        type: 2}
+    - target: {fileID: 1890569501375861174, guid: 755ce7b00972c0347b1099d3cef1d700,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4386973661723680775, guid: 20aaaca6bcfb7b54bada8bb9c27e6633,
+        type: 2}
+    - target: {fileID: 1890569501375861174, guid: 755ce7b00972c0347b1099d3cef1d700,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 755ce7b00972c0347b1099d3cef1d700, type: 3}
 --- !u!224 &726155501 stripped

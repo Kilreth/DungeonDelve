@@ -3549,7 +3549,7 @@ PrefabInstance:
     - target: {fileID: 3871793430635873137, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
       propertyPath: m_Text
-      value: 10%
+      value: 15%
       objectReference: {fileID: 0}
     - target: {fileID: 3871793430635873138, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
         type: 3}
@@ -4001,7 +4001,7 @@ MonoBehaviour:
     MaxRoomHeight: 6
     MaxRoomWidth: 6
     TargetRoomToDungeonRatio: 0.5
-    DoorsToWallRatio: 0.1
+    DoorsToWallRatio: 0.15
     CorridorTurnChance: 0.2
   - Rows: 60
     Cols: 80
@@ -4012,7 +4012,7 @@ MonoBehaviour:
     MaxRoomHeight: 9
     MaxRoomWidth: 9
     TargetRoomToDungeonRatio: 0.5
-    DoorsToWallRatio: 0.1
+    DoorsToWallRatio: 0.15
     CorridorTurnChance: 0.2
   - Rows: 20
     Cols: 100
