@@ -55,7 +55,7 @@ MonoBehaviour:
     MaxRoomHeight: 6
     MaxRoomWidth: 6
     TargetRoomToDungeonRatio: 0.5
-    DoorsToWallRatio: 0.1
+    DoorsToWallRatio: 0.15
     CorridorTurnChance: 0.2
   SaveGame:
     DungeonParameters:

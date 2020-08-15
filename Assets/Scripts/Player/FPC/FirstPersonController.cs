@@ -54,6 +54,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
+            m_AudioSource.volume = Jukebox.Instance.SFXVolume / 2;
 			m_MouseLook.Init(transform , m_Camera.transform);
         }
 

@@ -10,6 +10,7 @@ public class Jukebox : MonoBehaviour
     public AudioSource AudioSourceBGM;
     public AudioSource AudioSourceSFX;
 
+    // The actual volume setting, independent of temporary Coroutine changes
     public float BGMVolume;
     public float SFXVolume;
 
@@ -62,6 +63,7 @@ public class Jukebox : MonoBehaviour
         {
             AudioSourceBGM.clip = soundNameToClip["Title theme"];
             AudioSourceBGM.Play();
+            MuteSFX(0.2f);
         }
         else if (scene.name == "Dungeon")
         {
@@ -87,6 +89,10 @@ public class Jukebox : MonoBehaviour
         StartCoroutine(DuckBGMImpl());
     }
 
+    /// <summary>
+    /// Implementation for ducking BGM when the win fanfare plays.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DuckBGMImpl()
     {
         float startTime = Time.time;
@@ -103,5 +109,22 @@ public class Jukebox : MonoBehaviour
             yield return null;
         }
         AudioSourceBGM.volume = BGMVolume;
+    }
+
+    /// <summary>
+    /// Simple implementation only used on entering the Main Menu scene.
+    /// Mutes any highlight sounds from buttons already under the cursor.
+    /// </summary>
+    public void MuteSFX(float seconds)
+    {
+        StartCoroutine(MuteSFXImpl(seconds));
+    }
+
+    private IEnumerator MuteSFXImpl(float seconds)
+    {
+        AudioSourceSFX.volume = 0;
+        yield return new WaitForSeconds(seconds);
+        AudioSourceSFX.Stop();
+        AudioSourceSFX.volume = SFXVolume;
     }
 }
