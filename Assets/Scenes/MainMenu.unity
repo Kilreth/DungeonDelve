@@ -3580,6 +3580,7 @@ GameObject:
   - component: {fileID: 747506464}
   - component: {fileID: 747506466}
   - component: {fileID: 747506465}
+  - component: {fileID: 747506467}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3628,13 +3629,12 @@ MonoBehaviour:
 
     <b>Jonathan Brown</b> aka. <b>Kilreth</b>
 
+
     Made in Unity 2019.2.6f1
 
-    Music composed in FL Studio 20
+    Project repository available on <#7f7fe5><u><link="https://github.com/Kilreth/DungeonDelve">GitHub</link></u></color>
 
-    Project source at github.com/Kilreth/DungeonDelve
-
-    Music download at soundcloud.com/Kilreth/albums'
+    Music download available on <#7f7fe5><u><link="https://soundcloud.com/Kilreth/albums">SoundCloud</link></u></color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce38966015b537149beba6de29c22afe, type: 2}
   m_sharedMaterial: {fileID: 1444099520734325220, guid: ce38966015b537149beba6de29c22afe,
@@ -3704,11 +3704,11 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 747506465}
-    characterCount: 230
+    characterCount: 178
     spriteCount: 0
-    spaceCount: 29
-    wordCount: 37
-    linkCount: 0
+    spaceCount: 25
+    wordCount: 27
+    linkCount: 2
     lineCount: 6
     pageCount: 1
     materialCount: 1
@@ -3735,6 +3735,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747506463}
   m_CullTransparentMesh: 0
+--- !u!114 &747506467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747506463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6d86a3be1c986498e05bb45b62cd75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &752339303
 PrefabInstance:
   m_ObjectHideFlags: 0

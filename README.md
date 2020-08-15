@@ -16,8 +16,7 @@ Will you see your way through the entire dungeon, finding every key needed to le
 
 Programming, music, sounds, art, and design by Jonathan Brown aka. Kilreth<br>
 Made in Unity 2019.2.6f1<br>
-Music composed in FL Studio 20<br>
-Music available for download at soundcloud.com/Kilreth/albums<br>
+Music download available at https://soundcloud.com/Kilreth/albums<br>
 <br>
 ![Alt text](Images/MainMenu.png?raw=true)
 ![Alt text](Images/CustomizeDungeon.png?raw=true)
