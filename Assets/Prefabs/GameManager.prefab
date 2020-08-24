@@ -134,4 +134,12 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e838f1e8d45fb834e80ab1eb634f9053, type: 3}
   - {fileID: 2800000, guid: b6d5610672acb784aa46755e33266b24, type: 3}
   - {fileID: 2800000, guid: e9abfca5234a1ae49bdc9515ef8b5d0b, type: 3}
-  WallMaterial: {fileID: 2100000, guid: 08cdbf92f36591d449115fd72684e25f, type: 2}
+  wallMaterial: {fileID: 2100000, guid: 08cdbf92f36591d449115fd72684e25f, type: 2}
+  materialsWithNormalMaps:
+  - {fileID: 2100000, guid: 08cdbf92f36591d449115fd72684e25f, type: 2}
+  - {fileID: 2100000, guid: e899256fb743d5f44a20ee014984527a, type: 2}
+  - {fileID: 2100000, guid: d60414d9cf3a128448876a356f63d1fa, type: 2}
+  - {fileID: 2100000, guid: 52b367b4424bafd44821e0b9ec9be60c, type: 2}
+  - {fileID: 2100000, guid: 1ab8ca33985bd7c46b04bcbba6c6ecef, type: 2}
+  - {fileID: 2100000, guid: c497043dc82102e4c966bb19f55aa4db, type: 2}
+  - {fileID: 2100000, guid: 2f8e3c1b03ab2074cb7b7dd39b76f1bc, type: 2}

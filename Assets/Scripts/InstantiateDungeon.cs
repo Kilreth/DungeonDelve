@@ -34,12 +34,15 @@ public class InstantiateDungeon : MonoBehaviour
 
     private DungeonGenerator dungeonGenerator;
     private Dungeon dungeon;
+    private Textures textures;
 
     public void CreateDungeon()
     {
         dungeonGenerator = new DungeonGenerator(GM.Instance.DungeonParameters,
                                                 GM.Instance.Random);
         dungeon = dungeonGenerator.Dungeon;
+        textures = GetComponent<Textures>();
+        textures.ApplyGraphicsSettings();
         LoadPrefabs();
         InitializeMaterials();
         InstantiateFloor();
@@ -69,7 +72,7 @@ public class InstantiateDungeon : MonoBehaviour
 
     private void InitializeMaterials()
     {
-        wallMaterials = GetComponent<Textures>().PopulateWallMaterials(dungeon.Rooms.Count);
+        wallMaterials = textures.PopulateWallMaterials(dungeon.Rooms.Count);
     }
 
     public void InstantiateCeiling()

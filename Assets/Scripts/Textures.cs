@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using DungeonGeneratorNS;
 
 public class Textures : MonoBehaviour
 {
     [SerializeField]
     private Texture[] wallTextures = null;
 
-    public Material WallMaterial;
+    [SerializeField]
+    private Material wallMaterial;
+    [SerializeField]
+    private Material[] materialsWithNormalMaps = null;
 
     public static readonly byte MinColor = 18;
     public static readonly byte MaxColor = 58;
@@ -65,8 +65,23 @@ public class Textures : MonoBehaviour
         byte green = GetAndRemove(rgb, GM.Instance.Random.Next(0, 2));
         byte blue = rgb[0];
 
-        Material material = new Material(WallMaterial);
+        Material material = new Material(wallMaterial);
         material.color = new Color32(red, green, blue, 255);
+
         return material;
+    }
+
+    public void ApplyGraphicsSettings()
+    {
+        if (PlayerPrefs.GetInt("Graphics", 1) == 1)
+        {
+            foreach (Material m in materialsWithNormalMaps)
+                m.EnableKeyword("_NORMALMAP");
+        }
+        else
+        {
+            foreach (Material m in materialsWithNormalMaps)
+                m.DisableKeyword("_NORMALMAP");
+        }
     }
 }

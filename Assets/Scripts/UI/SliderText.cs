@@ -7,7 +7,7 @@ public class SliderText : MonoBehaviour
     [SerializeField]
     protected Slider slider;
     [SerializeField]
-    private Text text;
+    protected Text text;
 
     public void UpdateKeysText()
     {
