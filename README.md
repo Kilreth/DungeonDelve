@@ -5,9 +5,9 @@ Will you see your way through the entire dungeon, finding every key needed to le
 
 * WASD or arrow keys to move
 * Shift to sprint
-* Left-click to drop a breadcrumb
-    * (1, 2, 3 to choose color)
-* E to pick up breadcrumbs in front of you
+* Left-click or Space to drop a breadcrumb
+    * (1, 2, 3 or scroll wheel to change color)
+* Right-click or E to pick up breadcrumbs
 * Walk over a key to pick it up
 * *Collect all keys to clear the dungeon!*
 <!-- -->

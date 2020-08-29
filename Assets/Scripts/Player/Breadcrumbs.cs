@@ -67,23 +67,43 @@ public class Breadcrumbs : MonoBehaviour
         if (GM.Instance.GameState != GameState.Active || GM.Instance.MapActive)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
         {
             DropBreadcrumb();
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse1))
         {
             PickUpBreadcrumbs();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            if (currentBreadcrumb == blueBreadcrumb)
+                SelectBreadcrumb(greenBreadcrumb, UIGreen);
+            else if (currentBreadcrumb == redBreadcrumb)
+                SelectBreadcrumb(blueBreadcrumb, UIBlue);
+            else if (currentBreadcrumb == greenBreadcrumb)
+                SelectBreadcrumb(redBreadcrumb, UIRed);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            if (currentBreadcrumb == blueBreadcrumb)
+                SelectBreadcrumb(redBreadcrumb, UIRed);
+            else if (currentBreadcrumb == redBreadcrumb)
+                SelectBreadcrumb(greenBreadcrumb, UIGreen);
+            else if (currentBreadcrumb == greenBreadcrumb)
+                SelectBreadcrumb(blueBreadcrumb, UIBlue);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
         {
             SelectBreadcrumb(blueBreadcrumb, UIBlue);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
         {
             SelectBreadcrumb(redBreadcrumb, UIRed);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
         {
             SelectBreadcrumb(greenBreadcrumb, UIGreen);
         }
@@ -111,6 +131,7 @@ public class Breadcrumbs : MonoBehaviour
         currentBreadcrumb = chosenBreadcrumb;
         selectedIndicator.anchorMin = new Vector2(UIBreadcrumb.anchorMin.x, selectedIndicator.anchorMin.y);
         selectedIndicator.anchorMax = new Vector2(UIBreadcrumb.anchorMax.x, selectedIndicator.anchorMax.y);
+        Jukebox.Instance.PlaySFX("Toggle breadcrumb");
     }
 
     private void PickUpBreadcrumbs()
