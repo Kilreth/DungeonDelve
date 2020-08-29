@@ -39,13 +39,8 @@ public class Breadcrumbs : MonoBehaviour
     [SerializeField]
     private float pickUpDistance = 1.5f;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        // This object will already be populated if we loaded a save
-        if (BreadcrumbsParent == null)
-            BreadcrumbsParent = new GameObject("Breadcrumbs");
-
         player = gameObject;
         playerCollider = player.GetComponent<Collider>();
 
@@ -59,6 +54,14 @@ public class Breadcrumbs : MonoBehaviour
             "SelectedIndicator").gameObject.GetComponent<RectTransform>();
 
         SelectBreadcrumb(blueBreadcrumb, UIBlue);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // This object will already be populated if we loaded a save
+        if (BreadcrumbsParent == null)
+            BreadcrumbsParent = new GameObject("Breadcrumbs");
     }
 
     // Update is called once per frame
@@ -121,8 +124,9 @@ public class Breadcrumbs : MonoBehaviour
         BreadcrumbsParent = new GameObject("Breadcrumbs");
         foreach (ItemSave b in breadcrumbs)
         {
-            Instantiate(colorToPrefab[b.Name], b.Position, b.Rotation,
-                        BreadcrumbsParent.transform);
+            GameObject breadcrumb = Instantiate(colorToPrefab[b.Name], b.Position, b.Rotation,
+                                                BreadcrumbsParent.transform);
+            Physics.IgnoreCollision(playerCollider, breadcrumb.GetComponent<Collider>());
         }
     }
 
