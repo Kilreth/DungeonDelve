@@ -1121,6 +1121,7 @@ RectTransform:
   - {fileID: 32594786}
   - {fileID: 776364631}
   - {fileID: 2040381926}
+  - {fileID: 1575592781}
   m_Father: {fileID: 387444922}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2821,9 +2822,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 508793329}
-  normalColor: {r: 0.7921569, g: 0.38431373, b: 0.85882354, a: 1}
-  highlightedColor: {r: 0.9368901, g: 0.5424528, b: 1, a: 1}
-  pressedColor: {r: 0.909804, g: 0.5176471, b: 0.9725491, a: 1}
+  normalColor: {r: 0.81568635, g: 0.37254903, b: 0.8862746, a: 1}
+  highlightedColor: {r: 0.90550965, g: 0.5492168, b: 0.9622642, a: 1}
+  pressedColor: {r: 0.6627451, g: 0.15294118, b: 0.74509805, a: 1}
 --- !u!1001 &512353040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4326,7 +4327,7 @@ MonoBehaviour:
   m_text: "\u2022  WASD or arrow keys to move\r\n\u2022  Shift to sprint\r\n\u2022
     \ Left-click or Space to drop a breadcrumb\r\n     (1, 2, 3 or scroll wheel to
     change color)\n\u2022  Right-click or E to pick up breadcrumbs\n\u2022  Walk over
-    a key to pick it up\r\n\n<align=\"center\"><b>Collect all keys to clear the dungeon!</b></align>"
+    a key to pick it up\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce38966015b537149beba6de29c22afe, type: 2}
   m_sharedMaterial: {fileID: 1444099520734325220, guid: ce38966015b537149beba6de29c22afe,
@@ -4336,8 +4337,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4291901140
-  m_fontColor: {r: 0.83137256, g: 0.21568625, b: 0.82304806, a: 1}
+    rgba: 4290004918
+  m_fontColor: {r: 0.7169812, g: 0.2807049, b: 0.70919037, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4396,12 +4397,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 776364632}
-    characterCount: 259
+    characterCount: 219
     spriteCount: 0
-    spaceCount: 62
-    wordCount: 47
+    spaceCount: 54
+    wordCount: 40
     linkCount: 0
-    lineCount: 8
+    lineCount: 6
     pageCount: 1
     materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
@@ -5887,6 +5888,162 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1575592780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1575592781}
+  - component: {fileID: 1575592783}
+  - component: {fileID: 1575592782}
+  m_Layer: 5
+  m_Name: MiddleText (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1575592781
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575592780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 306984005}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.1, y: 0.2}
+  m_AnchorMax: {x: 0.9, y: 0.2}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1575592782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575592780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Collect all keys to clear the dungeon!
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: ce38966015b537149beba6de29c22afe, type: 2}
+  m_sharedMaterial: {fileID: 1444099520734325220, guid: ce38966015b537149beba6de29c22afe,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4291966932
+  m_fontColor: {r: 0.83137256, g: 0.21568628, b: 0.8235294, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 52
+  m_fontSizeBase: 52
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_textAlignment: 514
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: 0
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 1575592782}
+    characterCount: 38
+    spriteCount: 0
+    spaceCount: 6
+    wordCount: 7
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1575592783
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575592780}
+  m_CullTransparentMesh: 0
 --- !u!114 &1668195760 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3871793431998892940, guid: 45489b6e5a9c6c54c91eff3a7628ed12,
@@ -7744,8 +7901,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4291966932
-  m_fontColor: {r: 0.83137256, g: 0.21568628, b: 0.8235294, a: 1}
+    rgba: 4290070711
+  m_fontColor: {r: 0.7176471, g: 0.28235295, b: 0.70980394, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

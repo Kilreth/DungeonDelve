@@ -115,7 +115,6 @@ public class GM : MonoBehaviour
         BlocksParent = instantiateDungeon.BlocksParent;
         UnreachableBlocksParent = instantiateDungeon.UnreachableBlocksParent;
         timeAtDungeonLoad = Time.time;
-        MapActive = false;
     }
 
     private void InitializeNewGame()
@@ -157,9 +156,7 @@ public class GM : MonoBehaviour
 }
 
 /// <summary>
+/// GameState "Active" is the usual state during a dungeon.
 /// GameState "Won" prevents the player from moving or dropping breadcrumbs.
-/// It also makes the cursor visible.
-///
-/// GameState "Inactive" means we are not in a dungeon.
 /// </summary>
 public enum GameState { Active, Won, MainMenu }

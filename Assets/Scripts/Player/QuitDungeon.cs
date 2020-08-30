@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class QuitDungeon : MonoBehaviour
@@ -8,9 +6,11 @@ public class QuitDungeon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && GM.Instance.GameState == GameState.Active)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            GM.Instance.SaveGameToFile();
+            if (GM.Instance.GameState != GameState.Won)
+                GM.Instance.SaveGameToFile();
+
             SceneManager.LoadScene("MainMenu");
         }
     }

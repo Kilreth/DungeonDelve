@@ -142,9 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa698c970215d6d40974347fe53bf6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor: {r: 0.66145056, g: 0.1511659, b: 0.745283, a: 1}
-  highlightedColor: {r: 0.81450635, g: 0.3722855, b: 0.8867924, a: 1}
-  pressedColor: {r: 0.4567339, g: 0, b: 0.49056602, a: 1}
+  normalColor: {r: 0.26666668, g: 0.4694905, b: 0.62352943, a: 1}
+  highlightedColor: {r: 0.3737985, g: 0.65447533, b: 0.754717, a: 1}
+  pressedColor: {r: 0.20652366, g: 0.32713085, b: 0.3679245, a: 1}
 --- !u!1 &3285660571912772454
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,8 +218,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290652073
-  m_fontColor: {r: 0.6627451, g: 0.15294118, b: 0.74509805, a: 1}
+    rgba: 4288579652
+  m_fontColor: {r: 0.26726595, g: 0.53333336, b: 0.6226415, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.05
+  m_fontSize: 29.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

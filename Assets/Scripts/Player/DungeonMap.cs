@@ -19,7 +19,7 @@ public class DungeonMap : MonoBehaviour
         playerCamera = gameObject.transform.Find(
             "FirstPersonCharacter").gameObject.GetComponent<Camera>();
         dungeonMapCamera = Instantiate(dungeonMapCameraPrefab);
-        dungeonMapCamera.enabled = false;
+        HideDungeonMap();
     }
 
     // Update is called once per frame
@@ -62,7 +62,11 @@ public class DungeonMap : MonoBehaviour
         GM.Instance.MapActive = true;
         GM.Instance.Canvas.enabled = false;
         playerCamera.enabled = false;
-        dungeonMapCamera.enabled = true;
+
+        // Enable the dungeon map camera via its parent object,
+        // because it has a canvas to show too.
+        dungeonMapCamera.gameObject.SetActive(true);
+
         CenterCameraOnPlayer();
     }
 
@@ -72,7 +76,10 @@ public class DungeonMap : MonoBehaviour
         GM.Instance.MapActive = false;
         GM.Instance.Canvas.enabled = true;
         playerCamera.enabled = true;
-        dungeonMapCamera.enabled = false;
+
+        // Disable the dungeon map camera via its parent object,
+        // because we want to hide the canvas too.
+        dungeonMapCamera.gameObject.SetActive(false);
     }
 
     private void CenterCameraOnPlayer()
