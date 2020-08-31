@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Jukebox : MonoBehaviour
 {
@@ -45,27 +44,17 @@ public class Jukebox : MonoBehaviour
         AudioSourceSFX.volume = SFXVolume = PlayerPrefs.GetFloat("SFX volume", 1);
     }
 
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void PlayBGM(string name)
     {
         AudioSourceBGM.Stop();
         AudioSourceSFX.Stop();
-        if (scene.name == "MainMenu")
+        if (name == "MainMenu")
         {
             AudioSourceBGM.clip = soundNameToClip["Title theme"];
             AudioSourceBGM.Play();
             MuteSFX(0.2f);
         }
-        else if (scene.name == "Dungeon")
+        else if (name == "Dungeon")
         {
             AudioSourceBGM.clip = soundNameToClip["Dungeon theme"];
             AudioSourceBGM.Play();

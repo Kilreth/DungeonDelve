@@ -85,10 +85,12 @@ public class GM : MonoBehaviour
                     InitializeLoadedGame();
 
                 GameState = GameState.Active;
+                Jukebox.Instance.PlayBGM("Dungeon");
             }
             catch (Exception)
             {
                 SceneManager.LoadScene("MainMenu");
+                Jukebox.Instance.PlayBGM("MainMenu");
                 GameState = GameState.MainMenu;
             }
         }
@@ -98,6 +100,7 @@ public class GM : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
+            Jukebox.Instance.PlayBGM("MainMenu");
             GameState = GameState.MainMenu;
         }
     }
