@@ -36,6 +36,10 @@ public class InstantiateDungeon : MonoBehaviour
     private Dungeon dungeon;
     private Textures textures;
 
+    [SerializeField]
+    [ColorUsageAttribute(true, true)]
+    private Color ambientLight;
+
     public void CreateDungeon()
     {
         dungeonGenerator = new DungeonGenerator(GM.Instance.DungeonParameters,
@@ -49,6 +53,7 @@ public class InstantiateDungeon : MonoBehaviour
         InstantiateCeiling();
         InstantiateDungeonBlocks();
         // InstantiateNewItems() or InstantiateLoadedItems() to be called via GM
+        ApplyQualitySettings();
     }
 
     private void LoadPrefabs()
@@ -212,5 +217,14 @@ public class InstantiateDungeon : MonoBehaviour
         return new Vector3((col + prefab.transform.position.x) * GM.Instance.BlockScale,
                                   prefab.transform.position.y  * GM.Instance.BlockScale,
                            (row + prefab.transform.position.z) * GM.Instance.BlockScale);
+    }
+
+    private void ApplyQualitySettings()
+    {
+        int quality = QualitySettings.GetQualityLevel();
+
+        // Brighten the dungeon just a bit if on low quality,
+        // to make up for missing light from the player's lantern
+        RenderSettings.ambientLight = quality == 0 ? ambientLight : Color.black;
     }
 }

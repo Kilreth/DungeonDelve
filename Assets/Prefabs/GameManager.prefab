@@ -105,6 +105,7 @@ MonoBehaviour:
       type: 3}
     foundKey: {fileID: 8111732387634126881, guid: c11a03180920c5748b0909e6c9e89deb,
       type: 3}
+  ambientLight: {r: 1.1486983, g: 1.0000433, b: 0.5360592, a: 0}
 --- !u!114 &7128764168518751111
 MonoBehaviour:
   m_ObjectHideFlags: 0
