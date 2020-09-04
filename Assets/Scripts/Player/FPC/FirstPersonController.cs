@@ -101,19 +101,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             float speed;
             GetInput(out speed);
-
-            Vector3 desiredMove;
-            if (GM.Instance.MapActive)
-            {
-                // if the map is open, treat up as north, right as east, etc.
-                desiredMove = new Vector3(0, 0, 1) * m_Input.y + new Vector3(1, 0, 0) * m_Input.x;
-            }
-            else
-            {
-                // always move along the camera forward as it is the direction that it being aimed at
-                desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
-            }
-
+            Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
 
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
