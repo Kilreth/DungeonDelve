@@ -12,7 +12,7 @@ public class OptionSlider : SliderText, IPointerUpHandler
         else if (sliderName == "SFX")
             slider.value = Jukebox.Instance.SFXVolume;
         else if (sliderName == "Graphics")
-            slider.value = PlayerPrefs.GetInt("Graphics", 1);
+            slider.value = PlayerPrefs.GetInt("Graphics");
     }
 
     public override void UpdateText()
@@ -31,7 +31,13 @@ public class OptionSlider : SliderText, IPointerUpHandler
         }
         else if (sliderName == "Graphics")
         {
-            text.text = slider.value == 1 ? "High" : "Low";
+            if (slider.value == 2)
+                text.text = "High";
+            else if (slider.value == 1)
+                text.text = "Mid";
+            else
+                text.text = "Low";
+
             PlayerPrefs.SetInt("Graphics", (int)slider.value);
         }
     }

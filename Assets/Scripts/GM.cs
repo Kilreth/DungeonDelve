@@ -59,7 +59,9 @@ public class GM : MonoBehaviour
     // Setup that needs to happen when starting game from any scene
     private void InitializeGameManager()
     {
+        PlayerPrefs.SetInt("Graphics", QualitySettings.GetQualityLevel());
         QualitySettings.vSyncCount = 1;
+
         SaveGame = null;
     }
 
@@ -111,6 +113,7 @@ public class GM : MonoBehaviour
         if (DungeonParameters == null)
             throw new InvalidOperationException("Dungeon parameters object in Game Manager is null");
 
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Graphics"));
         Random = new System.Random(DungeonParameters.Seed);
         Canvas = FindObjectOfType<Canvas>();
         instantiateDungeon = GetComponent<InstantiateDungeon>();

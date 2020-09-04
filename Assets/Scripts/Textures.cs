@@ -73,7 +73,7 @@ public class Textures : MonoBehaviour
 
     public void ApplyGraphicsSettings()
     {
-        if (PlayerPrefs.GetInt("Graphics", 1) == 1)
+        if (QualitySettings.GetQualityLevel() > 0)
         {
             foreach (Material m in materialsWithNormalMaps)
                 m.EnableKeyword("_NORMALMAP");
