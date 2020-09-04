@@ -97,6 +97,8 @@ MonoBehaviour:
     ceiling: {fileID: 7075365173419588477, guid: 8b826061e55b6d74282359a6153f1143,
       type: 3}
     floor: {fileID: 5768885647456851186, guid: 6f0fd54e218bb1d44af9e43960b76a9d, type: 3}
+    floorOnMap: {fileID: 6699671556314577872, guid: dcc870c28d037a94b9d2b04ddac95a49,
+      type: 3}
     wall: {fileID: 4174532304131956657, guid: d9ad9336e0fc1824cb78b7fd9b425bc4, type: 3}
     portal: {fileID: 7320128239834605457, guid: 86d704a4428d91b44bf603eca5ef8c02,
       type: 3}

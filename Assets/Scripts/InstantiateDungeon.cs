@@ -12,6 +12,7 @@ public class InstantiateDungeon : MonoBehaviour
         public GameObject player;
         public GameObject ceiling;
         public GameObject floor;
+        public GameObject floorOnMap;
         public GameObject wall;
         public GameObject portal;
         public GameObject key;
@@ -86,7 +87,12 @@ public class InstantiateDungeon : MonoBehaviour
     }
     public void InstantiateFloor()
     {
+        // Create the floor the player sees in first person. It's a darker color.
         InstantiateFloorOrCeiling(GM.Instance.BlockScale / 2, prefabs.floor);
+
+        // Create the floor seen on the map. It's a lighter color.
+        // This goes beneath the other one so it isn't seen in first person.
+        InstantiateFloorOrCeiling(GM.Instance.BlockScale / 2 - 0.2f, prefabs.floorOnMap);
     }
 
     public void InstantiateFloorOrCeiling(float yPosition, GameObject prefab)
