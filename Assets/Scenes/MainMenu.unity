@@ -2786,7 +2786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7921569, g: 0.38431373, b: 0.85882354, a: 1}
+  m_Color: {r: 0.84313726, g: 0.4862745, b: 0.8980392, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2822,9 +2822,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 508793329}
-  normalColor: {r: 0.81568635, g: 0.37254903, b: 0.8862746, a: 1}
-  highlightedColor: {r: 0.90550965, g: 0.5492168, b: 0.9622642, a: 1}
-  pressedColor: {r: 0.6627451, g: 0.15294118, b: 0.74509805, a: 1}
+  normalColor: {r: 0.841551, g: 0.48616055, b: 0.8962264, a: 1}
+  highlightedColor: {r: 0.94528306, g: 0.5896226, b: 1, a: 1}
+  pressedColor: {r: 0.6766169, g: 0.3529281, b: 0.7264151, a: 1}
 --- !u!1001 &512353040
 PrefabInstance:
   m_ObjectHideFlags: 0
