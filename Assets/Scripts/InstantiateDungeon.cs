@@ -92,7 +92,7 @@ public class InstantiateDungeon : MonoBehaviour
 
         // Create the floor seen on the map. It's a lighter color.
         // This goes beneath the other one so it isn't seen in first person.
-        InstantiateFloorOrCeiling(GM.Instance.BlockScale / 2 - 0.2f, prefabs.floorOnMap);
+        InstantiateFloorOrCeiling(GM.Instance.BlockScale / 2 - 0.01f, prefabs.floorOnMap);
     }
 
     public void InstantiateFloorOrCeiling(float yPosition, GameObject prefab)
