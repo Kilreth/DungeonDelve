@@ -40,6 +40,10 @@ public class InstantiateDungeon : MonoBehaviour
     [SerializeField]
     [ColorUsageAttribute(true, true)]
     private Color ambientLight;
+    [SerializeField]
+    private Color32 ceilingColorLowGraphics;
+    [SerializeField]
+    private Color32 ceilingColorNormalGraphics;
 
     public void CreateDungeon()
     {
@@ -83,6 +87,15 @@ public class InstantiateDungeon : MonoBehaviour
 
     public void InstantiateCeiling()
     {
+        // On medium and high quality, the ceiling is near-black, the only color being
+        // from the light reflected off it from the player's lantern.
+        // The lantern light doesn't show up on low quality, however, so the same ceiling
+        // would appear black. Give the ceiling a lighter color on low quality.
+        if (QualitySettings.GetQualityLevel() == 0)
+            prefabs.ceiling.GetComponent<Renderer>().sharedMaterial.color = ceilingColorLowGraphics;
+        else
+            prefabs.ceiling.GetComponent<Renderer>().sharedMaterial.color = ceilingColorNormalGraphics;
+
         InstantiateFloorOrCeiling(GM.Instance.BlockScale * 3 + 1, prefabs.ceiling);
     }
     public void InstantiateFloor()
