@@ -4036,7 +4036,7 @@ MonoBehaviour:
     MaxRoomHeight: 3
     MaxRoomWidth: 9
     TargetRoomToDungeonRatio: 0.8
-    DoorsToWallRatio: 0.1
+    DoorsToWallRatio: 0.15
     CorridorTurnChance: 0.2
   - Rows: 40
     Cols: 60
@@ -4058,7 +4058,7 @@ MonoBehaviour:
     MaxRoomHeight: 1
     MaxRoomWidth: 1
     TargetRoomToDungeonRatio: 1
-    DoorsToWallRatio: 0.1
+    DoorsToWallRatio: 0.15
     CorridorTurnChance: 0.2
 --- !u!114 &765907154
 MonoBehaviour:
