@@ -24,6 +24,7 @@ Music download available at https://soundcloud.com/Kilreth/albums<br>
 ![Alt text](Images/Gameplay2.png?raw=true)
 ![Alt text](Images/Gameplay3.png?raw=true)
 ![Alt text](Images/Gameplay4.png?raw=true)
+![Alt text](Images/Gameplay5.png?raw=true)
 ![Alt text](Images/WinScreen.png?raw=true)
 ![Alt text](Images/DungeonStandard.png?raw=true)
 ![Alt text](Images/DungeonExpanded.png?raw=true)
