@@ -32,6 +32,11 @@ public class DungeonMap : MonoBehaviour
             else
                 ShowDungeonMap();
         }
+        if (Input.GetKeyDown(KeyCode.Escape) && GM.Instance.MapActive)
+        {
+            HideDungeonMap();
+        }
+
         if (GM.Instance.MapActive)
         {
             dungeonMapCamera.orthographicSize -= (Input.GetAxis("Mouse ScrollWheel")
