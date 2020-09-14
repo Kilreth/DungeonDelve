@@ -133,8 +133,8 @@ public class Breadcrumbs : MonoBehaviour
     private void SelectBreadcrumb(GameObject chosenBreadcrumb, RectTransform UIBreadcrumb)
     {
         currentBreadcrumb = chosenBreadcrumb;
-        selectedIndicator.anchorMin = new Vector2(UIBreadcrumb.anchorMin.x, selectedIndicator.anchorMin.y);
-        selectedIndicator.anchorMax = new Vector2(UIBreadcrumb.anchorMax.x, selectedIndicator.anchorMax.y);
+        selectedIndicator.anchorMin = new Vector2(selectedIndicator.anchorMin.x, UIBreadcrumb.anchorMin.y);
+        selectedIndicator.anchorMax = new Vector2(selectedIndicator.anchorMax.x, UIBreadcrumb.anchorMax.y);
         Jukebox.Instance.PlaySFX("Toggle breadcrumb");
     }
 
