@@ -116,7 +116,7 @@ public class InstantiateDungeon : MonoBehaviour
         Vector3 position = new Vector3((scale.x - GM.Instance.BlockScale) / 2,
                                                   yPosition,
                                        (scale.z - GM.Instance.BlockScale) / 2);
-        GameObject gameObj = Instantiate(prefab, position, Quaternion.identity);
+        GameObject gameObj = Instantiate(prefab, position, prefab.transform.rotation);
         gameObj.transform.localScale = scale;
         Material material = gameObj.GetComponent<Renderer>().material;
         material.mainTextureScale = new Vector2(GM.Instance.DungeonParameters.Cols,
