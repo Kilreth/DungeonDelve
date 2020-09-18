@@ -23,6 +23,10 @@ public class Breadcrumbs : MonoBehaviour
     private RectTransform UIRed;
     private RectTransform UIBlue;
     private RectTransform UIGreen;
+    [SerializeField]
+    private float selectedUIScale;
+    [SerializeField]
+    private float unselectedUIScale;
 
     // An arrow that hovers over the active UI breadcrumb
     private RectTransform selectedIndicator;
@@ -133,9 +137,17 @@ public class Breadcrumbs : MonoBehaviour
     private void SelectBreadcrumb(GameObject chosenBreadcrumb, RectTransform UIBreadcrumb)
     {
         currentBreadcrumb = chosenBreadcrumb;
+        Jukebox.Instance.PlaySFX("Toggle breadcrumb");
+
+        // Make the active breadcrumb bigger in the UI
+        UIRed.localScale = new Vector3(unselectedUIScale, unselectedUIScale, unselectedUIScale);
+        UIGreen.localScale = new Vector3(unselectedUIScale, unselectedUIScale, unselectedUIScale);
+        UIBlue.localScale = new Vector3(unselectedUIScale, unselectedUIScale, unselectedUIScale);
+        UIBreadcrumb.localScale = new Vector3(selectedUIScale, selectedUIScale, selectedUIScale);
+
+        // Move the selection cursor to the active breadcrumb
         selectedIndicator.anchorMin = new Vector2(selectedIndicator.anchorMin.x, UIBreadcrumb.anchorMin.y);
         selectedIndicator.anchorMax = new Vector2(selectedIndicator.anchorMax.x, UIBreadcrumb.anchorMax.y);
-        Jukebox.Instance.PlaySFX("Toggle breadcrumb");
     }
 
     private void PickUpBreadcrumbs()

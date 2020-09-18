@@ -393,6 +393,8 @@ MonoBehaviour:
   greenBreadcrumb: {fileID: 2302604445796768833, guid: fdc0dd421ca4e2e4aa824b0ed1a49383,
     type: 3}
   BreadcrumbsParent: {fileID: 0}
+  selectedUIScale: 1.2
+  unselectedUIScale: 1
   dropHeight: 0.7
   throwStrength: 0.8
   pickUpRadius: 0.5
