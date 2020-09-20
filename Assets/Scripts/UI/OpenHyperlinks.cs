@@ -4,6 +4,13 @@ public class OpenHyperlinks : MonoBehaviour
 {
     public void OpenURL(string url)
     {
-        Application.OpenURL(url);
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            Application.ExternalEval("window.open('" + url + "', '_blank')");
+        }
+        else
+        {
+            Application.OpenURL(url);
+        }
     }
 }
