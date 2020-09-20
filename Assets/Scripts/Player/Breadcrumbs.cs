@@ -159,7 +159,10 @@ public class Breadcrumbs : MonoBehaviour
         {
             Destroy(collisions[i].transform.gameObject);
         }
-        Jukebox.Instance.PlaySFX("Pick up breadcrumbs");
+        if (collisions.Length > 0)
+            Jukebox.Instance.PlaySFX("Pick up breadcrumbs");
+        else
+            Jukebox.Instance.PlaySFX("Pick up no breadcrumbs");
     }
 
     private void DropBreadcrumb()

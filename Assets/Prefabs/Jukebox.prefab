@@ -56,8 +56,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97b05accea74a694c96d26f00dae1791, type: 3}
   - {fileID: 8300000, guid: eadad533c8a08d9409f7dc5b1f3876ca, type: 3}
   - {fileID: 8300000, guid: e99a051c09446eb489988890782708c9, type: 3}
-  - {fileID: 8300000, guid: ed05fef5205441c438e073a7b9dd871c, type: 3}
+  - {fileID: 8300000, guid: 8d50ef03a1604e647adffc6301be43a9, type: 3}
   - {fileID: 8300000, guid: 880295564e70f624baef03a1c21cde83, type: 3}
+  - {fileID: 8300000, guid: ed05fef5205441c438e073a7b9dd871c, type: 3}
   soundNames:
   - Title theme
   - Dungeon theme
@@ -65,8 +66,9 @@ MonoBehaviour:
   - Pick up key
   - Drop breadcrumb
   - Pick up breadcrumbs
-  - UI highlight
+  - Pick up no breadcrumbs
   - Toggle breadcrumb
+  - UI highlight
 --- !u!82 &5256363730359541102
 AudioSource:
   m_ObjectHideFlags: 0
