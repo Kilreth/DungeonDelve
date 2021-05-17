@@ -1,0 +1,6 @@
+You're free to fork this repository and/or refer to the source code.
+If you do, please provide a link to the original source at https://github.com/Kilreth/DungeonDelve.
+Please also attribute any assets from this repository (eg. code, art, music, or SFX) to me.
+You may not use my work commercially or share it as your own.
+
+Jonathan Brown (aka. Kilreth on GitHub and SoundCloud)
